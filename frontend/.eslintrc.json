@@ -37,7 +37,9 @@
     "react/jsx-one-expression-per-line": "off",
     "react/jsx-props-no-spreading": "off",
     "react/prop-types": "off",
+    "@typescript-eslint/camelcase": "off",
     "no-unused-expressions": "off",
+    "@typescript-eslint/interface-name-prefix": ["error", { "prefixWithI": "always" }],
     "@typescript-eslint/explicit-function-return-type": [
       "error",
       {
