@@ -1,7 +1,7 @@
 import { Router } from "express";
 import querystring from "querystring";
 
-import generateRandomString from "../utils/GenerateRandomString";
+import generateRandomString from "../../utils/GenerateRandomString";
 
 const sessionsRouter = Router();
 

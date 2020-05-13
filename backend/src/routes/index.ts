@@ -1,11 +1,13 @@
 import { Router } from "express";
 
-import sessionsRouter from "./sessions.routes";
-import callbackRouter from "./callback.routes";
+import sessionsRouter from "./auth/sessions.routes";
+import callbackRouter from "./auth/callback.routes";
+import userRouter from "./user.routes";
 
 const routes = Router();
 
 routes.use("/sessions", sessionsRouter);
 routes.use("/callback", callbackRouter);
+routes.use("/users", userRouter);
 
 export default routes;

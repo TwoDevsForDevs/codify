@@ -2,6 +2,8 @@ import request from "request";
 import { Router } from "express";
 import querystring from "querystring";
 
+import api from "../../services/api";
+
 const callbackRouter = Router();
 
 const clientId = process.env.CLIENT_ID;
@@ -42,9 +44,9 @@ callbackRouter.get("/", (req, res) => {
       if (!error && response.statusCode === 200) {
         const { access_token } = body;
 
-        req.accessToken = access_token;
+        api.defaults.headers.Authorization = `Bearer ${access_token}`;
 
-        res.redirect(`http://localhost:3000/`);
+        res.redirect(`http://localhost:3000/dashboard`);
       }
     });
   }
