@@ -18,10 +18,11 @@ export default createGlobalStyle`
 
   body {
     -webkit-font-smoothing: antialiased;
+    background: #121212;
   }
 
   body, input, button {
-    font: 14px Montserrat, sans-serif;
+    font: 16px Montserrat, sans-serif;
     color: #b3b3b3;
     line-height: 20px;
   }
