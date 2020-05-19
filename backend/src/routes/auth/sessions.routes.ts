@@ -12,7 +12,8 @@ sessionsRouter.get("/", (req, res) => {
   const state = generateRandomString(16);
   res.cookie(stateKey, state);
 
-  const scope = "user-read-private user-read-email user-read-playback-state";
+  const scope =
+    "user-read-private user-read-email user-read-playback-state user-read-recently-played";
 
   res.redirect(
     `https://accounts.spotify.com/authorize?${querystring.stringify({
