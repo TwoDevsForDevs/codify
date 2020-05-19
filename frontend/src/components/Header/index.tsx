@@ -7,7 +7,12 @@ import {
 
 import { Container, Content } from "./styles";
 
-const Header: React.FC = () => {
+interface IHeaderProps {
+  avatar: string;
+  name: string;
+}
+
+const Header: React.FC<IHeaderProps> = ({ avatar, name }) => {
   return (
     <Container>
       <Content>
@@ -17,11 +22,8 @@ const Header: React.FC = () => {
         </nav>
 
         <div>
-          <img
-            src="https://media-exp1.licdn.com/dms/image/C5603AQGGD3RX_4QwzQ/profile-displayphoto-shrink_200_200/0?e=1594857600&v=beta&t=FckrYmvg6nXCW0tZ2O0CNNpN4tbD9HTWphAUbwBz6Fk"
-            alt=""
-          />
-          <span>Paulinho da Vara</span>
+          <img src={avatar} alt={name} />
+          <span>{name}</span>
           <MdKeyboardArrowDown size={24} color="#fff" />
         </div>
       </Content>

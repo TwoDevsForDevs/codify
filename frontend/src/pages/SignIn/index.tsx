@@ -1,59 +1,56 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FaSpotify } from "react-icons/fa";
-import { MdPlayCircleOutline, MdVolumeUp, MdGroupAdd } from "react-icons/md";
 
-import { Container, Content, Background, Logo } from "./styles";
+import edSheeran from "../../assets/ed-sheeran.svg";
+
+import { Container, Content, SignInContainer, SignUpContainer } from "./styles";
 
 const SignIn: React.FC = () => {
+  const [mount, setMount] = useState(false);
+
+  useEffect(() => {
+    setMount(true);
+  }, []);
+
   return (
     <Container>
-      <Background>
-        <div>
-          <ul>
-            <li>
-              <MdPlayCircleOutline color="#f5f5f5" size={32} />É música que você
-              quer?
-            </li>
-            <li>
-              <MdVolumeUp color="#f5f5f5" size={32} />
-              Conheça os melhores lançamentos do momento
-            </li>
-            <li>
-              <MdGroupAdd color="#f5f5f5" size={32} />
-              Siga as playlists dos seus artistas favoritos
-            </li>
-          </ul>
-        </div>
-      </Background>
-
       <Content>
-        <div>
-          <Logo>
-            <FaSpotify color="#1fd562" size={56} />
-            <span>Clone</span>
-          </Logo>
+        <SignInContainer mount={mount}>
+          <h1>
+            <div className="word-container">
+              <span>Descubra</span>
+            </div>
+            <div className="word-container">
+              <span>como</span>
+            </div>
+            <div className="word-container">
+              <span>você</span>
+            </div>
+            <div className="word-container green">
+              <span>escuta.</span>
+            </div>
+          </h1>
+          <p>
+            Explore diversas músicas no seu perfil e crie playlists incríveis.
+          </p>
+          <a href="http://localhost:3333/sessions">
+            <FaSpotify size={24} color="#fff" />
+            Continue com o Spotify
+          </a>
+        </SignInContainer>
 
-          <h2>
-            Se conecte à um mundo de possibilidade
-            <br />
-            Ouça sem limite
-          </h2>
+        <img src={edSheeran} alt="Ed Sheeran" />
 
-          <div>
-            <strong>Entre agora.</strong>
-            <a className="sign-in" href="http://localhost:3333/sessions">
-              Logar
-            </a>
-            <a
-              className="sign-up"
-              href="https://www.spotify.com/br/signup/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Criar conta
-            </a>
-          </div>
-        </div>
+        <SignUpContainer>
+          <span>Não possui uma conta no Spotify?</span>
+          <a
+            href="https://www.spotify.com/br/signup/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Crie sua conta gratuita agora
+          </a>
+        </SignUpContainer>
       </Content>
     </Container>
   );

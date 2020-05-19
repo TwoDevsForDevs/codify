@@ -8,10 +8,13 @@ import {
   MdFavorite,
 } from "react-icons/md";
 import { NavLink } from "react-router-dom";
+import { useWindowSize } from "@react-hook/window-size";
 
 import { Container, Content, Logo, Nav, Playlist } from "./styles";
 
 const Sidebar: React.FC = () => {
+  const [, height] = useWindowSize();
+
   return (
     <Container>
       <Content>
@@ -37,7 +40,7 @@ const Sidebar: React.FC = () => {
           </NavLink>
         </Nav>
 
-        <Playlist>
+        <Playlist height={height}>
           <h2>P L A Y L I S T S</h2>
 
           <div>
@@ -53,6 +56,8 @@ const Sidebar: React.FC = () => {
               <span>Músicas curtidas</span>
             </button>
           </div>
+
+          <hr />
 
           <ul>
             <li>Panic!</li>

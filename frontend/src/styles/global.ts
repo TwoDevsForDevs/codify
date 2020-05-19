@@ -19,6 +19,7 @@ export default createGlobalStyle`
   body {
     -webkit-font-smoothing: antialiased;
     background: #121212;
+    cursor: default;
   }
 
   body, input, button {
@@ -38,4 +39,12 @@ export default createGlobalStyle`
   button {
     cursor: pointer;
   }
+
+  ::-webkit-scrollbar {
+    width: 16px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: hsla(0,0%,100%,.3);
+}
 `;
