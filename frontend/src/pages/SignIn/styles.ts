@@ -1,4 +1,4 @@
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 import { shade } from "polished";
 
 export const Container = styled.div`
@@ -9,51 +9,24 @@ export const Container = styled.div`
   align-items: center;
 `;
 
-const imageAnimation = keyframes`
-  from {
-    opacity: 0;
-    transform: translateX(200px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0px);
-  }
-`;
-
 export const Content = styled.div`
   display: flex;
   align-items: center;
-
-  img {
-    width: 600px;
-    animation: ${imageAnimation} 0.5s ease-in-out;
-  }
 `;
 
-const showButton = keyframes`
-  from {
-    opacity: 0;
-    transform: translateX(-50px);
-  }
-  tp {
-    opacity: 1;
-    transform: translateX(0);
-  }
-`;
-
-interface ISignInContainerProps {
+interface IMountProps {
   mount: boolean;
 }
 
-export const SignInContainer = styled.div<ISignInContainerProps>`
+export const SignInContainer = styled.div<IMountProps>`
   width: 500px;
-  margin-right: 40px;
+  margin-right: 152px;
 
   display: flex;
   flex-direction: column;
 
   h1 {
-    font-size: 70px;
+    font-size: 80px;
     color: #fff;
     height: 252px;
     position: relative;
@@ -67,6 +40,7 @@ export const SignInContainer = styled.div<ISignInContainerProps>`
 
       span {
         display: inline-block;
+
         transform: ${props =>
           props.mount ? "translateY(0)" : "translateY(110%)"};
         transition: transform 0.8s cubic-bezier(0.075, 0.82, 0.165, 1);
@@ -92,7 +66,7 @@ export const SignInContainer = styled.div<ISignInContainerProps>`
 
     .word-container:nth-child(3) {
       top: 72px;
-      left: 220.375px;
+      left: 250.375px;
 
       span {
         transition-delay: 0.4s;
@@ -109,38 +83,42 @@ export const SignInContainer = styled.div<ISignInContainerProps>`
     }
 
     .green {
-      color: #1ed760;
+      color: #1db954;
     }
   }
 
   p {
     margin-bottom: 24px;
-    font-size: 20px;
+    font-size: 24px;
     line-height: 2;
+
     opacity: ${props => (props.mount ? "1" : "0")};
     transform: ${props => (props.mount ? "translateY(0)" : "translateY(40px)")};
-    transition-delay: 0.2s;
     transition: transform 1.5s cubic-bezier(0.19, 1, 0.22, 1),
       opacity 1s cubic-bezier(0.19, 1, 0.22, 1);
+    transition-delay: 0.8s;
   }
 
   a {
-    background: #1ed760;
+    background: #1db954;
     color: #fff;
+    font-size: 18px;
     font-weight: bold;
     width: fit-content;
     padding: 32px 54px;
     border-radius: 10px;
+
     opacity: ${props => (props.mount ? "1" : "0")};
-    animation: ${showButton} 0.5s;
-    animation-delay: 1s;
-    transition: background 0.2s;
+    transform: ${props => (props.mount ? "translateY(0)" : "translateY(40px)")};
+    will-change: transform;
+    transition: transform 1.5s cubic-bezier(0.19, 1, 0.22, 1) 1s,
+      opacity 1s cubic-bezier(0.19, 1, 0.22, 1) 1s, background 0.2s;
 
     display: flex;
     align-items: center;
 
     &:hover {
-      background: ${shade(0.1, "#1ed760")};
+      background: ${shade(0.1, "#1db954")};
     }
 
     svg {
@@ -149,23 +127,47 @@ export const SignInContainer = styled.div<ISignInContainerProps>`
   }
 `;
 
-export const SignUpContainer = styled.div`
+export const ArtistImage = styled.div<IMountProps>`
+  opacity: ${props => (props.mount ? "1" : "0")};
+  transform: ${props => (props.mount ? "translateX(0)" : "translateX(80px)")};
+  will-change: transform;
+  transition: transform 1.5s cubic-bezier(0.19, 1, 0.22, 1) 1s,
+    opacity 1s cubic-bezier(0.19, 1, 0.22, 1);
+  transition-delay: 0.8s;
+
+  img {
+    width: 700px;
+  }
+`;
+
+export const SignUpContainer = styled.div<IMountProps>`
   position: absolute;
-  bottom: 16px;
-  left: 16px;
-  font-size: 14px;
+  bottom: 24px;
+  left: 24px;
+  font-size: 16px;
+
+  opacity: ${props => (props.mount ? "1" : "0")};
+  transform: ${props => (props.mount ? "translateX(0)" : "translateX(80px)")};
+  transition: transform 1.5s cubic-bezier(0.19, 1, 0.22, 1),
+    opacity 1s cubic-bezier(0.19, 1, 0.22, 1);
+  transition-delay: 1s;
 
   display: flex;
   flex-direction: column;
 
   span {
     color: #fff;
-    font-weight: 500;
+    font-weight: bold;
   }
 
   a {
-    color: #1ed760;
+    color: #1db954;
     font-weight: bold;
     margin-top: 8px;
+    transition: color 0.2s;
+
+    &:hover {
+      color: ${shade(0.1, "#1db954")};
+    }
   }
 `;

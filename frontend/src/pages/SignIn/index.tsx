@@ -3,7 +3,13 @@ import { FaSpotify } from "react-icons/fa";
 
 import edSheeran from "../../assets/ed-sheeran.svg";
 
-import { Container, Content, SignInContainer, SignUpContainer } from "./styles";
+import {
+  Container,
+  Content,
+  SignInContainer,
+  ArtistImage,
+  SignUpContainer,
+} from "./styles";
 
 const SignIn: React.FC = () => {
   const [mount, setMount] = useState(false);
@@ -39,9 +45,11 @@ const SignIn: React.FC = () => {
           </a>
         </SignInContainer>
 
-        <img src={edSheeran} alt="Ed Sheeran" />
+        <ArtistImage mount={mount}>
+          <img src={edSheeran} alt="Ed Sheeran" />
+        </ArtistImage>
 
-        <SignUpContainer>
+        <SignUpContainer mount={mount}>
           <span>Não possui uma conta no Spotify?</span>
           <a
             href="https://www.spotify.com/br/signup/"
