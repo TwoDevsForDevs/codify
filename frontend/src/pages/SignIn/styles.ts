@@ -83,7 +83,7 @@ export const SignInContainer = styled.div<IMountProps>`
     }
 
     .green {
-      color: #1db954;
+      color: #33ff7a;
     }
   }
 
@@ -161,13 +161,13 @@ export const SignUpContainer = styled.div<IMountProps>`
   }
 
   a {
-    color: #1db954;
+    color: #33ff7a;
     font-weight: bold;
     margin-top: 8px;
     transition: color 0.2s;
 
     &:hover {
-      color: ${shade(0.1, "#1db954")};
+      color: ${shade(0.1, "#33ff7a")};
     }
   }
 `;
