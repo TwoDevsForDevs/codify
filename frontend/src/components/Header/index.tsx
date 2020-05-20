@@ -1,9 +1,5 @@
 import React from "react";
-import {
-  MdKeyboardArrowLeft,
-  MdKeyboardArrowRight,
-  MdKeyboardArrowDown,
-} from "react-icons/md";
+import { MdKeyboardArrowDown } from "react-icons/md";
 
 import { Container, Content } from "./styles";
 
@@ -17,8 +13,7 @@ const Header: React.FC<IHeaderProps> = ({ avatar, name }) => {
     <Container>
       <Content>
         <nav>
-          <MdKeyboardArrowLeft size={32} color="#fff" />
-          <MdKeyboardArrowRight size={32} color="#fff" />
+          <span>teste</span>
         </nav>
 
         <div>

@@ -14,6 +14,8 @@ export const Container = styled.div`
 `;
 
 export const Content = styled.div`
+  padding: 32px;
+
   display: flex;
   align-items: center;
 `;
