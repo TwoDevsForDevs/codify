@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { shade } from "polished";
+import { lighten } from "polished";
 
 import ball from "../../assets/ball.svg";
 
@@ -122,7 +122,7 @@ export const SignInContainer = styled.div<IMountProps>`
     align-items: center;
 
     &:hover {
-      background: ${shade(0.1, "#1db954")};
+      background: ${lighten(0.03, "#1db954")};
     }
 
     svg {
@@ -133,7 +133,7 @@ export const SignInContainer = styled.div<IMountProps>`
 
 export const ArtistImage = styled.div<IMountProps>`
   opacity: ${props => (props.mount ? "1" : "0")};
-  transform: ${props => (props.mount ? "translateX(0)" : "translateX(80px)")};
+  transform: ${props => (props.mount ? "scale(1)" : "scale(0.8)")};
   will-change: transform;
   transition: transform 1.5s cubic-bezier(0.19, 1, 0.22, 1) 1s,
     opacity 1s cubic-bezier(0.19, 1, 0.22, 1);
@@ -165,13 +165,13 @@ export const SignUpContainer = styled.div<IMountProps>`
   }
 
   a {
-    color: #33ff7a;
+    color: #1db954;
     font-weight: bold;
     margin-top: 8px;
     transition: color 0.2s;
 
     &:hover {
-      color: ${shade(0.1, "#33ff7a")};
+      color: ${lighten(0.03, "#1db954")};
     }
   }
 `;
