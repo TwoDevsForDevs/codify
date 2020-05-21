@@ -136,7 +136,6 @@ export const SignInContainer = styled.div<IMountProps>`
 export const ArtistImage = styled.div<IMountProps>`
   opacity: ${props => (props.mount ? "1" : "0")};
   transform: ${props => (props.mount ? "scale(1)" : "scale(0.8)")};
-  will-change: transform;
   transition: transform 1.5s cubic-bezier(0.19, 1, 0.22, 1) 1s,
     opacity 1s cubic-bezier(0.19, 1, 0.22, 1);
   transition-delay: 0.8s;

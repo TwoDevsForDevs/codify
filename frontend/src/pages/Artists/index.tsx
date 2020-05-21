@@ -1,32 +1,48 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useTransition } from "react-spring";
 
 import Header from "../../components/Header";
 
-import { Container, Content, TopArtists, Artist } from "./styles";
+import { useAuth } from "../../hooks/auth";
 
-interface IParams {
-  params?: object;
+import api from "../../services/api";
+
+import { Container, Content, LeftContent, TopArtists, Artist } from "./styles";
+
+interface IArtistImages {
+  url: string;
+}
+
+interface ITopArtists {
+  id: string;
+  name: string;
+  images: IArtistImages[];
+  type: string;
+  uri: string;
 }
 
 const Artists: React.FC = () => {
-  const [params, setParams] = useState({} as IParams);
+  const [topArtists, setTopArtists] = useState<ITopArtists[]>([]);
+  const [fistTopArtist, setFistTopArtist] = useState<ITopArtists>(
+    {} as ITopArtists,
+  );
+  const [mount, setMount] = useState(false);
+
+  const { getCredentials } = useAuth();
 
   useEffect(() => {
-    const hashParams = {} as any;
+    getCredentials();
 
-    const query = window.location.search.replace("?", "");
-    const entries = query.split("&");
+    async function loadTopArtists(): Promise<void> {
+      const response = await api.get("/me/top-artists");
 
-    entries.forEach(entry => {
-      const [key, value] = entry.split("=");
-      hashParams[key] = value;
-    });
+      setTopArtists(response.data);
+      setFistTopArtist(response.data[0]);
+      setMount(true);
+    }
 
-    window.history.pushState("", "", "/artists");
-    // window.history.replaceState({}, "", window.location.href.split("#")[0]);
-
-    console.log(hashParams);
-  }, []);
+    loadTopArtists();
+  }, [getCredentials]);
 
   return (
     <>
@@ -34,54 +50,37 @@ const Artists: React.FC = () => {
 
       <Container>
         <Content>
-          <h1>Artistas</h1>
+          <LeftContent mount={mount}>
+            <h1>
+              <div className="word-container">
+                <span>Descubra</span>
+              </div>
+              <div className="word-container">
+                <span>como</span>
+              </div>
+              <div className="word-container">
+                <span>você</span>
+              </div>
+              <div className="word-container green">
+                <span>escuta.</span>
+              </div>
+            </h1>
+            <p>
+              Quando se trata dos seus artistas favoritos, ninguem faz igual a/o{" "}
+              {fistTopArtist.name}.
+            </p>
+          </LeftContent>
 
-          <TopArtists>
-            <Artist>
-              <img
-                src="https://mosaic.scdn.co/300/ab67616d0000b2732519d01c0cca06f134eeadd8ab67616d0000b2732bfb97c135445f83927049caab67616d0000b2733c9047f9aa5d0d1e03827039ab67616d0000b273b1c4b76e23414c9f20242268"
-                alt=""
-              />
-              <div>
-                <h3>Ed Sheeran</h3>
-              </div>
-            </Artist>
-            <Artist>
-              <img
-                src="https://mosaic.scdn.co/300/ab67616d0000b2732519d01c0cca06f134eeadd8ab67616d0000b2732bfb97c135445f83927049caab67616d0000b2733c9047f9aa5d0d1e03827039ab67616d0000b273b1c4b76e23414c9f20242268"
-                alt=""
-              />
-              <div>
-                <h3>Ed Sheeran</h3>
-              </div>
-            </Artist>
-            <Artist>
-              <img
-                src="https://mosaic.scdn.co/300/ab67616d0000b2732519d01c0cca06f134eeadd8ab67616d0000b2732bfb97c135445f83927049caab67616d0000b2733c9047f9aa5d0d1e03827039ab67616d0000b273b1c4b76e23414c9f20242268"
-                alt=""
-              />
-              <div>
-                <h3>Ed Sheeran</h3>
-              </div>
-            </Artist>
-            <Artist>
-              <img
-                src="https://mosaic.scdn.co/300/ab67616d0000b2732519d01c0cca06f134eeadd8ab67616d0000b2732bfb97c135445f83927049caab67616d0000b2733c9047f9aa5d0d1e03827039ab67616d0000b273b1c4b76e23414c9f20242268"
-                alt=""
-              />
-              <div>
-                <h3>Ed Sheeran</h3>
-              </div>
-            </Artist>
-            <Artist>
-              <img
-                src="https://mosaic.scdn.co/300/ab67616d0000b2732519d01c0cca06f134eeadd8ab67616d0000b2732bfb97c135445f83927049caab67616d0000b2733c9047f9aa5d0d1e03827039ab67616d0000b273b1c4b76e23414c9f20242268"
-                alt=""
-              />
-              <div>
-                <h3>Ed Sheeran</h3>
-              </div>
-            </Artist>
+          <TopArtists mount={mount}>
+            {topArtists.map((artist, index) => (
+              <Artist key={artist.id} mount={mount}>
+                <img src={artist.images[0].url} alt={artist.name} />
+                <div>
+                  <span>#{index + 1}</span>
+                  <h3>{artist.name}</h3>
+                </div>
+              </Artist>
+            ))}
           </TopArtists>
         </Content>
       </Container>

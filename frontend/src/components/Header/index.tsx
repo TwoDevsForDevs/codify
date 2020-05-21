@@ -1,28 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { NavLink } from "react-router-dom";
 import { FaSpotify } from "react-icons/fa";
 
-import api from "../../services/api";
+import { useAuth } from "../../hooks/auth";
 
 import { Container, Content } from "./styles";
 
-interface IProfile {
-  display_name: string;
-  avatar: string;
-}
-
 const Header: React.FC = () => {
-  const [profile, setProfile] = useState<IProfile>({} as IProfile);
-
-  useEffect(() => {
-    async function loadProfileData(): Promise<void> {
-      const response = await api.get("/me");
-
-      setProfile(response.data);
-    }
-
-    loadProfileData();
-  }, []);
+  const { user } = useAuth();
 
   return (
     <Container>
@@ -41,8 +26,8 @@ const Header: React.FC = () => {
         </nav>
 
         <div>
-          <img src={profile.avatar} alt={profile.display_name} />
-          <span>{profile.display_name}</span>
+          <img src={user.avatar} alt={user.display_name} />
+          <span>{user.display_name}</span>
         </div>
       </Content>
     </Container>
