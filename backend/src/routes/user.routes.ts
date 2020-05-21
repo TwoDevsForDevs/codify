@@ -20,6 +20,18 @@ userRouter.get("/", async (req, res) => {
   return res.json(user);
 });
 
+userRouter.get("/top-artists", async (req, res) => {
+  const response = await api.get("/me/top/artists", {
+    params: {
+      limit: 5,
+    },
+  });
+
+  const artists = response.data.items;
+
+  return res.json(artists);
+});
+
 userRouter.get("/recently-played", async (req, res) => {
   const response = await api.get("/me/player/recently-played");
 
