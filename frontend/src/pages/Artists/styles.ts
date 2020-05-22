@@ -19,7 +19,7 @@ interface IMountProps {
 }
 
 export const LeftContent = styled.div<IMountProps>`
-  margin-right: 150px;
+  margin-right: 100px;
 
   display: flex;
   flex-direction: column;
@@ -88,7 +88,6 @@ export const LeftContent = styled.div<IMountProps>`
   }
 
   p {
-    margin-bottom: 24px;
     font-size: 20px;
     line-height: 2;
 
@@ -101,36 +100,18 @@ export const LeftContent = styled.div<IMountProps>`
 `;
 
 export const TopArtists = styled.div<IMountProps>`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-`;
-
-const artistAnimation = keyframes`
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  display: grid;
+  grid-template-columns: minmax(250px, 1fr) minmax(250px, 1fr) minmax(
+      250px,
+      1fr
+    );
+  grid-gap: 24px;
 `;
 
 export const Artist = styled.div<IMountProps>`
   position: relative;
-  margin: 0 0 32px 32px;
   border-radius: 10px;
   overflow: hidden;
-
-  /* animation: ${artistAnimation} 1s;
-
-  &:nth-child(1) {
-    animation-delay: 0.2s;
-  }
-
-  &:nth-child(2) {
-    animation-delay: 0.4s;
-  } */
-
 
   opacity: ${props => (props.mount ? "1" : "0")};
   transform: ${props => (props.mount ? "scale(1)" : "scale(0.8)")};
@@ -150,11 +131,12 @@ export const Artist = styled.div<IMountProps>`
     }
   }
 
-  div {
+  .name {
     color: #fff;
-    padding: 0 16px 16px;
     position: absolute;
-    bottom: 0px;
+    bottom: 16px;
+    left: 16px;
+    padding-right: 16px;
 
     display: flex;
     flex-direction: column;
@@ -169,6 +151,69 @@ export const Artist = styled.div<IMountProps>`
 
     span {
       font-weight: bold;
+      width: fit-content;
+    }
+  }
+
+  &:hover .followers {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+    transition: transform 1.5s cubic-bezier(0.19, 1, 0.22, 1),
+      visibility 1s cubic-bezier(0.19, 1, 0.22, 1),
+      opacity 1s cubic-bezier(0.19, 1, 0.22, 1);
+    transition-delay: 0.2s;
+  }
+
+  &:hover .popularity {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(56px);
+    transition: transform 1.5s cubic-bezier(0.19, 1, 0.22, 1),
+      visibility 1s cubic-bezier(0.19, 1, 0.22, 1),
+      opacity 1s cubic-bezier(0.19, 1, 0.22, 1);
+    transition-delay: 0.4s;
+  }
+`;
+
+export const ArtistInfo = styled.div`
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  color: #fff;
+
+  display: flex;
+  flex-direction: column;
+
+  .followers {
+    position: absolute;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(40px);
+
+    span {
+      font-weight: bold;
+      font-size: 12px;
+    }
+
+    h3 {
+      font-size: 20px;
+    }
+  }
+
+  .popularity {
+    position: absolute;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(80px);
+
+    span {
+      font-weight: bold;
+      font-size: 12px;
+    }
+
+    h3 {
+      font-size: 20px;
     }
   }
 `;

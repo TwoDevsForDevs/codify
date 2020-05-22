@@ -29,6 +29,11 @@ userRouter.get("/top-artists", async (req, res) => {
 
   const artists = response.data.items;
 
+  // artists.map(async artist => ({
+  //   ...artist,
+  //   topTrack: await api.get(`/artists/${artist.id}/top-tracks`),
+  // }));
+
   return res.json(artists);
 });
 
