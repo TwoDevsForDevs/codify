@@ -1,10 +1,11 @@
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
+import { animated } from "react-spring";
 
 export const Container = styled.div`
   max-width: 1366px;
   width: 100%;
   margin: 0 auto;
-  padding: 0 32px;
+  padding: 0 32px 32px;
 
   display: flex;
 `;
@@ -19,68 +20,24 @@ interface IMountProps {
 }
 
 export const LeftContent = styled.div<IMountProps>`
-  margin-right: 100px;
+  /* margin-right: 70px; */
 
   display: flex;
   flex-direction: column;
 
   h1 {
-    width: 345px;
     font-size: 64px;
     color: #fff;
-    height: 252px;
-    position: relative;
-    overflow-wrap: break-word;
+    line-height: 1.25;
 
-    div {
-      line-height: 93.6px;
-      position: absolute;
-      top: 0px;
-      overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
 
-      span {
-        display: inline-block;
-
-        transform: ${props =>
-          props.mount ? "translateY(0)" : "translateY(110%)"};
-        transition: transform 0.8s cubic-bezier(0.075, 0.82, 0.165, 1);
-      }
-    }
-
-    .word-container:nth-child(1) {
-      left: 0px;
-
-      span {
-        transition-delay: 0.2s;
-      }
-    }
-
-    .word-container:nth-child(2) {
-      top: 72px;
-      left: 0px;
-
-      span {
-        transition-delay: 0.3s;
-      }
-    }
-
-    .word-container:nth-child(3) {
-      top: 72px;
-      left: 200.375px;
-
-      span {
-        transition-delay: 0.4s;
-      }
-    }
-
-    .word-container:nth-child(4) {
-      top: 144px;
-      left: 0px;
-
-      span {
-        transition-delay: 0.5s;
-      }
-    }
+    opacity: ${props => (props.mount ? "1" : "0")};
+    transform: ${props => (props.mount ? "translateY(0)" : "translateY(40px)")};
+    transition: transform 1.5s cubic-bezier(0.19, 1, 0.22, 1),
+      opacity 1s cubic-bezier(0.19, 1, 0.22, 1);
+    transition-delay: 0.3s;
 
     .green {
       color: #33ff7a;
@@ -90,6 +47,7 @@ export const LeftContent = styled.div<IMountProps>`
   p {
     font-size: 20px;
     line-height: 2;
+    margin-top: 32px;
 
     opacity: ${props => (props.mount ? "1" : "0")};
     transform: ${props => (props.mount ? "translateY(0)" : "translateY(40px)")};
@@ -100,28 +58,48 @@ export const LeftContent = styled.div<IMountProps>`
 `;
 
 export const TopArtists = styled.div<IMountProps>`
-  display: grid;
-  grid-template-columns: minmax(250px, 1fr) minmax(250px, 1fr) minmax(
-      250px,
-      1fr
-    );
-  grid-gap: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 `;
 
-export const Artist = styled.div<IMountProps>`
+export const Artist = styled(animated.div)`
   position: relative;
   border-radius: 10px;
   overflow: hidden;
+  width: 230px;
+  height: 230px;
+  margin: 0 0 24px 24px;
 
-  opacity: ${props => (props.mount ? "1" : "0")};
-  transform: ${props => (props.mount ? "scale(1)" : "scale(0.8)")};
   transition: transform 1.5s cubic-bezier(0.19, 1, 0.22, 1),
     opacity 1s cubic-bezier(0.19, 1, 0.22, 1);
-  transition-delay: 0.8s;
+
+  &:nth-child(1) {
+    justify-self: flex-end;
+    transition-delay: 0.3s;
+  }
+
+  &:nth-child(2) {
+    transition-delay: 0.45s;
+  }
+
+  &:nth-child(3) {
+    justify-self: flex-start;
+    transition-delay: 0.65s;
+  }
+
+  &:nth-child(4) {
+    transition-delay: 0.85s;
+  }
+
+  &:nth-child(5) {
+    transition-delay: 1.05s;
+  }
 
   img {
-    width: 250px;
-    height: 250px;
+    width: 100%;
+    height: 100%;
     border-radius: 10px;
     opacity: 0.8;
     transition: all 0.3s;
@@ -193,15 +171,17 @@ export const ArtistInfo = styled.div`
 
     span {
       font-weight: bold;
-      font-size: 12px;
+      font-size: 10px;
     }
 
     h3 {
       font-size: 20px;
+      width: fit-content;
     }
   }
 
   .popularity {
+    white-space: nowrap;
     position: absolute;
     visibility: hidden;
     opacity: 0;

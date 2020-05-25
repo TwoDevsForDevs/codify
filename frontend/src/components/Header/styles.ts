@@ -44,7 +44,9 @@ export const Content = styled.div`
     }
   }
 
-  div {
+  aside {
+    position: relative;
+
     display: flex;
     align-items: center;
 
@@ -57,7 +59,16 @@ export const Content = styled.div`
     span {
       color: #fff;
       font-weight: bold;
-      margin-left: 16px;
+      margin: 0 16px;
+    }
+
+    button {
+      background: transparent;
+      border: 0;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
   }
 `;

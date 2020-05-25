@@ -15,9 +15,12 @@ export const Container = styled.div`
 
 export const Content = styled.div`
   padding: 32px;
+  max-width: 1366px;
+  width: 100%;
 
   display: flex;
   align-items: center;
+  justify-content: center;
 `;
 
 interface IMountProps {
@@ -26,13 +29,13 @@ interface IMountProps {
 
 export const SignInContainer = styled.div<IMountProps>`
   width: 500px;
-  margin-right: 152px;
+  margin-right: 120px;
 
   display: flex;
   flex-direction: column;
 
   h1 {
-    font-size: 80px;
+    font-size: 72px;
     color: #fff;
     height: 252px;
     position: relative;
@@ -72,7 +75,7 @@ export const SignInContainer = styled.div<IMountProps>`
 
     .word-container:nth-child(3) {
       top: 72px;
-      left: 250.375px;
+      left: 230.375px;
 
       span {
         transition-delay: 0.4s;
@@ -95,7 +98,7 @@ export const SignInContainer = styled.div<IMountProps>`
 
   p {
     margin-bottom: 24px;
-    font-size: 24px;
+    font-size: 20px;
     line-height: 2;
 
     opacity: ${props => (props.mount ? "1" : "0")};
@@ -111,7 +114,7 @@ export const SignInContainer = styled.div<IMountProps>`
     font-size: 18px;
     font-weight: bold;
     width: fit-content;
-    padding: 32px 54px;
+    padding: 32px 48px;
     border-radius: 10px;
 
     opacity: ${props => (props.mount ? "1" : "0")};
@@ -141,7 +144,7 @@ export const ArtistImage = styled.div<IMountProps>`
   transition-delay: 0.8s;
 
   img {
-    width: 700px;
+    width: 600px;
   }
 `;
 

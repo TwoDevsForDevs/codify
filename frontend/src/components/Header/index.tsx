@@ -1,13 +1,22 @@
-import React from "react";
+import React, { useState, useCallback } from "react";
 import { NavLink } from "react-router-dom";
 import { FaSpotify } from "react-icons/fa";
+import { FiMoreVertical } from "react-icons/fi";
 
 import { useAuth } from "../../hooks/auth";
+
+import DropdownMenu from "./Dropdown";
 
 import { Container, Content } from "./styles";
 
 const Header: React.FC = () => {
+  const [showDropdown, setShowDropdown] = useState(false);
+
   const { user } = useAuth();
+
+  const handleDropdown = useCallback(() => {
+    setShowDropdown(!showDropdown);
+  }, [showDropdown]);
 
   return (
     <Container>
@@ -25,10 +34,16 @@ const Header: React.FC = () => {
           </NavLink>
         </nav>
 
-        <div>
+        <aside>
           <img src={user.avatar} alt={user.display_name} />
           <span>{user.display_name}</span>
-        </div>
+
+          <button type="button" onClick={() => handleDropdown()}>
+            <FiMoreVertical size={24} color="#fff" />
+          </button>
+
+          <DropdownMenu showDropdown={showDropdown} />
+        </aside>
       </Content>
     </Container>
   );

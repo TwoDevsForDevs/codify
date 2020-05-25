@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
+import { useTransition } from "react-spring";
 
 import Header from "../../components/Header";
 
@@ -45,6 +46,46 @@ const Artists: React.FC = () => {
   );
   const [mount, setMount] = useState(false);
 
+  // const useHover = <T extends HTMLElement>(): [
+  //   (node?: T | null) => void,
+  //   boolean,
+  // ] => {
+  //   const [value, setValue] = useState(false);
+  //   const audio = new Audio(
+  //     "https://p.scdn.co/mp3-preview/07c282084563ef61b97b04a0f82b4e7235c8b6ee?cid=3990f465a79b4b2bbd49712c5daf7b0c",
+  //   );
+
+  //   const handleMouseOver = useCallback(() => {
+  //     audio.play();
+  //   }, [audio]);
+  //   const handleMouseOut = useCallback(() => {
+  //     audio.pause();
+  //   }, [audio]);
+
+  //   const ref = useRef<T>();
+
+  //   const callbackRef = useCallback<(node?: null | T) => void>(
+  //     node => {
+  //       if (ref.current) {
+  //         ref.current.removeEventListener("mouseover", handleMouseOver);
+  //         ref.current.removeEventListener("mouseout", handleMouseOut);
+  //       }
+
+  //       ref.current = node || undefined;
+
+  //       if (ref.current) {
+  //         ref.current.addEventListener("mouseover", handleMouseOver);
+  //         ref.current.addEventListener("mouseout", handleMouseOut);
+  //       }
+  //     },
+  //     [handleMouseOver, handleMouseOut],
+  //   );
+
+  //   return [callbackRef, value];
+  // };
+
+  // const [hoverRef, isHovered] = useHover();
+
   const { getCredentials } = useAuth();
 
   useEffect(() => {
@@ -68,6 +109,21 @@ const Artists: React.FC = () => {
     loadTopArtists();
   }, [getCredentials]);
 
+  const artistsWithTransition = useTransition(
+    topArtists,
+    topArtist => topArtist.id,
+    {
+      from: {
+        opacity: 0,
+        transform: "scale(0.8)",
+      },
+      enter: {
+        opacity: 1,
+        transform: "scale(1)",
+      },
+    },
+  );
+
   return (
     <>
       <Header />
@@ -76,46 +132,38 @@ const Artists: React.FC = () => {
         <Content>
           <LeftContent mount={mount}>
             <h1>
-              <div className="word-container">
-                <span>Escutando</span>
-              </div>
-              {/* <div className="word-container">
-                <span>como</span>
-              </div>
-              <div className="word-container">
-                <span>você</span>
-              </div> */}
-              <div className="word-container green">
-                <span>{firstTopArtist.name}</span>
-              </div>
+              Escutando
+              <span className="green">{firstTopArtist.name}</span>
             </h1>
             <p>
-              Quando se trata dos seus artistas favoritos, ninguem faz igual a/o
+              Quando se trata dos seus artistas favoritos, ninguém faz igual a/o
               <strong> {firstTopArtist.name}!</strong>
             </p>
           </LeftContent>
 
           <TopArtists mount={mount}>
-            {topArtists.map((artist, index) => (
-              <Artist key={artist.id} mount={mount}>
-                <img src={artist.images[0].url} alt={artist.name} />
+            {artistsWithTransition.map(({ item, key, props }, index) => (
+              <Artist key={key} style={props}>
+                <img src={item.images[0].url} alt={item.name} />
                 <div className="name">
                   <span>#{index + 1}</span>
-                  <h3>{artist.name}</h3>
+                  <h3>{item.name}</h3>
                 </div>
                 <ArtistInfo>
                   <div className="followers">
                     <span>Seguidores</span>
-                    <h4>{artist.formattedFollowers}</h4>
+                    <h4>{item.formattedFollowers}</h4>
                   </div>
                   <div className="popularity">
                     <span>Popularidade</span>
-                    <h4>{artist.popularityTag}</h4>
+                    <h4>{item.popularityTag}</h4>
                   </div>
                 </ArtistInfo>
               </Artist>
             ))}
           </TopArtists>
+
+          {/* <div ref={hoverRef}>{isHovered ? "TOCANDO" : "NÃO TOCANDO"}</div> */}
         </Content>
       </Container>
     </>
