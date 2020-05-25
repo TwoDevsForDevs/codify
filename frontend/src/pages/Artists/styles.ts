@@ -20,7 +20,7 @@ interface IMountProps {
 }
 
 export const LeftContent = styled.div<IMountProps>`
-  /* margin-right: 70px; */
+  margin-right: 72px;
 
   display: flex;
   flex-direction: column;
@@ -58,10 +58,9 @@ export const LeftContent = styled.div<IMountProps>`
 `;
 
 export const TopArtists = styled.div<IMountProps>`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
+  display: grid;
+  grid-template-columns: auto auto auto auto auto auto;
+  grid-gap: 24px;
 `;
 
 export const Artist = styled(animated.div)`
@@ -70,30 +69,39 @@ export const Artist = styled(animated.div)`
   overflow: hidden;
   width: 230px;
   height: 230px;
-  margin: 0 0 24px 24px;
 
   transition: transform 1.5s cubic-bezier(0.19, 1, 0.22, 1),
     opacity 1s cubic-bezier(0.19, 1, 0.22, 1);
 
   &:nth-child(1) {
-    justify-self: flex-end;
+    grid-column-start: 1;
+    grid-column-end: 3;
     transition-delay: 0.3s;
   }
 
   &:nth-child(2) {
+    grid-column-start: 3;
+    grid-column-end: 5;
     transition-delay: 0.45s;
   }
 
   &:nth-child(3) {
-    justify-self: flex-start;
+    grid-column-start: 5;
+    grid-column-end: 7;
     transition-delay: 0.65s;
   }
 
   &:nth-child(4) {
+    grid-row-start: 2;
+    grid-column-start: 2;
+    grid-column-end: 4;
     transition-delay: 0.85s;
   }
 
   &:nth-child(5) {
+    grid-row-start: 2;
+    grid-column-start: 4;
+    grid-column-end: 6;
     transition-delay: 1.05s;
   }
 
