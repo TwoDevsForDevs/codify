@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { FiLogOut, FiMaximize } from "react-icons/fi";
 
-import { toggleFullScreen } from "../../../utils/getFullScreen";
+import { toggleFullScreen } from "../../../utils/handleFullScreen";
 
 import { Container } from "./styles";
 
