@@ -46,8 +46,6 @@ callbackRouter.get("/", (req, res) => {
 
         api.defaults.headers.Authorization = `Bearer ${access_token}`;
 
-        // return res.json({ access_token });
-
         res.redirect(
           `http://localhost:3000/artists?${querystring.stringify({
             access_token,

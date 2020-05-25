@@ -8,6 +8,7 @@ const routes = Router();
 
 routes.use("/sessions", sessionsRouter);
 routes.use("/callback", callbackRouter);
+
 routes.use("/me", userRouter);
 
 export default routes;
