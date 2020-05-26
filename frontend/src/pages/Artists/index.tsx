@@ -1,5 +1,7 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+/* eslint-disable no-param-reassign */
+import React, { useState, useEffect, useCallback } from "react";
 import { useTransition } from "react-spring";
+import { FaHeadphones } from "react-icons/fa";
 
 import Header from "../../components/Header";
 
@@ -12,6 +14,7 @@ import api from "../../services/api";
 
 import {
   Container,
+  Main,
   Content,
   LeftContent,
   TopArtists,
@@ -37,6 +40,7 @@ interface ITopArtists {
   formattedFollowers: number;
   popularity: number;
   popularityTag: string;
+  audio: HTMLAudioElement;
 }
 
 const Artists: React.FC = () => {
@@ -46,47 +50,39 @@ const Artists: React.FC = () => {
   );
   const [mount, setMount] = useState(false);
 
-  // const useHover = <T extends HTMLElement>(): [
-  //   (node?: T | null) => void,
-  //   boolean,
-  // ] => {
-  //   const [value, setValue] = useState(false);
-  //   const audio = new Audio(
-  //     "https://p.scdn.co/mp3-preview/07c282084563ef61b97b04a0f82b4e7235c8b6ee?cid=3990f465a79b4b2bbd49712c5daf7b0c",
-  //   );
-
-  //   const handleMouseOver = useCallback(() => {
-  //     audio.play();
-  //   }, [audio]);
-  //   const handleMouseOut = useCallback(() => {
-  //     audio.pause();
-  //   }, [audio]);
-
-  //   const ref = useRef<T>();
-
-  //   const callbackRef = useCallback<(node?: null | T) => void>(
-  //     node => {
-  //       if (ref.current) {
-  //         ref.current.removeEventListener("mouseover", handleMouseOver);
-  //         ref.current.removeEventListener("mouseout", handleMouseOut);
-  //       }
-
-  //       ref.current = node || undefined;
-
-  //       if (ref.current) {
-  //         ref.current.addEventListener("mouseover", handleMouseOver);
-  //         ref.current.addEventListener("mouseout", handleMouseOut);
-  //       }
-  //     },
-  //     [handleMouseOver, handleMouseOut],
-  //   );
-
-  //   return [callbackRef, value];
-  // };
-
-  // const [hoverRef, isHovered] = useHover();
-
   const { getCredentials } = useAuth();
+
+  const playAudioWithFade = useCallback(audio => {
+    let volCounter = 0;
+    audio.volume = 0;
+
+    setTimeout(() => {
+      audio.play();
+
+      const volumeFade = setInterval(() => {
+        volCounter++;
+        audio.volume = volCounter / 20;
+      }, 100);
+
+      setTimeout(() => {
+        clearInterval(volumeFade);
+      }, 1000);
+    }, 500);
+  }, []);
+
+  const pauseAudioWithFade = useCallback(audio => {
+    let volCounter = audio.volume * 10;
+
+    const volumeFade = setInterval(() => {
+      volCounter--;
+      audio.volume = Math.max(volCounter / 10, 0);
+    }, 100);
+
+    setTimeout(() => {
+      clearInterval(volumeFade);
+      audio.pause();
+    }, 1000);
+  }, []);
 
   useEffect(() => {
     getCredentials();
@@ -98,6 +94,9 @@ const Artists: React.FC = () => {
         ...artist,
         formattedFollowers: formatValue(artist.followers.total),
         popularityTag: getPopularity(artist.popularity),
+        audio: new Audio(
+          "https://p.scdn.co/mp3-preview/07c282084563ef61b97b04a0f82b4e7235c8b6ee?cid=3990f465a79b4b2bbd49712c5daf7b0c",
+        ),
       }));
 
       console.log(data);
@@ -125,12 +124,15 @@ const Artists: React.FC = () => {
   );
 
   return (
-    <>
+    <Container>
       <Header />
 
-      <Container>
+      <Main>
         <Content>
           <LeftContent mount={mount}>
+            <div>
+              <FaHeadphones size={32} color="#fff" />
+            </div>
             <h1>
               Escutando
               <span className="green">{firstTopArtist.name}</span>
@@ -143,12 +145,18 @@ const Artists: React.FC = () => {
 
           <TopArtists mount={mount}>
             {artistsWithTransition.map(({ item, key, props }, index) => (
-              <Artist key={key} style={props}>
+              <Artist
+                key={key}
+                style={props}
+                onMouseEnter={() => playAudioWithFade(item.audio)}
+                onMouseLeave={() => pauseAudioWithFade(item.audio)}
+              >
                 <img src={item.images[0].url} alt={item.name} />
                 <div className="name">
                   <span>#{index + 1}</span>
                   <h3>{item.name}</h3>
                 </div>
+
                 <ArtistInfo>
                   <div className="followers">
                     <span>Seguidores</span>
@@ -162,11 +170,9 @@ const Artists: React.FC = () => {
               </Artist>
             ))}
           </TopArtists>
-
-          {/* <div ref={hoverRef}>{isHovered ? "TOCANDO" : "NÃO TOCANDO"}</div> */}
         </Content>
-      </Container>
-    </>
+      </Main>
+    </Container>
   );
 };
 

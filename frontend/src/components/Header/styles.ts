@@ -43,32 +43,45 @@ export const Content = styled.div`
       left: 0;
     }
   }
+`;
 
-  aside {
-    position: relative;
+interface IProfileDataProps {
+  showDropdown: boolean;
+}
+
+export const ProfileData = styled.aside<IProfileDataProps>`
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  img {
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+  }
+
+  span {
+    color: #fff;
+    font-weight: bold;
+    margin: 0 16px;
+  }
+
+  > button {
+    background: ${props =>
+      props.showDropdown ? "rgba(51, 255, 122, 0.15)" : "transparent"};
+    border: 0;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    transition: background 0.2s;
 
     display: flex;
+    justify-content: center;
     align-items: center;
 
-    img {
-      width: 40px;
-      height: 40px;
-      border-radius: 20px;
-    }
-
-    span {
-      color: #fff;
-      font-weight: bold;
-      margin: 0 16px;
-    }
-
-    button {
-      background: transparent;
-      border: 0;
-
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    svg {
+      color: ${props => (props.showDropdown ? "#33ff7a" : "#fff")};
     }
   }
 `;

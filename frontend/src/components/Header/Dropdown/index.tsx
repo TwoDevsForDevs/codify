@@ -1,15 +1,19 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { FiLogOut, FiMaximize } from "react-icons/fi";
 
-import { toggleFullScreen } from "../../../utils/handleFullScreen";
+import { toggleFullScreen } from "../../../utils/toggleFullScreen";
 
 import { Container } from "./styles";
 
 interface IDropdownProps {
   showDropdown: boolean;
+  setShowDropdown: any;
 }
 
-const Dropdown: React.FC<IDropdownProps> = ({ showDropdown }) => {
+const Dropdown: React.FC<IDropdownProps> = ({
+  showDropdown,
+  setShowDropdown,
+}) => {
   const [fullScreen, setFullScreen] = useState(false);
 
   const handleFullScreen = useCallback(() => {
@@ -18,26 +22,30 @@ const Dropdown: React.FC<IDropdownProps> = ({ showDropdown }) => {
 
   useEffect(() => {
     document.addEventListener("fullscreenchange", handleFullScreen);
-  }, [handleFullScreen]);
+
+    setShowDropdown(false);
+  }, [handleFullScreen, setShowDropdown]);
 
   useEffect(() => {
     return () => {
       document.removeEventListener("fullscreenchange", handleFullScreen);
+
+      setShowDropdown(false);
     };
-  }, [handleFullScreen]);
+  }, [handleFullScreen, setShowDropdown]);
 
   return (
     <Container showDropdown={showDropdown}>
       <ul>
         <li>
           <button type="button" onClick={() => toggleFullScreen(fullScreen)}>
-            <FiMaximize size={22} color="#fff" />
+            <FiMaximize size={22} />
             {fullScreen ? "Sair da tela cheia" : "Tela cheia"}
           </button>
         </li>
         <li>
           <button type="button">
-            <FiLogOut size={22} color="#fff" />
+            <FiLogOut size={22} />
             Sair
           </button>
         </li>

@@ -9,6 +9,7 @@ export const Container = styled.div<IDropdownMenuProps>`
   padding: 8px 0;
   border-radius: 10px;
   width: 325px;
+  box-shadow: 0 40px 99px 0 #000;
   z-index: 100;
   position: absolute;
   right: 0px;
@@ -17,15 +18,17 @@ export const Container = styled.div<IDropdownMenuProps>`
   opacity: ${props => (props.showDropdown ? 1 : 0)};
   visibility: ${props => (props.showDropdown ? "visible" : "hidden")};
   transform: ${props =>
-    props.showDropdown ? "translateY(0)" : "translateY(40px)"};
+    props.showDropdown ? "translateY(0)" : "translateY(20px)"};
   transition: transform 1s cubic-bezier(0.19, 1, 0.22, 1),
     opacity 1s cubic-bezier(0.19, 1, 0.22, 1);
 
   ul {
+    overflow: hidden;
+
     li {
       height: 60px;
       padding: 0 24px;
-      overflow: hidden;
+      cursor: pointer;
 
       display: flex;
       justify-content: flex-start;
@@ -44,16 +47,24 @@ export const Container = styled.div<IDropdownMenuProps>`
         transition-delay: 0.3s;
       }
 
+      &:hover button svg {
+        color: #1db954;
+      }
+
       button {
         color: #fff;
         font-size: 18px;
         font-weight: 500;
+        background: transparent;
+        border: 0;
 
         display: flex;
         align-items: center;
 
         svg {
+          color: #fff;
           margin-right: 16px;
+          transition: color 0.2s;
         }
       }
     }

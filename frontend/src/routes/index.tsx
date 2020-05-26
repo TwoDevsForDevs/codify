@@ -1,7 +1,7 @@
 import React from "react";
-import { Switch } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 
-import Route from "./Route";
+// import Route from "./Route";
 
 import Artists from "../pages/Artists";
 import SignIn from "../pages/SignIn";
@@ -13,8 +13,6 @@ const Routes: React.FC = () => {
       <Route path="/" exact component={SignIn} />
 
       <Route path="/artists" component={Artists} />
-      <Route path="/error" component={Error} />
-      <Route path="/playlists" component={Artists} isPrivate />
 
       <Route path="/error" component={Error} />
     </Switch>

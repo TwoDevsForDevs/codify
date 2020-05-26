@@ -1,7 +1,15 @@
 import styled from "styled-components";
 import { animated } from "react-spring";
 
+import ball from "../../assets/ball.svg";
+
 export const Container = styled.div`
+  height: 100%;
+  background-image: url(${ball});
+  background-repeat: repeat;
+`;
+
+export const Main = styled.main`
   max-width: 1366px;
   width: 100%;
   margin: 0 auto;
@@ -24,11 +32,29 @@ export const LeftContent = styled.div<IMountProps>`
 
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
+
+  div {
+    background: linear-gradient(134.4deg, #20ac9a, #1db954 52%, #91c040);
+    padding: 16px;
+    border-radius: 10px;
+
+    opacity: ${props => (props.mount ? "1" : "0")};
+    transform: ${props => (props.mount ? "translateY(0)" : "translateY(40px)")};
+    transition: transform 1.5s cubic-bezier(0.19, 1, 0.22, 1),
+      opacity 1s cubic-bezier(0.19, 1, 0.22, 1);
+    transition-delay: 0.3s;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
   h1 {
     font-size: 64px;
     color: #fff;
     line-height: 1.25;
+    margin: 32px 0;
 
     display: flex;
     flex-wrap: wrap;
@@ -37,7 +63,7 @@ export const LeftContent = styled.div<IMountProps>`
     transform: ${props => (props.mount ? "translateY(0)" : "translateY(40px)")};
     transition: transform 1.5s cubic-bezier(0.19, 1, 0.22, 1),
       opacity 1s cubic-bezier(0.19, 1, 0.22, 1);
-    transition-delay: 0.3s;
+    transition-delay: 0.5s;
 
     .green {
       color: #33ff7a;
@@ -45,9 +71,8 @@ export const LeftContent = styled.div<IMountProps>`
   }
 
   p {
-    font-size: 20px;
+    font-size: 18px;
     line-height: 2;
-    margin-top: 32px;
 
     opacity: ${props => (props.mount ? "1" : "0")};
     transform: ${props => (props.mount ? "translateY(0)" : "translateY(40px)")};
@@ -76,33 +101,33 @@ export const Artist = styled(animated.div)`
   &:nth-child(1) {
     grid-column-start: 1;
     grid-column-end: 3;
-    transition-delay: 0.3s;
+    transition-delay: 0.2s;
   }
 
   &:nth-child(2) {
     grid-column-start: 3;
     grid-column-end: 5;
-    transition-delay: 0.45s;
+    transition-delay: 0.4s;
   }
 
   &:nth-child(3) {
     grid-column-start: 5;
     grid-column-end: 7;
-    transition-delay: 0.65s;
+    transition-delay: 0.6s;
   }
 
   &:nth-child(4) {
     grid-row-start: 2;
     grid-column-start: 2;
     grid-column-end: 4;
-    transition-delay: 0.85s;
+    transition-delay: 0.8s;
   }
 
   &:nth-child(5) {
     grid-row-start: 2;
     grid-column-start: 4;
     grid-column-end: 6;
-    transition-delay: 1.05s;
+    transition-delay: 1s;
   }
 
   img {
@@ -130,7 +155,6 @@ export const Artist = styled(animated.div)`
     h3 {
       width: fit-content;
       font-size: 24px;
-      margin-top: 8px;
       border-radius: 12px;
       line-height: 1.2;
     }
@@ -181,11 +205,6 @@ export const ArtistInfo = styled.div`
       font-weight: bold;
       font-size: 10px;
     }
-
-    h3 {
-      font-size: 20px;
-      width: fit-content;
-    }
   }
 
   .popularity {
@@ -198,10 +217,6 @@ export const ArtistInfo = styled.div`
     span {
       font-weight: bold;
       font-size: 12px;
-    }
-
-    h3 {
-      font-size: 20px;
     }
   }
 `;
