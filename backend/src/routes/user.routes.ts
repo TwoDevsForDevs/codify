@@ -4,6 +4,30 @@ import api from "../services/api";
 
 const userRouter = Router();
 
+interface ITracks {
+  [key: string]: string;
+}
+
+interface IArtistImages {
+  url: string;
+}
+
+interface IArtistFollwers {
+  total: number;
+}
+
+interface ITopArtists {
+  id: string;
+  name: string;
+  images: IArtistImages[];
+  type: string;
+  uri: string;
+  followers: IArtistFollwers;
+  popularity: number;
+  topTrackPreview: string;
+  topTrackName: string;
+}
+
 userRouter.get("/", async (req, res) => {
   const response = await api.get("/me");
 
@@ -27,31 +51,39 @@ userRouter.get("/top-artists", async (req, res) => {
     },
   });
 
-  const artists = response.data.items;
+  const artists: ITopArtists[] = response.data.items;
 
-  // artists.map(async artist => ({
-  //   ...artist,
-  //   topTrack: await api.get(`/artists/${artist.id}/top-tracks`),
-  // }));
+  await Promise.all(
+    artists.map(async artist => {
+      const tracksResponse = await api.get(
+        `/artists/${artist.id}/top-tracks?country=BR`,
+      );
+
+      Object.assign(artist, {
+        topTrackPreview: tracksResponse.data.tracks[0].preview_url,
+        topTrackName: tracksResponse.data.tracks[0].name,
+      });
+    }),
+  );
 
   return res.json(artists);
 });
 
-userRouter.get("/recently-played", async (req, res) => {
-  const response = await api.get("/me/player/recently-played");
+// userRouter.get("/recently-played", async (req, res) => {
+//   const response = await api.get("/me/player/recently-played");
 
-  console.log(response.data);
-  // const { id, type, display_name, email, images } = response.data;
+//   console.log(response.data);
+//   // const { id, type, display_name, email, images } = response.data;
 
-  // const user = {
-  //   id,
-  //   type,
-  //   display_name,
-  //   email,
-  //   avatar: images[0].url,
-  // };
+//   // const user = {
+//   //   id,
+//   //   type,
+//   //   display_name,
+//   //   email,
+//   //   avatar: images[0].url,
+//   // };
 
-  return res.json(response.data);
-});
+//   return res.json(response.data);
+// });
 
 export default userRouter;
