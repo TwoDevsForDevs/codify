@@ -92,8 +92,8 @@ export const Artist = styled(animated.div)`
   position: relative;
   border-radius: 10px;
   overflow: hidden;
-  width: 230px;
-  height: 230px;
+  width: 240px;
+  height: 240px;
 
   transition: transform 1.5s cubic-bezier(0.19, 1, 0.22, 1),
     opacity 1s cubic-bezier(0.19, 1, 0.22, 1);
@@ -178,11 +178,21 @@ export const Artist = styled(animated.div)`
   &:hover .popularity {
     visibility: visible;
     opacity: 1;
-    transform: translateY(56px);
+    transform: translateY(44px);
     transition: transform 1.5s cubic-bezier(0.19, 1, 0.22, 1),
       visibility 1s cubic-bezier(0.19, 1, 0.22, 1),
       opacity 1s cubic-bezier(0.19, 1, 0.22, 1);
     transition-delay: 0.4s;
+  }
+
+  &:hover .top-track {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(88px);
+    transition: transform 1.5s cubic-bezier(0.19, 1, 0.22, 1),
+      visibility 1s cubic-bezier(0.19, 1, 0.22, 1),
+      opacity 1s cubic-bezier(0.19, 1, 0.22, 1);
+    transition-delay: 0.6s;
   }
 `;
 
@@ -191,32 +201,39 @@ export const ArtistInfo = styled.div`
   top: 16px;
   left: 16px;
   color: #fff;
+  width: 200px;
 
   display: flex;
   flex-direction: column;
 
-  .followers {
+  .info {
     position: absolute;
     visibility: hidden;
     opacity: 0;
-    transform: translateY(40px);
+    width: 100%;
 
     span {
       font-weight: bold;
       font-size: 10px;
     }
+
+    h4 {
+      font-size: 14px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+
+  .followers {
+    transform: translateY(40px);
   }
 
   .popularity {
-    white-space: nowrap;
-    position: absolute;
-    visibility: hidden;
-    opacity: 0;
     transform: translateY(80px);
+  }
 
-    span {
-      font-weight: bold;
-      font-size: 12px;
-    }
+  .top-track {
+    transform: translateY(120px);
   }
 `;

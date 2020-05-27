@@ -23,10 +23,10 @@ const Header: React.FC = () => {
       <Content>
         <nav>
           <FaSpotify color="#fff" size={24} />
-          <NavLink to="/artists" activeClassName="selected">
+          <NavLink to="/top-artists" activeClassName="selected">
             Artistas
           </NavLink>
-          <NavLink to="/favorite_tracks" activeClassName="selected">
+          <NavLink to="/favorite-tracks" activeClassName="selected">
             Músicas favoritas
           </NavLink>
           <NavLink to="/playlists" activeClassName="selected">

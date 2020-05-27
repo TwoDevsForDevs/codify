@@ -46,7 +46,7 @@ export const AuthProvider: React.FC = ({ children }) => {
       hashParams[key] = value;
     });
 
-    window.history.pushState("", "", "/artists");
+    window.history.pushState("", "", "/top-artists");
 
     const { access_token } = hashParams;
 

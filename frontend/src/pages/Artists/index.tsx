@@ -41,6 +41,8 @@ interface ITopArtists {
   popularity: number;
   popularityTag: string;
   audio: HTMLAudioElement;
+  topTrackPreview: string;
+  topTrackName: string;
 }
 
 const Artists: React.FC = () => {
@@ -94,9 +96,7 @@ const Artists: React.FC = () => {
         ...artist,
         formattedFollowers: formatValue(artist.followers.total),
         popularityTag: getPopularity(artist.popularity),
-        audio: new Audio(
-          "https://p.scdn.co/mp3-preview/07c282084563ef61b97b04a0f82b4e7235c8b6ee?cid=3990f465a79b4b2bbd49712c5daf7b0c",
-        ),
+        audio: new Audio(`${artist.topTrackPreview}`),
       }));
 
       console.log(data);
@@ -158,13 +158,17 @@ const Artists: React.FC = () => {
                 </div>
 
                 <ArtistInfo>
-                  <div className="followers">
+                  <div className="info followers">
                     <span>Seguidores</span>
                     <h4>{item.formattedFollowers}</h4>
                   </div>
-                  <div className="popularity">
+                  <div className="info popularity">
                     <span>Popularidade</span>
                     <h4>{item.popularityTag}</h4>
+                  </div>
+                  <div className="info top-track">
+                    <span>Mais tocada</span>
+                    <h4>{item.topTrackName}</h4>
                   </div>
                 </ArtistInfo>
               </Artist>
