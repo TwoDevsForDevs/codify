@@ -90,6 +90,10 @@ export const Artist = styled(animated.div)`
   transition: transform 1.5s cubic-bezier(0.19, 1, 0.22, 1),
     opacity 1s cubic-bezier(0.19, 1, 0.22, 1);
 
+  &:hover > img {
+    transform: scale(1.1);
+  }
+
   &:nth-child(1) {
     grid-column-start: 1;
     grid-column-end: 3;
@@ -128,10 +132,6 @@ export const Artist = styled(animated.div)`
     border-radius: 10px;
     opacity: 0.8;
     transition: all 0.3s;
-
-    &:hover {
-      transform: scale(1.1);
-    }
   }
 
   .name {
