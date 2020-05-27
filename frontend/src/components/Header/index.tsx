@@ -9,10 +9,22 @@ import DropdownMenu from "./Dropdown";
 
 import { Container, Content, ProfileData } from "./styles";
 
-const Header: React.FC = () => {
+interface IUserData {
+  id: string;
+  type: string;
+  display_name: string;
+  email: string;
+  avatar: string;
+}
+
+interface IHeaderProps {
+  user: IUserData;
+}
+
+const Header: React.FC<IHeaderProps> = ({ user }) => {
   const [showDropdown, setShowDropdown] = useState(false);
 
-  const { user } = useAuth();
+  // const { user } = useAuth();
 
   const handleDropdown = useCallback(() => {
     setShowDropdown(!showDropdown);

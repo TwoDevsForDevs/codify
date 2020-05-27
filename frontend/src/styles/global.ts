@@ -1,5 +1,7 @@
 import { createGlobalStyle } from "styled-components";
 
+import ball from "../assets/ball.svg";
+
 export default createGlobalStyle`
   * {
     margin: 0;
@@ -19,6 +21,9 @@ export default createGlobalStyle`
   body {
     -webkit-font-smoothing: antialiased;
     background: #121212;
+    height: 100%;
+    background-image: url(${ball});
+    background-repeat: repeat;
     cursor: default;
   }
 
@@ -45,6 +50,6 @@ export default createGlobalStyle`
   }
 
   ::-webkit-scrollbar-thumb {
-    background-color: hsla(0,0%,100%,.3);
-}
+    background-color: hsla(0, 0%, 100%, 0.3);
+  }
 `;

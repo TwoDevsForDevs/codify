@@ -14,7 +14,6 @@ import api from "../../services/api";
 
 import {
   Container,
-  Main,
   Content,
   LeftContent,
   TopArtists,
@@ -52,7 +51,7 @@ const Artists: React.FC = () => {
   );
   const [mount, setMount] = useState(false);
 
-  const { getCredentials } = useAuth();
+  const { user } = useAuth();
 
   const playAudioWithFade = useCallback(audio => {
     let volCounter = 0;
@@ -69,7 +68,7 @@ const Artists: React.FC = () => {
       setTimeout(() => {
         clearInterval(volumeFade);
       }, 1000);
-    }, 500);
+    }, 1000);
   }, []);
 
   const pauseAudioWithFade = useCallback(audio => {
@@ -87,8 +86,6 @@ const Artists: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    getCredentials();
-
     async function loadTopArtists(): Promise<void> {
       const response = await api.get("/me/top-artists");
 
@@ -99,14 +96,13 @@ const Artists: React.FC = () => {
         audio: new Audio(`${artist.topTrackPreview}`),
       }));
 
-      console.log(data);
       setTopArtists(data);
       setFirstTopArtist(data[0]);
       setMount(true);
     }
 
     loadTopArtists();
-  }, [getCredentials]);
+  }, []);
 
   const artistsWithTransition = useTransition(
     topArtists,
@@ -124,10 +120,10 @@ const Artists: React.FC = () => {
   );
 
   return (
-    <Container>
-      <Header />
+    <>
+      <Header user={user} />
 
-      <Main>
+      <Container>
         <Content>
           <LeftContent mount={mount}>
             <div>
@@ -175,8 +171,8 @@ const Artists: React.FC = () => {
             ))}
           </TopArtists>
         </Content>
-      </Main>
-    </Container>
+      </Container>
+    </>
   );
 };
 

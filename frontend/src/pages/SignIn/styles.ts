@@ -1,12 +1,8 @@
 import styled from "styled-components";
 import { lighten } from "polished";
 
-import ball from "../../assets/ball.svg";
-
 export const Container = styled.div`
   height: 100%;
-  background-image: url(${ball});
-  background-repeat: repeat;
 
   display: flex;
   justify-content: center;

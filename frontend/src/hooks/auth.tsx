@@ -46,11 +46,9 @@ export const AuthProvider: React.FC = ({ children }) => {
       hashParams[key] = value;
     });
 
-    window.history.pushState("", "", "/top-artists");
+    const response = await api.get("/me");
 
     const { access_token } = hashParams;
-
-    const response = await api.get("/me");
 
     localStorage.setItem("@Spotify:access_token", access_token);
     localStorage.setItem("@Spotify:user", JSON.stringify(response.data));
@@ -59,6 +57,8 @@ export const AuthProvider: React.FC = ({ children }) => {
       access_token,
       user: response.data,
     });
+
+    window.location.href = "/top-artists";
   }, []);
 
   const signOut = useCallback(() => {

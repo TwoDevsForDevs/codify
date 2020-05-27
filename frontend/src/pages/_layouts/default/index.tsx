@@ -7,7 +7,7 @@ import { Wrapper } from "./styles";
 const DefaultLayout: React.FC = ({ children }) => {
   return (
     <Wrapper>
-      <Header />
+      {/* <Header /> */}
       {children}
     </Wrapper>
   );

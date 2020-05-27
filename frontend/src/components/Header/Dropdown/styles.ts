@@ -9,7 +9,7 @@ export const Container = styled.div<IDropdownMenuProps>`
   padding: 8px 0;
   border-radius: 10px;
   width: 325px;
-  box-shadow: 0 40px 99px 0 #000;
+  box-shadow: 2px 2px 16px #000;
   z-index: 100;
   position: absolute;
   right: 0px;
