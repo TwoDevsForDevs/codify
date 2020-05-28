@@ -7,6 +7,7 @@ import SignIn from '../pages/SignIn';
 import Authenticate from '../pages/Authenticate';
 
 import Artists from '../pages/Artists';
+import Playlists from '../pages/Playlists';
 import Error from '../pages/Error';
 
 const Routes: React.FC = () => {
@@ -16,6 +17,7 @@ const Routes: React.FC = () => {
       <Route path="/spotify-authentication" exact component={Authenticate} />
 
       <Route path="/top-artists" exact component={Artists} />
+      <Route path="/playlists" exact component={Playlists} />
 
       <Route path="/error" component={Error} />
     </Switch>

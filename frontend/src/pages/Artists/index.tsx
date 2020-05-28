@@ -1,11 +1,9 @@
 /* eslint-disable no-param-reassign */
 import React, { useState, useEffect, useCallback } from 'react';
 import { useTransition } from 'react-spring';
-import { FaHeadphones } from 'react-icons/fa';
+import { GiMicrophone } from 'react-icons/gi';
 
 import Header from '../../components/Header';
-
-import { useAuth } from '../../hooks/auth';
 
 import formatValue from '../../utils/formatValue';
 import getPopularity from '../../utils/getPopularity';
@@ -21,7 +19,7 @@ import {
   ArtistInfo,
 } from './styles';
 
-interface IArtistImages {
+interface IImages {
   url: string;
 }
 
@@ -32,7 +30,7 @@ interface IArtistFollwers {
 interface ITopArtists {
   id: string;
   name: string;
-  images: IArtistImages[];
+  images: IImages[];
   type: string;
   uri: string;
   followers: IArtistFollwers;
@@ -50,8 +48,6 @@ const Artists: React.FC = () => {
     {} as ITopArtists,
   );
   const [mount, setMount] = useState(false);
-
-  const { user } = useAuth();
 
   const playAudioWithFade = useCallback(audio => {
     let volCounter = 0;
@@ -121,13 +117,13 @@ const Artists: React.FC = () => {
 
   return (
     <>
-      <Header user={user} />
+      <Header />
 
       <Container>
         <Content>
           <LeftContent mount={mount}>
             <div>
-              <FaHeadphones size={32} color="#fff" />
+              <GiMicrophone size={32} color="#fff" />
             </div>
             <h1>
               Escutando
