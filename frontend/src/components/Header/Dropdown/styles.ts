@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 interface IDropdownMenuProps {
   showDropdown: boolean;
@@ -16,9 +16,9 @@ export const Container = styled.div<IDropdownMenuProps>`
   top: 54px;
 
   opacity: ${props => (props.showDropdown ? 1 : 0)};
-  visibility: ${props => (props.showDropdown ? "visible" : "hidden")};
+  visibility: ${props => (props.showDropdown ? 'visible' : 'hidden')};
   transform: ${props =>
-    props.showDropdown ? "translateY(0)" : "translateY(20px)"};
+    props.showDropdown ? 'translateY(0)' : 'translateY(20px)'};
   transition: transform 1s cubic-bezier(0.19, 1, 0.22, 1),
     opacity 1s cubic-bezier(0.19, 1, 0.22, 1);
 
@@ -35,7 +35,7 @@ export const Container = styled.div<IDropdownMenuProps>`
 
       opacity: ${props => (props.showDropdown ? 1 : 0)};
       transform: ${props =>
-        props.showDropdown ? "translateY(0)" : "translateY(40px)"};
+        props.showDropdown ? 'translateY(0)' : 'translateY(40px)'};
       transition: transform 0.8s cubic-bezier(0.19, 1, 0.22, 1),
         opacity 0.5s cubic-bezier(0.19, 1, 0.22, 1);
 

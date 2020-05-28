@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { FiLogOut, FiMaximize, FiGithub } from "react-icons/fi";
+import React, { useState, useEffect, useCallback } from 'react';
+import { FiLogOut, FiMaximize, FiGithub } from 'react-icons/fi';
 
-import { toggleFullScreen } from "../../../utils/toggleFullScreen";
+import { toggleFullScreen } from '../../../utils/toggleFullScreen';
 
-import { Container } from "./styles";
+import { Container } from './styles';
 
 interface IDropdownProps {
   showDropdown: boolean;
@@ -21,14 +21,14 @@ const Dropdown: React.FC<IDropdownProps> = ({
   }, [fullScreen]);
 
   useEffect(() => {
-    document.addEventListener("fullscreenchange", handleFullScreen);
+    document.addEventListener('fullscreenchange', handleFullScreen);
 
     setShowDropdown(false);
   }, [handleFullScreen, setShowDropdown]);
 
   useEffect(() => {
     return () => {
-      document.removeEventListener("fullscreenchange", handleFullScreen);
+      document.removeEventListener('fullscreenchange', handleFullScreen);
 
       setShowDropdown(false);
     };
@@ -40,7 +40,7 @@ const Dropdown: React.FC<IDropdownProps> = ({
         <li>
           <button type="button" onClick={() => toggleFullScreen(fullScreen)}>
             <FiMaximize size={22} />
-            {fullScreen ? "Sair da tela cheia" : "Tela cheia"}
+            {fullScreen ? 'Sair da tela cheia' : 'Tela cheia'}
           </button>
         </li>
         <li>

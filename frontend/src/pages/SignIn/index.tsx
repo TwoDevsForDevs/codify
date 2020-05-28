@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { FaSpotify } from "react-icons/fa";
+import React, { useEffect, useState } from 'react';
+import { FaSpotify } from 'react-icons/fa';
 
-import edSheeran from "../../assets/ed-sheeran.svg";
+import edSheeran from '../../assets/ed-sheeran.svg';
 
 import {
   Container,
@@ -9,7 +9,7 @@ import {
   SignInContainer,
   ArtistImage,
   SignUpContainer,
-} from "./styles";
+} from './styles';
 
 const SignIn: React.FC = () => {
   const [mount, setMount] = useState(false);

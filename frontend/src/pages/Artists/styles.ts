@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { animated } from "react-spring";
+import styled from 'styled-components';
+import { animated } from 'react-spring';
 
 export const Container = styled.main`
   max-width: 1366px;
@@ -31,8 +31,8 @@ export const LeftContent = styled.div<IMountProps>`
     padding: 16px;
     border-radius: 10px;
 
-    opacity: ${props => (props.mount ? "1" : "0")};
-    transform: ${props => (props.mount ? "translateY(0)" : "translateY(40px)")};
+    opacity: ${props => (props.mount ? '1' : '0')};
+    transform: ${props => (props.mount ? 'translateY(0)' : 'translateY(40px)')};
     transition: transform 1.5s cubic-bezier(0.19, 1, 0.22, 1),
       opacity 1s cubic-bezier(0.19, 1, 0.22, 1);
     transition-delay: 0.1s;
@@ -51,8 +51,8 @@ export const LeftContent = styled.div<IMountProps>`
     display: flex;
     flex-wrap: wrap;
 
-    opacity: ${props => (props.mount ? "1" : "0")};
-    transform: ${props => (props.mount ? "translateY(0)" : "translateY(40px)")};
+    opacity: ${props => (props.mount ? '1' : '0')};
+    transform: ${props => (props.mount ? 'translateY(0)' : 'translateY(40px)')};
     transition: transform 1.5s cubic-bezier(0.19, 1, 0.22, 1),
       opacity 1s cubic-bezier(0.19, 1, 0.22, 1);
     transition-delay: 0.3s;
@@ -66,8 +66,8 @@ export const LeftContent = styled.div<IMountProps>`
     font-size: 18px;
     line-height: 2;
 
-    opacity: ${props => (props.mount ? "1" : "0")};
-    transform: ${props => (props.mount ? "translateY(0)" : "translateY(40px)")};
+    opacity: ${props => (props.mount ? '1' : '0')};
+    transform: ${props => (props.mount ? 'translateY(0)' : 'translateY(40px)')};
     transition: transform 1.5s cubic-bezier(0.19, 1, 0.22, 1),
       opacity 1s cubic-bezier(0.19, 1, 0.22, 1);
     transition-delay: 0.5s;

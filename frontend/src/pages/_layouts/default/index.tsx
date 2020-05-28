@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 
-import Header from "../../../components/Header";
+import Header from '../../../components/Header';
 
-import { Wrapper } from "./styles";
+import { Wrapper } from './styles';
 
 const DefaultLayout: React.FC = ({ children }) => {
   return (

@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { lighten } from "polished";
+import styled from 'styled-components';
+import { lighten } from 'polished';
 
 export const Container = styled.div`
   height: 100%;
@@ -47,7 +47,7 @@ export const SignInContainer = styled.div<IMountProps>`
         display: inline-block;
 
         transform: ${props =>
-          props.mount ? "translateY(0)" : "translateY(110%)"};
+          props.mount ? 'translateY(0)' : 'translateY(110%)'};
         transition: transform 0.8s cubic-bezier(0.075, 0.82, 0.165, 1);
       }
     }
@@ -97,8 +97,8 @@ export const SignInContainer = styled.div<IMountProps>`
     font-size: 20px;
     line-height: 2;
 
-    opacity: ${props => (props.mount ? "1" : "0")};
-    transform: ${props => (props.mount ? "translateY(0)" : "translateY(40px)")};
+    opacity: ${props => (props.mount ? '1' : '0')};
+    transform: ${props => (props.mount ? 'translateY(0)' : 'translateY(40px)')};
     transition: transform 1.5s cubic-bezier(0.19, 1, 0.22, 1),
       opacity 1s cubic-bezier(0.19, 1, 0.22, 1);
     transition-delay: 0.8s;
@@ -113,8 +113,8 @@ export const SignInContainer = styled.div<IMountProps>`
     padding: 32px 48px;
     border-radius: 10px;
 
-    opacity: ${props => (props.mount ? "1" : "0")};
-    transform: ${props => (props.mount ? "translateY(0)" : "translateY(40px)")};
+    opacity: ${props => (props.mount ? '1' : '0')};
+    transform: ${props => (props.mount ? 'translateY(0)' : 'translateY(40px)')};
     will-change: transform;
     transition: transform 1.5s cubic-bezier(0.19, 1, 0.22, 1) 1s,
       opacity 1s cubic-bezier(0.19, 1, 0.22, 1) 1s, background 0.2s;
@@ -123,7 +123,7 @@ export const SignInContainer = styled.div<IMountProps>`
     align-items: center;
 
     &:hover {
-      background: ${lighten(0.03, "#1db954")};
+      background: ${lighten(0.03, '#1db954')};
     }
 
     svg {
@@ -133,8 +133,8 @@ export const SignInContainer = styled.div<IMountProps>`
 `;
 
 export const ArtistImage = styled.div<IMountProps>`
-  opacity: ${props => (props.mount ? "1" : "0")};
-  transform: ${props => (props.mount ? "scale(1)" : "scale(0.8)")};
+  opacity: ${props => (props.mount ? '1' : '0')};
+  transform: ${props => (props.mount ? 'scale(1)' : 'scale(0.8)')};
   transition: transform 1.5s cubic-bezier(0.19, 1, 0.22, 1) 1s,
     opacity 1s cubic-bezier(0.19, 1, 0.22, 1);
   transition-delay: 0.8s;
@@ -150,8 +150,8 @@ export const SignUpContainer = styled.div<IMountProps>`
   left: 24px;
   font-size: 16px;
 
-  opacity: ${props => (props.mount ? "1" : "0")};
-  transform: ${props => (props.mount ? "translateX(0)" : "translateX(80px)")};
+  opacity: ${props => (props.mount ? '1' : '0')};
+  transform: ${props => (props.mount ? 'translateX(0)' : 'translateX(80px)')};
   transition: transform 1.5s cubic-bezier(0.19, 1, 0.22, 1),
     opacity 1s cubic-bezier(0.19, 1, 0.22, 1);
   transition-delay: 1s;
@@ -171,7 +171,7 @@ export const SignUpContainer = styled.div<IMountProps>`
     transition: color 0.2s;
 
     &:hover {
-      color: ${lighten(0.03, "#1db954")};
+      color: ${lighten(0.03, '#1db954')};
     }
   }
 `;

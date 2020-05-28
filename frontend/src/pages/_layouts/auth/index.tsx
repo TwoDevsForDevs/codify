@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-import { Wrapper } from "./styles";
+import { Wrapper } from './styles';
 
 const AuthLayout: React.FC = ({ children }) => {
   return <Wrapper>{children}</Wrapper>;

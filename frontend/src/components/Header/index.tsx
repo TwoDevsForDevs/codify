@@ -1,13 +1,13 @@
-import React, { useState, useCallback } from "react";
-import { NavLink } from "react-router-dom";
-import { FaSpotify } from "react-icons/fa";
-import { FiMoreVertical } from "react-icons/fi";
+import React, { useState, useCallback } from 'react';
+import { NavLink } from 'react-router-dom';
+import { FaSpotify } from 'react-icons/fa';
+import { FiMoreVertical } from 'react-icons/fi';
 
-import { useAuth } from "../../hooks/auth";
+import { useAuth } from '../../hooks/auth';
 
-import DropdownMenu from "./Dropdown";
+import DropdownMenu from './Dropdown';
 
-import { Container, Content, ProfileData } from "./styles";
+import { Container, Content, ProfileData } from './styles';
 
 interface IUserData {
   id: string;

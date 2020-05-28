@@ -1,16 +1,16 @@
 /* eslint-disable no-param-reassign */
-import React, { useState, useEffect, useCallback } from "react";
-import { useTransition } from "react-spring";
-import { FaHeadphones } from "react-icons/fa";
+import React, { useState, useEffect, useCallback } from 'react';
+import { useTransition } from 'react-spring';
+import { FaHeadphones } from 'react-icons/fa';
 
-import Header from "../../components/Header";
+import Header from '../../components/Header';
 
-import { useAuth } from "../../hooks/auth";
+import { useAuth } from '../../hooks/auth';
 
-import formatValue from "../../utils/formatValue";
-import getPopularity from "../../utils/getPopularity";
+import formatValue from '../../utils/formatValue';
+import getPopularity from '../../utils/getPopularity';
 
-import api from "../../services/api";
+import api from '../../services/api';
 
 import {
   Container,
@@ -19,7 +19,7 @@ import {
   TopArtists,
   Artist,
   ArtistInfo,
-} from "./styles";
+} from './styles';
 
 interface IArtistImages {
   url: string;
@@ -87,7 +87,7 @@ const Artists: React.FC = () => {
 
   useEffect(() => {
     async function loadTopArtists(): Promise<void> {
-      const response = await api.get("/me/top-artists");
+      const response = await api.get('/me/top-artists');
 
       const data = response.data.map((artist: ITopArtists) => ({
         ...artist,
@@ -110,11 +110,11 @@ const Artists: React.FC = () => {
     {
       from: {
         opacity: 0,
-        transform: "scale(0.8)",
+        transform: 'scale(0.8)',
       },
       enter: {
         opacity: 1,
-        transform: "scale(1)",
+        transform: 'scale(1)',
       },
     },
   );

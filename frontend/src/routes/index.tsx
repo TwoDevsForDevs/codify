@@ -1,13 +1,13 @@
-import React from "react";
-import { Switch, Route } from "react-router-dom";
+import React from 'react';
+import { Switch, Route } from 'react-router-dom';
 
 // import Route from "./Route";
 
-import SignIn from "../pages/SignIn";
-import Authenticate from "../pages/Authenticate";
+import SignIn from '../pages/SignIn';
+import Authenticate from '../pages/Authenticate';
 
-import Artists from "../pages/Artists";
-import Error from "../pages/Error";
+import Artists from '../pages/Artists';
+import Error from '../pages/Error';
 
 const Routes: React.FC = () => {
   return (

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Container = styled.header`
   width: 100%;
@@ -34,7 +34,7 @@ export const Content = styled.div`
     }
 
     .selected::after {
-      content: "";
+      content: '';
       width: 100%;
       height: 3px;
       background: #1db954;
@@ -69,7 +69,7 @@ export const ProfileData = styled.aside<IProfileDataProps>`
 
   > button {
     background: ${props =>
-      props.showDropdown ? "rgba(51, 255, 122, 0.15)" : "transparent"};
+      props.showDropdown ? 'rgba(51, 255, 122, 0.15)' : 'transparent'};
     border: 0;
     border-radius: 50%;
     width: 32px;
@@ -81,7 +81,7 @@ export const ProfileData = styled.aside<IProfileDataProps>`
     align-items: center;
 
     svg {
-      color: ${props => (props.showDropdown ? "#33ff7a" : "#fff")};
+      color: ${props => (props.showDropdown ? '#33ff7a' : '#fff')};
     }
   }
 `;

@@ -1,6 +1,6 @@
-import React, { createContext, useCallback, useState, useContext } from "react";
+import React, { createContext, useCallback, useState, useContext } from 'react';
 
-import api from "../services/api";
+import api from '../services/api';
 
 interface IUserData {
   id: string;
@@ -25,8 +25,8 @@ const AuthContext = createContext<IAuthContextData>({} as IAuthContextData);
 
 export const AuthProvider: React.FC = ({ children }) => {
   const [data, setData] = useState<IAuthState>(() => {
-    const access_token = localStorage.getItem("@Spotify:access_token");
-    const user = localStorage.getItem("@Spotify:user");
+    const access_token = localStorage.getItem('@Spotify:access_token');
+    const user = localStorage.getItem('@Spotify:user');
 
     if (access_token && user) {
       return { access_token, user: JSON.parse(user) };
@@ -38,32 +38,32 @@ export const AuthProvider: React.FC = ({ children }) => {
   const getCredentials = useCallback(async () => {
     const hashParams = {} as any;
 
-    const query = window.location.search.replace("?", "");
-    const entries = query.split("&");
+    const query = window.location.search.replace('?', '');
+    const entries = query.split('&');
 
     entries.forEach(entry => {
-      const [key, value] = entry.split("=");
+      const [key, value] = entry.split('=');
       hashParams[key] = value;
     });
 
-    const response = await api.get("/me");
+    const response = await api.get('/me');
 
     const { access_token } = hashParams;
 
-    localStorage.setItem("@Spotify:access_token", access_token);
-    localStorage.setItem("@Spotify:user", JSON.stringify(response.data));
+    localStorage.setItem('@Spotify:access_token', access_token);
+    localStorage.setItem('@Spotify:user', JSON.stringify(response.data));
 
     setData({
       access_token,
       user: response.data,
     });
 
-    window.location.href = "/top-artists";
+    window.location.href = '/top-artists';
   }, []);
 
   const signOut = useCallback(() => {
-    localStorage.removeItem("@Spotify:access_token");
-    localStorage.removeItem("@Spotify:user");
+    localStorage.removeItem('@Spotify:access_token');
+    localStorage.removeItem('@Spotify:user');
 
     setData({} as IAuthState);
   }, []);
@@ -79,7 +79,7 @@ export function useAuth(): IAuthContextData {
   const context = useContext(AuthContext);
 
   if (!context) {
-    throw new Error("useAuth must be used within an AuthProvider");
+    throw new Error('useAuth must be used within an AuthProvider');
   }
 
   return context;

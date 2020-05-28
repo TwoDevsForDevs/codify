@@ -1,18 +1,18 @@
 const getPopularity = (value: number): string => {
   if (value < 30) {
-    return "Pouco escutado";
+    return 'Pouco escutado';
   }
   if (value < 55) {
-    return "Sutil";
+    return 'Sutil';
   }
   if (value < 80) {
-    return "Bem conhecido";
+    return 'Bem conhecido';
   }
   if (value < 88) {
-    return "Popular";
+    return 'Popular';
   }
 
-  return "Estourando";
+  return 'Estourando';
 };
 
 export default getPopularity;

@@ -1,6 +1,6 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from 'styled-components';
 
-import ball from "../assets/ball.svg";
+import ball from '../assets/ball.svg';
 
 export default createGlobalStyle`
   * {
