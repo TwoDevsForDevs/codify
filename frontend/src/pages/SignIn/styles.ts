@@ -29,6 +29,7 @@ export const SignInContainer = styled.div<IMountProps>`
 
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
 
   h1 {
     font-size: 72px;
@@ -105,30 +106,8 @@ export const SignInContainer = styled.div<IMountProps>`
   }
 
   a {
-    background: #1db954;
-    color: #fff;
-    font-size: 18px;
-    font-weight: bold;
-    width: fit-content;
-    padding: 32px 48px;
-    border-radius: 10px;
-
     opacity: ${props => (props.mount ? '1' : '0')};
     transform: ${props => (props.mount ? 'translateY(0)' : 'translateY(40px)')};
-    will-change: transform;
-    transition: transform 1.5s cubic-bezier(0.19, 1, 0.22, 1) 1s,
-      opacity 1s cubic-bezier(0.19, 1, 0.22, 1) 1s, background 0.2s;
-
-    display: flex;
-    align-items: center;
-
-    &:hover {
-      background: ${lighten(0.03, '#1db954')};
-    }
-
-    svg {
-      margin-right: 16px;
-    }
   }
 `;
 

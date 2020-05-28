@@ -5,6 +5,7 @@ import { FaHeadphones } from 'react-icons/fa';
 import api from '../../services/api';
 
 import Header from '../../components/Header';
+import Modal from '../../components/Modal';
 
 import {
   Container,
@@ -28,6 +29,10 @@ const Playlists: React.FC = () => {
   useEffect(() => {
     async function loadUserPlaylists(): Promise<void> {
       const response = await api.get('/me/playlists');
+
+      const test = await api.get(`/playlist/tracks/${response.data[0].id}`);
+
+      console.log(test.data);
 
       setPlaylist(response.data);
       setMount(true);
@@ -55,6 +60,8 @@ const Playlists: React.FC = () => {
   return (
     <>
       <Header />
+
+      {/* <Modal /> */}
 
       <Container>
         <Content>

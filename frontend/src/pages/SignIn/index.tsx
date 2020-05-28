@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { FaSpotify } from 'react-icons/fa';
 
 import edSheeran from '../../assets/ed-sheeran.svg';
+
+import SpotifyButton from '../../components/SpotifyButton';
 
 import {
   Container,
@@ -39,10 +40,9 @@ const SignIn: React.FC = () => {
           <p>
             Explore diversas músicas no seu perfil e crie playlists incríveis.
           </p>
-          <a href="http://localhost:3333/sessions">
-            <FaSpotify size={24} color="#fff" />
+          <SpotifyButton linkTo="http://localhost:3333/sessions">
             Continue com o Spotify
-          </a>
+          </SpotifyButton>
         </SignInContainer>
 
         <ArtistImage mount={mount}>
