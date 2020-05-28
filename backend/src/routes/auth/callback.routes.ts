@@ -1,18 +1,18 @@
-import request from "request";
-import { Router } from "express";
-import querystring from "querystring";
+import request from 'request';
+import { Router } from 'express';
+import querystring from 'querystring';
 
-import api from "../../services/api";
+import api from '../../services/api';
 
 const callbackRouter = Router();
 
 const clientId = process.env.CLIENT_ID;
 const clientSecret = process.env.CLIENT_SECRET;
-const redirectURI = "http://localhost:3333/callback";
+const redirectURI = 'http://localhost:3333/callback';
 
-const stateKey = "@spotify-clone/auth_state";
+const stateKey = '@spotify-clone/auth_state';
 
-callbackRouter.get("/", (req, res) => {
+callbackRouter.get('/', (req, res) => {
   const code = req.query.code || null;
   const state = req.query.state || null;
   const storedState = req.cookies ? req.cookies[stateKey] : null;
@@ -20,22 +20,22 @@ callbackRouter.get("/", (req, res) => {
   if (state === null || state !== storedState) {
     res.redirect(
       `http://localhost:3000/error/${querystring.stringify({
-        error: "state_mismatch",
+        error: 'state_mismatch',
       })}`,
     );
   } else {
     res.clearCookie(stateKey);
     const authOptions = {
-      url: "https://accounts.spotify.com/api/token",
+      url: 'https://accounts.spotify.com/api/token',
       form: {
         code,
         redirect_uri: redirectURI,
-        grant_type: "authorization_code",
+        grant_type: 'authorization_code',
       },
       headers: {
         Authorization: `Basic ${Buffer.from(
           `${clientId}:${clientSecret}`,
-        ).toString("base64")}`,
+        ).toString('base64')}`,
       },
       json: true,
     };

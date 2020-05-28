@@ -1,6 +1,6 @@
-import { Router } from "express";
+import { Router } from 'express';
 
-import api from "../services/api";
+import api from '../services/api';
 
 const userRouter = Router();
 
@@ -28,8 +28,8 @@ interface ITopArtists {
   topTrackName: string;
 }
 
-userRouter.get("/", async (req, res) => {
-  const response = await api.get("/me");
+userRouter.get('/', async (req, res) => {
+  const response = await api.get('/me');
 
   const { id, type, display_name, email, images } = response.data;
 
@@ -44,8 +44,8 @@ userRouter.get("/", async (req, res) => {
   return res.json(user);
 });
 
-userRouter.get("/top-artists", async (req, res) => {
-  const response = await api.get("/me/top/artists", {
+userRouter.get('/top-artists', async (req, res) => {
+  const response = await api.get('/me/top/artists', {
     params: {
       limit: 5,
     },
@@ -68,6 +68,10 @@ userRouter.get("/top-artists", async (req, res) => {
 
   return res.json(artists);
 });
+
+// userRouter.get('playlists', async (req, res) => {
+//   const response = await api.get('')
+// })
 
 // userRouter.get("/recently-played", async (req, res) => {
 //   const response = await api.get("/me/player/recently-played");
