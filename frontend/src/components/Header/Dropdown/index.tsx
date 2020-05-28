@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { FiLogOut, FiMaximize } from "react-icons/fi";
+import { FiLogOut, FiMaximize, FiGithub } from "react-icons/fi";
 
 import { toggleFullScreen } from "../../../utils/toggleFullScreen";
 
@@ -42,6 +42,12 @@ const Dropdown: React.FC<IDropdownProps> = ({
             <FiMaximize size={22} />
             {fullScreen ? "Sair da tela cheia" : "Tela cheia"}
           </button>
+        </li>
+        <li>
+          <a href="https://github.com/KeepCodingLab/codify">
+            <FiGithub size={22} />
+            Contribue
+          </a>
         </li>
         <li>
           <button type="button">

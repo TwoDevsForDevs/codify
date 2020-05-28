@@ -47,11 +47,16 @@ export const Container = styled.div<IDropdownMenuProps>`
         transition-delay: 0.3s;
       }
 
-      &:hover button svg {
+      &:nth-child(3) {
+        transition-delay: 0.4s;
+      }
+
+      &:hover svg {
         color: #1db954;
       }
 
-      button {
+      button,
+      a {
         color: #fff;
         font-size: 18px;
         font-weight: 500;
