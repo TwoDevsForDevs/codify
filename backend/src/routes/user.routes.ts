@@ -8,7 +8,7 @@ interface ITracks {
   [key: string]: string;
 }
 
-interface IArtistImages {
+interface IImages {
   url: string;
 }
 
@@ -19,13 +19,20 @@ interface IArtistFollwers {
 interface ITopArtists {
   id: string;
   name: string;
-  images: IArtistImages[];
+  images: IImages[];
   type: string;
   uri: string;
   followers: IArtistFollwers;
   popularity: number;
   topTrackPreview: string;
   topTrackName: string;
+}
+
+interface IPlaylists {
+  id: string;
+  name: string;
+  images: IImages[];
+  uri: string;
 }
 
 userRouter.get('/', async (req, res) => {
@@ -69,9 +76,20 @@ userRouter.get('/top-artists', async (req, res) => {
   return res.json(artists);
 });
 
-// userRouter.get('playlists', async (req, res) => {
-//   const response = await api.get('')
-// })
+userRouter.get('/playlists', async (req, res) => {
+  const response = await api.get('/me/playlists');
+
+  const playlists: IPlaylists[] = response.data.items;
+
+  const formattedPlaylists = playlists.map(playlist => ({
+    id: playlist.id,
+    name: playlist.name,
+    avatar: playlist.images[0].url,
+    uri: playlist.uri,
+  }));
+
+  return res.json(formattedPlaylists);
+});
 
 // userRouter.get("/recently-played", async (req, res) => {
 //   const response = await api.get("/me/player/recently-played");
