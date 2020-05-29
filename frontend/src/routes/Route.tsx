@@ -1,6 +1,8 @@
 import React from 'react';
 import { Route, Redirect, RouteProps } from 'react-router-dom';
 
+import { useAuth } from '../hooks/auth';
+
 import AuthLayout from '../pages/_layouts/auth';
 import DefaultLayout from '../pages/_layouts/default';
 
@@ -14,7 +16,9 @@ const RouteWrapper: React.FC<IRouteProps> = ({
   isPrivate = false,
   ...rest
 }) => {
-  const signed = true;
+  const { user } = useAuth();
+
+  const signed = !!user;
 
   if (!signed && isPrivate) {
     return <Redirect to="/" />;
