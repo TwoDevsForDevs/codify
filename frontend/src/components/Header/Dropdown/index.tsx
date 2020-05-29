@@ -3,6 +3,8 @@ import { FiLogOut, FiMaximize, FiGithub } from 'react-icons/fi';
 
 import { toggleFullScreen } from '../../../utils/toggleFullScreen';
 
+import { useAuth } from '../../../hooks/auth';
+
 import { Container } from './styles';
 
 interface IDropdownProps {
@@ -15,6 +17,7 @@ const Dropdown: React.FC<IDropdownProps> = ({
   setShowDropdown,
 }) => {
   const [fullScreen, setFullScreen] = useState(false);
+  const { signOut } = useAuth();
 
   const handleFullScreen = useCallback(() => {
     setFullScreen(!fullScreen);
@@ -54,7 +57,7 @@ const Dropdown: React.FC<IDropdownProps> = ({
           </a>
         </li>
         <li>
-          <button type="button">
+          <button type="button" onClick={signOut}>
             <FiLogOut size={22} />
             Sair
           </button>
