@@ -4,16 +4,9 @@ import { FaHeadphones } from 'react-icons/fa';
 
 import api from '../../services/api';
 
-import Header from '../../components/Header';
 import Modal from '../../components/Modal';
 
-import {
-  Container,
-  Content,
-  LeftContent,
-  UserPlaylists,
-  Playlist,
-} from './styles';
+import { Container, LeftContent, UserPlaylists, Playlist } from './styles';
 
 interface IPlaylists {
   id: string;
@@ -58,39 +51,35 @@ const Playlists: React.FC = () => {
   );
 
   return (
-    <>
-      <Header />
+    <Container>
+      <Modal />
 
-      <Container>
-        <Modal />
+      <>
+        <LeftContent mount={mount}>
+          <div>
+            <FaHeadphones size={32} color="#fff" />
+          </div>
+          <h1>
+            Visualize Suas
+            <span className="green">Playlists</span>
+          </h1>
+          <p>Mostrando todas as playlists criadas por você!</p>
+        </LeftContent>
 
-        <Content>
-          <LeftContent mount={mount}>
-            <div>
-              <FaHeadphones size={32} color="#fff" />
-            </div>
-            <h1>
-              Visualize Suas
-              <span className="green">Playlists</span>
-            </h1>
-            <p>Mostrando todas as playlists criadas por você!</p>
-          </LeftContent>
-
-          <UserPlaylists mount={mount}>
-            {playlistsWithTransition.map(({ item, key, props }, index) => (
-              <Playlist key={key} style={props}>
-                <img src={item.avatar} alt={item.name} />
-                <div>
-                  <strong>
-                    {index + 1}. {item.name}
-                  </strong>
-                </div>
-              </Playlist>
-            ))}
-          </UserPlaylists>
-        </Content>
-      </Container>
-    </>
+        <UserPlaylists mount={mount}>
+          {playlistsWithTransition.map(({ item, key, props }, index) => (
+            <Playlist key={key} style={props}>
+              <img src={item.avatar} alt={item.name} />
+              <div>
+                <strong>
+                  {index + 1}. {item.name}
+                </strong>
+              </div>
+            </Playlist>
+          ))}
+        </UserPlaylists>
+      </>
+    </Container>
   );
 };
 

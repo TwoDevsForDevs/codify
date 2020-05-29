@@ -2,14 +2,6 @@ import styled from 'styled-components';
 import { lighten } from 'polished';
 
 export const Container = styled.div`
-  height: 100%;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-export const Content = styled.div`
   padding: 32px;
   max-width: 1366px;
   width: 100%;

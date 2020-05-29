@@ -6,7 +6,6 @@ import SpotifyButton from '../../components/SpotifyButton';
 
 import {
   Container,
-  Content,
   SignInContainer,
   ArtistImage,
   SignUpContainer,
@@ -21,45 +20,43 @@ const SignIn: React.FC = () => {
 
   return (
     <Container>
-      <Content>
-        <SignInContainer mount={mount}>
-          <h1>
-            <div className="word-container">
-              <span>Descubra</span>
-            </div>
-            <div className="word-container">
-              <span>como</span>
-            </div>
-            <div className="word-container">
-              <span>você</span>
-            </div>
-            <div className="word-container green">
-              <span>escuta.</span>
-            </div>
-          </h1>
-          <p>
-            Explore diversas músicas no seu perfil e crie playlists incríveis.
-          </p>
-          <SpotifyButton href="http://localhost:3333/sessions">
-            Continue com o Spotify
-          </SpotifyButton>
-        </SignInContainer>
+      <SignInContainer mount={mount}>
+        <h1>
+          <div className="word-container">
+            <span>Descubra</span>
+          </div>
+          <div className="word-container">
+            <span>como</span>
+          </div>
+          <div className="word-container">
+            <span>você</span>
+          </div>
+          <div className="word-container green">
+            <span>escuta.</span>
+          </div>
+        </h1>
+        <p>
+          Explore diversas músicas no seu perfil e crie playlists incríveis.
+        </p>
+        <SpotifyButton href="http://localhost:3333/sessions">
+          Continue com o Spotify
+        </SpotifyButton>
+      </SignInContainer>
 
-        <ArtistImage mount={mount}>
-          <img src={edSheeran} alt="Ed Sheeran" />
-        </ArtistImage>
+      <ArtistImage mount={mount}>
+        <img src={edSheeran} alt="Ed Sheeran" />
+      </ArtistImage>
 
-        <SignUpContainer mount={mount}>
-          <span>Não possui uma conta no Spotify?</span>
-          <a
-            href="https://www.spotify.com/br/signup/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Crie sua conta gratuita agora
-          </a>
-        </SignUpContainer>
-      </Content>
+      <SignUpContainer mount={mount}>
+        <span>Não possui uma conta no Spotify?</span>
+        <a
+          href="https://www.spotify.com/br/signup/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Crie sua conta gratuita agora
+        </a>
+      </SignUpContainer>
     </Container>
   );
 };

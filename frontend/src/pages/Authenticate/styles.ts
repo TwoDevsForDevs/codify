@@ -13,10 +13,5 @@ const logoAnimated = keyframes`
 `;
 
 export const Container = styled.div`
-  height: 100%;
   animation: ${logoAnimated} 1.5s infinite ease-in-out;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
 `;

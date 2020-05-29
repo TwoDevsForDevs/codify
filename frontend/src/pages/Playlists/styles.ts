@@ -1,16 +1,7 @@
 import styled from 'styled-components';
 import { animated } from 'react-spring';
 
-export const Container = styled.main`
-  max-width: 1366px;
-  width: 100%;
-  margin: 0 auto;
-  padding: 0 32px 32px;
-
-  display: flex;
-`;
-
-export const Content = styled.div`
+export const Container = styled.div`
   display: flex;
   align-items: flex-start;
 `;

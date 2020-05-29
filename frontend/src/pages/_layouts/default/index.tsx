@@ -2,13 +2,14 @@ import React from 'react';
 
 import Header from '../../../components/Header';
 
-import { Wrapper } from './styles';
+import { Wrapper, Main } from './styles';
 
 const DefaultLayout: React.FC = ({ children }) => {
   return (
     <Wrapper>
-      {/* <Header /> */}
-      {children}
+      <Header />
+
+      <Main>{children}</Main>
     </Wrapper>
   );
 };
