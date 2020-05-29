@@ -80,15 +80,6 @@ export const TopArtists = styled.div<IMountProps>`
   grid-gap: 24px;
 `;
 
-const rotate = keyframes`
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-`;
-
 export const Artist = styled(animated.div)`
   position: relative;
   border-radius: 10px;
@@ -210,14 +201,18 @@ export const Artist = styled(animated.div)`
     justify-content: center;
   }
 
+  .lineGraph {
+    display: none;
+  }
+
   &:hover svg {
     &.playCircle {
-      opacity: 0;
+      display: none;
     }
+  }
 
-    &.circleNotch {
-      animation: ${rotate} 1s linear infinite;
-    }
+  &:hover .lineGraph {
+    display: flex;
   }
 `;
 

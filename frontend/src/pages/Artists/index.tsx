@@ -5,6 +5,7 @@ import { GiMicrophone } from 'react-icons/gi';
 import { FaPlay } from 'react-icons/fa';
 
 import Header from '../../components/Header';
+import LineGraphAnimated from '../../components/LineGraphAnimated';
 
 import formatValue from '../../utils/formatValue';
 import getPopularity from '../../utils/getPopularity';
@@ -154,7 +155,8 @@ const Artists: React.FC = () => {
                   <h3>{item.name}</h3>
                 </div>
                 <div className="playingAnimationContainer">
-                  <FaPlay className="playCircle" size={16} color="#1DB954" />
+                  <FaPlay className="playCircle" size={12} color="#1DB954" />
+                  <LineGraphAnimated className="lineGraph" />
                 </div>
 
                 <ArtistInfo>
