@@ -119,7 +119,7 @@ export const CloseModal = styled.button`
   align-items: center;
 
   &:hover {
-    transform: scale(1.3);
+    transform: scale(1.2);
   }
 
   svg {
