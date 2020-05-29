@@ -61,9 +61,9 @@ const Playlists: React.FC = () => {
     <>
       <Header />
 
-      {/* <Modal /> */}
-
       <Container>
+        <Modal />
+
         <Content>
           <LeftContent mount={mount}>
             <div>

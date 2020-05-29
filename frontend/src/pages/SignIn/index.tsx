@@ -40,7 +40,7 @@ const SignIn: React.FC = () => {
           <p>
             Explore diversas músicas no seu perfil e crie playlists incríveis.
           </p>
-          <SpotifyButton linkTo="http://localhost:3333/sessions">
+          <SpotifyButton href="http://localhost:3333/sessions">
             Continue com o Spotify
           </SpotifyButton>
         </SignInContainer>

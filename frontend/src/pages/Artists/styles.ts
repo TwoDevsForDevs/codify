@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { animated } from 'react-spring';
 
 export const Container = styled.main`
@@ -78,6 +78,15 @@ export const TopArtists = styled.div<IMountProps>`
   display: grid;
   grid-template-columns: auto auto auto auto auto auto;
   grid-gap: 24px;
+`;
+
+const rotate = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 `;
 
 export const Artist = styled(animated.div)`
@@ -185,6 +194,30 @@ export const Artist = styled(animated.div)`
       visibility 1s cubic-bezier(0.19, 1, 0.22, 1),
       opacity 1s cubic-bezier(0.19, 1, 0.22, 1);
     transition-delay: 0.6s;
+  }
+
+  div.playingAnimationContainer {
+    position: absolute;
+    right: 16px;
+    top: 16px;
+    background: #000;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &:hover svg {
+    &.playCircle {
+      opacity: 0;
+    }
+
+    &.circleNotch {
+      animation: ${rotate} 1s linear infinite;
+    }
   }
 `;
 

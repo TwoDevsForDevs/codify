@@ -4,12 +4,12 @@ import { FaSpotify } from 'react-icons/fa';
 import { Container } from './styles';
 
 interface ISpotifyButtonProps {
-  linkTo: string;
+  href: string;
 }
 
-const SpotifyButton: React.FC<ISpotifyButtonProps> = ({ children, linkTo }) => {
+const SpotifyButton: React.FC<ISpotifyButtonProps> = ({ children, href }) => {
   return (
-    <Container href={linkTo}>
+    <Container href={href}>
       <FaSpotify size={24} color="#fff" />
       {children}
     </Container>

@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useTransition } from 'react-spring';
 import { GiMicrophone } from 'react-icons/gi';
+import { FaPlay } from 'react-icons/fa';
 
 import Header from '../../components/Header';
 
@@ -49,11 +50,14 @@ const Artists: React.FC = () => {
   );
   const [mount, setMount] = useState(false);
 
+  let timer: number;
+
   const playAudioWithFade = useCallback(audio => {
     let volCounter = 0;
     audio.volume = 0;
 
-    setTimeout(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    timer = setTimeout(() => {
       audio.play();
 
       const volumeFade = setInterval(() => {
@@ -68,6 +72,7 @@ const Artists: React.FC = () => {
   }, []);
 
   const pauseAudioWithFade = useCallback(audio => {
+    clearTimeout(timer);
     let volCounter = audio.volume * 10;
 
     const volumeFade = setInterval(() => {
@@ -147,6 +152,9 @@ const Artists: React.FC = () => {
                 <div className="name">
                   <span>#{index + 1}</span>
                   <h3>{item.name}</h3>
+                </div>
+                <div className="playingAnimationContainer">
+                  <FaPlay className="playCircle" size={16} color="#1DB954" />
                 </div>
 
                 <ArtistInfo>
