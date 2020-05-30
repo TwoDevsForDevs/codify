@@ -4,12 +4,34 @@ import api from '../services/api';
 
 const playlistRouter = Router();
 
-interface IArtist {
-  name: string;
-}
-
 interface IImages {
   url: string;
+}
+
+interface IPlaylist {
+  id: string;
+  name: string;
+  images: IImages[];
+  uri: string;
+}
+
+playlistRouter.get('/:id', async (req, res) => {
+  const response = await api.get(`playlists/${req.params.id}`);
+
+  const playlist: IPlaylist = response.data;
+
+  const formattedPlaylist = {
+    id: playlist.id,
+    name: playlist.name,
+    avatar: playlist.images[0].url,
+    uri: playlist.uri,
+  };
+
+  return res.json(formattedPlaylist);
+});
+
+interface IArtist {
+  name: string;
 }
 
 interface IAlbum {

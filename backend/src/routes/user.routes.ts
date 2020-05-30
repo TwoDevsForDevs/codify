@@ -4,9 +4,21 @@ import api from '../services/api';
 
 const userRouter = Router();
 
-interface ITracks {
-  [key: string]: string;
-}
+userRouter.get('/', async (req, res) => {
+  const response = await api.get('/me');
+
+  const { id, type, display_name, email, images } = response.data;
+
+  const user = {
+    id,
+    type,
+    display_name,
+    email,
+    avatar: images[0].url,
+  };
+
+  return res.json(user);
+});
 
 interface IImages {
   url: string;
@@ -27,29 +39,6 @@ interface ITopArtists {
   topTrackPreview: string;
   topTrackName: string;
 }
-
-interface IPlaylists {
-  id: string;
-  name: string;
-  images: IImages[];
-  uri: string;
-}
-
-userRouter.get('/', async (req, res) => {
-  const response = await api.get('/me');
-
-  const { id, type, display_name, email, images } = response.data;
-
-  const user = {
-    id,
-    type,
-    display_name,
-    email,
-    avatar: images[0].url,
-  };
-
-  return res.json(user);
-});
 
 userRouter.get('/top-artists', async (req, res) => {
   const response = await api.get('/me/top/artists', {
@@ -75,6 +64,13 @@ userRouter.get('/top-artists', async (req, res) => {
 
   return res.json(artists);
 });
+
+interface IPlaylists {
+  id: string;
+  name: string;
+  images: IImages[];
+  uri: string;
+}
 
 userRouter.get('/playlists', async (req, res) => {
   const response = await api.get('/me/playlists');
