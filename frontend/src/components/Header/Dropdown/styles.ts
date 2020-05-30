@@ -57,6 +57,7 @@ export const Container = styled.div<IDropdownMenuProps>`
 
       button,
       a {
+        width: 100%;
         color: #fff;
         font-size: 18px;
         font-weight: 500;

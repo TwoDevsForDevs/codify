@@ -1,23 +1,57 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-export const Container = styled.div`
+interface IModal {
+  visible: boolean;
+}
+
+export const Background = styled.div<IModal>`
+  width: 100%;
+  height: 100%;
+  z-index: 9998;
+  background: rgba(0, 0, 0, 0.5);
+
+  opacity: ${props => (props.visible ? '1' : '0')};
+  visibility: ${props => (props.visible ? 'visible' : 'hidden')};
+  transition: opacity 1s cubic-bezier(0.19, 1, 0.22, 1);
+  transition-delay: 0.1s;
+
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+`;
+
+export const Container = styled.div<IModal>`
   max-width: 1240px;
   width: 100%;
   height: 640px;
   overflow: hidden;
   overflow-y: scroll;
-  z-index: 9999;
-  background: rgb(25, 25, 25);
+  background: #191919;
   border-radius: 16px;
   padding: 56px 56px 0;
+  z-index: 9999;
+
+  opacity: ${props => (props.visible ? '1' : '0')};
+  visibility: ${props => (props.visible ? 'visible' : 'hidden')};
+  transition: opacity 1s cubic-bezier(0.19, 1, 0.22, 1);
+  transition-delay: 0.1s;
+
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 
   display: flex;
   align-items: flex-start;
 
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  ::-webkit-scrollbar {
+    width: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #1db954;
+  }
 `;
 
 export const Info = styled.aside`
@@ -63,7 +97,11 @@ export const TracksList = styled.section`
   flex-direction: column;
 `;
 
-export const Track = styled.div`
+interface IIsPlaying {
+  isPlaying: boolean;
+}
+
+export const Track = styled.div<IIsPlaying>`
   background: #252527;
   padding: 0 24px;
   border-radius: 10px;
@@ -100,7 +138,36 @@ export const Track = styled.div`
   aside {
     margin-left: auto;
 
-    a + a {
+    display: flex;
+    align-items: center;
+
+    button {
+      background: transparent;
+      border: 0;
+    }
+
+    ${props =>
+      props.isPlaying
+        ? css`
+            .playButton {
+              display: none;
+            }
+
+            .pauseButton {
+              display: block;
+            }
+          `
+        : css`
+            .playButton {
+              display: block;
+            }
+
+            .pauseButton {
+              display: none;
+            }
+          `}
+
+    a {
       margin-left: 16px;
     }
   }
@@ -120,10 +187,5 @@ export const CloseModal = styled.button`
 
   &:hover {
     transform: scale(1.2);
-  }
-
-  svg {
-    color: #f7415f;
-    font-size: 24px;
   }
 `;

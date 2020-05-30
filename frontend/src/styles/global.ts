@@ -31,6 +31,7 @@ export default createGlobalStyle`
     font: 16px Montserrat, sans-serif;
     color: #b3b3b3;
     line-height: 20px;
+    overflow-x: hidden;
   }
 
   a {

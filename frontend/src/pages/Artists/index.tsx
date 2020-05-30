@@ -1,5 +1,4 @@
-/* eslint-disable no-param-reassign */
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTransition } from 'react-spring';
 import { GiMicrophone } from 'react-icons/gi';
 import { FaPlay } from 'react-icons/fa';
@@ -8,6 +7,7 @@ import LineGraphAnimated from '../../components/LineGraphAnimated';
 
 import formatValue from '../../utils/formatValue';
 import getPopularity from '../../utils/getPopularity';
+import { playAudioWithFade, pauseAudioWithFade } from '../../utils/audio';
 
 import api from '../../services/api';
 
@@ -48,42 +48,6 @@ const Artists: React.FC = () => {
     {} as ITopArtists,
   );
   const [mount, setMount] = useState(false);
-
-  let timer: number;
-
-  const playAudioWithFade = useCallback(audio => {
-    let volCounter = 0;
-    audio.volume = 0;
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    timer = setTimeout(() => {
-      audio.play();
-
-      const volumeFade = setInterval(() => {
-        volCounter++;
-        audio.volume = volCounter / 20;
-      }, 100);
-
-      setTimeout(() => {
-        clearInterval(volumeFade);
-      }, 1000);
-    }, 1000);
-  }, []);
-
-  const pauseAudioWithFade = useCallback(audio => {
-    clearTimeout(timer);
-    let volCounter = audio.volume * 10;
-
-    const volumeFade = setInterval(() => {
-      volCounter--;
-      audio.volume = Math.max(volCounter / 10, 0);
-    }, 100);
-
-    setTimeout(() => {
-      clearInterval(volumeFade);
-      audio.pause();
-    }, 1000);
-  }, []);
 
   useEffect(() => {
     async function loadTopArtists(): Promise<void> {

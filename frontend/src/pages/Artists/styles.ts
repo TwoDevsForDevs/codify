@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 import { animated } from 'react-spring';
 
 export const Container = styled.div`
@@ -182,7 +182,7 @@ export const Artist = styled(animated.div)`
     position: absolute;
     right: 16px;
     top: 16px;
-    background: #000;
+    background: #121212;
     width: 25px;
     height: 25px;
     border-radius: 50%;

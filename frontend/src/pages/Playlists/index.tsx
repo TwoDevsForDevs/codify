@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useTransition } from 'react-spring';
 import { FaHeadphones } from 'react-icons/fa';
 
 import api from '../../services/api';
 
-import Modal from '../../components/Modal';
+import Modal from './Modal';
 
 import { Container, LeftContent, UserPlaylists, Playlist } from './styles';
 
@@ -18,14 +18,16 @@ interface IPlaylists {
 const Playlists: React.FC = () => {
   const [playlists, setPlaylist] = useState<IPlaylists[]>([]);
   const [mount, setMount] = useState(false);
+  const [toggleModal, setToggleModal] = useState(false);
+  const [playlistId, setPlaylistId] = useState('');
+
+  const handleModal = useCallback(() => {
+    setToggleModal(!toggleModal);
+  }, [toggleModal]);
 
   useEffect(() => {
     async function loadUserPlaylists(): Promise<void> {
       const response = await api.get('/me/playlists');
-
-      const test = await api.get(`/playlist/tracks/${response.data[0].id}`);
-
-      console.log(test.data);
 
       setPlaylist(response.data);
       setMount(true);
@@ -52,9 +54,15 @@ const Playlists: React.FC = () => {
 
   return (
     <Container>
-      <Modal />
-
       <>
+        {toggleModal && (
+          <Modal
+            visible={toggleModal}
+            handleModal={handleModal}
+            playlistId={playlistId}
+          />
+        )}
+
         <LeftContent mount={mount}>
           <div>
             <FaHeadphones size={32} color="#fff" />
@@ -68,7 +76,14 @@ const Playlists: React.FC = () => {
 
         <UserPlaylists mount={mount}>
           {playlistsWithTransition.map(({ item, key, props }, index) => (
-            <Playlist key={key} style={props}>
+            <Playlist
+              key={key}
+              style={props}
+              onClick={() => {
+                setPlaylistId(item.id);
+                setToggleModal(true);
+              }}
+            >
               <img src={item.avatar} alt={item.name} />
               <div>
                 <strong>
