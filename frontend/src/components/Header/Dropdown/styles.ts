@@ -7,7 +7,6 @@ interface IDropdownMenuProps {
 export const Container = styled.div<IDropdownMenuProps>`
   background: #19191a;
   padding: 8px 0;
-  border-radius: 10px;
   width: 325px;
   box-shadow: 2px 2px 16px #000;
   z-index: 100;
@@ -15,12 +14,15 @@ export const Container = styled.div<IDropdownMenuProps>`
   right: 0px;
   top: 54px;
 
-  opacity: ${props => (props.showDropdown ? 1 : 0)};
   visibility: ${props => (props.showDropdown ? 'visible' : 'hidden')};
+  clip-path: ${props =>
+    props.showDropdown
+      ? 'inset(0px 0px 0px 0px round 20px)'
+      : 'inset(0px 0px 100% 100% round 20px)'};
   transform: ${props =>
     props.showDropdown ? 'translateY(0)' : 'translateY(20px)'};
   transition: transform 1s cubic-bezier(0.19, 1, 0.22, 1),
-    opacity 1s cubic-bezier(0.19, 1, 0.22, 1);
+    clip-path 0.5s cubic-bezier(0.2, 0.6, 0.35, 1);
 
   ul {
     overflow: hidden;
@@ -35,7 +37,7 @@ export const Container = styled.div<IDropdownMenuProps>`
 
       opacity: ${props => (props.showDropdown ? 1 : 0)};
       transform: ${props =>
-        props.showDropdown ? 'translateY(0)' : 'translateY(40px)'};
+        props.showDropdown ? 'translateY(0)' : 'translateY(80px)'};
       transition: transform 0.8s cubic-bezier(0.19, 1, 0.22, 1),
         opacity 0.5s cubic-bezier(0.19, 1, 0.22, 1);
 
