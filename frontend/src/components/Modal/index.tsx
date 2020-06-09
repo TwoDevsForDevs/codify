@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import ReactModal from 'react-modal';
 
+import './styles.css';
+
 interface IModalProps {
   isOpen: boolean;
   setIsOpen: () => void;

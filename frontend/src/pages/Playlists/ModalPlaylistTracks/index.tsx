@@ -56,7 +56,7 @@ const ModalPlaylistTracks: React.FC<IModalProps> = ({
   const [loading, setLoading] = useState(true);
   const [tracks, setTracks] = useState<ITrack[]>([]);
   const [playlist, setPlaylist] = useState<IPlaylist>({} as IPlaylist);
-  const [visible, setVisible] = useState(false);
+  const [mount, setMount] = useState(false);
 
   const handlePlay = useCallback(
     id => {
@@ -83,10 +83,6 @@ const ModalPlaylistTracks: React.FC<IModalProps> = ({
   useEffect(() => {
     async function loadPlaylist(): Promise<void> {
       try {
-        setTimeout(() => {
-          setVisible(true);
-        }, 10);
-
         const [playlistResponse, tracksResponse] = await Promise.all([
           api.get(`/playlist/${playlistId}`),
           api.get(`/playlist/tracks/${playlistId}`),
@@ -100,6 +96,9 @@ const ModalPlaylistTracks: React.FC<IModalProps> = ({
 
         setPlaylist(playlistResponse.data);
         setTracks(tracksData);
+        setTimeout(() => {
+          setMount(true);
+        }, 10);
       } catch (err) {
         toast.error(err.response.data.error);
       } finally {
@@ -124,19 +123,19 @@ const ModalPlaylistTracks: React.FC<IModalProps> = ({
 
   return (
     <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
-      <Container visible={visible}>
+      <Container>
         {loading ? (
           <Spinner width={48} height={48} />
         ) : (
           <>
-            <Info visible={visible} loading={loading}>
+            <Info mount={mount}>
               <img src={playlist.avatar} alt={playlist.name} />
               <SpotifyButton href={playlist.uri}>
                 Abrir no Spotify
               </SpotifyButton>
             </Info>
 
-            <Content visible={visible}>
+            <Content>
               <h1>{playlist.name}</h1>
               <TracksList>
                 {tracksWithTransition.map(({ item, key, props }, index) => (
@@ -144,7 +143,7 @@ const ModalPlaylistTracks: React.FC<IModalProps> = ({
                     key={key}
                     style={props}
                     isPlaying={item.playing}
-                    visible={visible}
+                    mount={mount}
                   >
                     <img src={item.albumImage} alt={item.name} />
                     <div>

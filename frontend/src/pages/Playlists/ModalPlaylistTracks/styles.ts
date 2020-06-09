@@ -1,21 +1,16 @@
 import styled, { css } from 'styled-components';
 
-interface IModal {
-  visible: boolean;
-  loading?: boolean;
-}
-
-export const Container = styled.div<IModal>`
+export const Container = styled.div`
   overflow: hidden;
   overflow-y: scroll;
-
-  opacity: ${props => (props.visible ? '1' : '0')};
-  transition: opacity 1s cubic-bezier(0.19, 1, 0.22, 1);
-  transition-delay: 0.1s;
 
   display: flex;
   align-items: flex-start;
 `;
+
+interface IModal {
+  mount: boolean;
+}
 
 export const Info = styled.aside<IModal>`
   padding-bottom: 56px;
@@ -27,24 +22,32 @@ export const Info = styled.aside<IModal>`
   img {
     width: 400px;
     height: 400px;
-    border-radius: 10px;
     margin-bottom: 16px;
 
-    opacity: ${props => (props.loading ? '0' : '1')};
-    transform: ${props =>
-      props.loading ? 'translateY(40)' : 'translateY(0px)'};
-    transition: opacity 1s cubic-bezier(0.19, 1, 0.22, 1);
+    opacity: ${props => (props.mount ? '1' : '0')};
+    clip-path: ${props =>
+      props.mount
+        ? 'inset(0px 0px 0px 0px round 10px)'
+        : 'inset(0px 100% 100% 0px round 10px)'};
+    transition: opacity 1s cubic-bezier(0.19, 1, 0.22, 1),
+      clip-path 1s cubic-bezier(0.19, 1, 0.22, 1);
     transition-delay: 0.1s;
   }
 
   a {
     width: 100%;
 
+    opacity: ${props => (props.mount ? '1' : '0')};
+    transform: ${props => (props.mount ? 'translateY(0)' : 'translateY(40px)')};
+    transition: opacity 1s cubic-bezier(0.19, 1, 0.22, 1),
+      transform 1s cubic-bezier(0.19, 1, 0.22, 1);
+    transition-delay: 0.3s;
+
     justify-content: center;
   }
 `;
 
-export const Content = styled.div<IModal>`
+export const Content = styled.div`
   width: 100%;
 
   display: flex;
@@ -68,7 +71,7 @@ export const TracksList = styled.section`
 
 interface IIsPlaying {
   isPlaying: boolean;
-  visible: boolean;
+  mount: boolean;
 }
 
 export const Track = styled.div<IIsPlaying>`
@@ -79,6 +82,12 @@ export const Track = styled.div<IIsPlaying>`
 
   display: flex;
   align-items: center;
+
+  opacity: ${props => (props.mount ? '1' : '0')};
+  transform: ${props => (props.mount ? 'translateY(0)' : 'translateY(40px)')};
+  transition: opacity 1s cubic-bezier(0.19, 1, 0.22, 1),
+    transform 1s cubic-bezier(0.19, 1, 0.22, 1);
+  transition-delay: 0.5s;
 
   & + div {
     margin-top: 16px;

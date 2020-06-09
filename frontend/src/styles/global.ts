@@ -53,14 +53,4 @@ export default createGlobalStyle`
   ::-webkit-scrollbar-thumb {
     background-color: hsla(0, 0%, 100%, 0.3);
   }
-
-  .ReactModal__Content {
-    &::-webkit-scrollbar {
-      width: 3px;
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background-color: #1db954;
-    }
-  }
 `;
