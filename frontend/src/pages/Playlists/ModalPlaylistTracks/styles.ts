@@ -5,57 +5,16 @@ interface IModal {
   loading?: boolean;
 }
 
-export const Container = styled.div`
-  height: 100%;
-`;
-
-export const Background = styled.div<IModal>`
-  width: 100%;
-  height: 100%;
-  z-index: 9998;
-  background: rgba(0, 0, 0, 0.5);
-
-  opacity: ${props => (props.visible ? '1' : '0')};
-  visibility: ${props => (props.visible ? 'visible' : 'hidden')};
-  transition: opacity 1s cubic-bezier(0.19, 1, 0.22, 1);
-  transition-delay: 0.1s;
-
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-`;
-
-export const ModalContainer = styled.div<IModal>`
-  max-width: 1240px;
-  width: 100%;
-  height: 640px;
+export const Container = styled.div<IModal>`
   overflow: hidden;
   overflow-y: scroll;
-  background: #191919;
-  border-radius: 16px;
-  padding: 56px 56px 0;
-  z-index: 9999;
 
   opacity: ${props => (props.visible ? '1' : '0')};
   transition: opacity 1s cubic-bezier(0.19, 1, 0.22, 1);
   transition-delay: 0.1s;
-
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
 
   display: flex;
   align-items: flex-start;
-
-  ::-webkit-scrollbar {
-    width: 3px;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background-color: #1db954;
-  }
 `;
 
 export const Info = styled.aside<IModal>`

@@ -5,7 +5,7 @@ import { FaHeadphones } from 'react-icons/fa';
 import api from '../../services/api';
 
 import Spinner from '../../components/Spinner';
-import Modal from './Modal';
+import ModalPlaylistTracks from './ModalPlaylistTracks';
 
 import { Container, LeftContent, UserPlaylists, Playlist } from './styles';
 
@@ -67,7 +67,11 @@ const Playlists: React.FC = () => {
       ) : (
         <>
           {toggleModal && (
-            <Modal handleModal={handleModal} playlistId={playlistId} />
+            <ModalPlaylistTracks
+              isOpen={toggleModal}
+              setIsOpen={handleModal}
+              playlistId={playlistId}
+            />
           )}
 
           <LeftContent mount={mount}>

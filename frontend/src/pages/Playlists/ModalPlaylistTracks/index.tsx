@@ -8,6 +8,7 @@ import {
 import { useTransition } from 'react-spring';
 import { toast } from 'react-toastify';
 
+import Modal from '../../../components/Modal';
 import SpotifyButton from '../../../components/SpotifyButton';
 import Spinner from '../../../components/Spinner';
 
@@ -15,9 +16,7 @@ import api from '../../../services/api';
 import { playAudioWithFade, pauseAudioWithFade } from '../../../utils/audio';
 
 import {
-  Background,
   Container,
-  ModalContainer,
   Info,
   Content,
   TracksList,
@@ -26,7 +25,8 @@ import {
 } from './styles';
 
 interface IModalProps {
-  handleModal: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  isOpen: boolean;
+  setIsOpen: () => void;
   playlistId: string;
 }
 
@@ -48,7 +48,11 @@ interface IPlaylist {
   uri: string;
 }
 
-const Modal: React.FC<IModalProps> = ({ handleModal, playlistId }) => {
+const ModalPlaylistTracks: React.FC<IModalProps> = ({
+  isOpen,
+  setIsOpen,
+  playlistId,
+}) => {
   const [loading, setLoading] = useState(true);
   const [tracks, setTracks] = useState<ITrack[]>([]);
   const [playlist, setPlaylist] = useState<IPlaylist>({} as IPlaylist);
@@ -119,10 +123,8 @@ const Modal: React.FC<IModalProps> = ({ handleModal, playlistId }) => {
   });
 
   return (
-    <Container>
-      <Background visible={visible} />
-
-      <ModalContainer visible={visible}>
+    <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
+      <Container visible={visible}>
         {loading ? (
           <Spinner width={48} height={48} />
         ) : (
@@ -182,15 +184,15 @@ const Modal: React.FC<IModalProps> = ({ handleModal, playlistId }) => {
                 ))}
               </TracksList>
 
-              <CloseModal type="button" onClick={handleModal}>
+              <CloseModal type="button" onClick={setIsOpen}>
                 <FaTimes size={24} color="#f7415f" />
               </CloseModal>
             </Content>
           </>
         )}
-      </ModalContainer>
-    </Container>
+      </Container>
+    </Modal>
   );
 };
 
-export default Modal;
+export default ModalPlaylistTracks;
