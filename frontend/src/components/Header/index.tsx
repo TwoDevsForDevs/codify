@@ -38,7 +38,7 @@ const Header: React.FC = () => {
           <img src={user.avatar} alt={user.display_name} />
           <span>{user.display_name}</span>
 
-          <button type="button" onClick={() => handleDropdown()}>
+          <button type="button" onClick={handleDropdown}>
             <FiMoreVertical size={24} />
           </button>
 

@@ -9,7 +9,7 @@ import { Container } from './styles';
 
 interface IDropdownProps {
   showDropdown: boolean;
-  setShowDropdown: any;
+  setShowDropdown: (state: boolean) => void;
 }
 
 const Dropdown: React.FC<IDropdownProps> = ({

@@ -4,6 +4,7 @@ import { GiMicrophone } from 'react-icons/gi';
 import { FaPlay } from 'react-icons/fa';
 
 import LineGraphAnimated from '../../components/LineGraphAnimated';
+import Spinner from '../../components/Spinner';
 
 import formatValue from '../../utils/formatValue';
 import getPopularity from '../../utils/getPopularity';
@@ -48,9 +49,12 @@ const Artists: React.FC = () => {
     {} as ITopArtists,
   );
   const [mount, setMount] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     async function loadTopArtists(): Promise<void> {
+      setLoading(true);
+
       const response = await api.get('/me/top-artists');
 
       const data = response.data.map((artist: ITopArtists) => ({
@@ -62,7 +66,11 @@ const Artists: React.FC = () => {
 
       setTopArtists(data);
       setFirstTopArtist(data[0]);
-      setMount(true);
+      setLoading(false);
+
+      setTimeout(() => {
+        setMount(true);
+      }, [10]);
     }
 
     loadTopArtists();
@@ -85,55 +93,61 @@ const Artists: React.FC = () => {
 
   return (
     <Container>
-      <LeftContent mount={mount}>
-        <div>
-          <GiMicrophone size={32} color="#fff" />
-        </div>
-        <h1>
-          Escutando
-          <span className="green">{firstTopArtist.name}</span>
-        </h1>
-        <p>
-          Quando se trata dos seus artistas favoritos, ninguém faz igual a/o
-          <strong> {firstTopArtist.name}!</strong>
-        </p>
-      </LeftContent>
-
-      <TopArtists mount={mount}>
-        {artistsWithTransition.map(({ item, key, props }, index) => (
-          <Artist
-            key={key}
-            style={props}
-            onMouseEnter={() => playAudioWithFade(item.audio)}
-            onMouseLeave={() => pauseAudioWithFade(item.audio)}
-          >
-            <img src={item.images[0].url} alt={item.name} />
-            <div className="name">
-              <span>#{index + 1}</span>
-              <h3>{item.name}</h3>
+      {loading ? (
+        <Spinner />
+      ) : (
+        <>
+          <LeftContent mount={mount}>
+            <div>
+              <GiMicrophone size={32} color="#fff" />
             </div>
-            <div className="playingAnimationContainer">
-              <FaPlay className="playCircle" size={12} color="#1DB954" />
-              <LineGraphAnimated className="lineGraph" />
-            </div>
+            <h1>
+              Escutando
+              <span className="green">{firstTopArtist.name}</span>
+            </h1>
+            <p>
+              Quando se trata dos seus artistas favoritos, ninguém faz igual a/o
+              <strong> {firstTopArtist.name}!</strong>
+            </p>
+          </LeftContent>
 
-            <ArtistInfo>
-              <div className="info followers">
-                <span>Seguidores</span>
-                <h4>{item.formattedFollowers}</h4>
-              </div>
-              <div className="info popularity">
-                <span>Popularidade</span>
-                <h4>{item.popularityTag}</h4>
-              </div>
-              <div className="info top-track">
-                <span>Mais tocada</span>
-                <h4>{item.topTrackName}</h4>
-              </div>
-            </ArtistInfo>
-          </Artist>
-        ))}
-      </TopArtists>
+          <TopArtists mount={mount}>
+            {artistsWithTransition.map(({ item, key, props }, index) => (
+              <Artist
+                key={key}
+                style={props}
+                onMouseEnter={() => playAudioWithFade(item.audio)}
+                onMouseLeave={() => pauseAudioWithFade(item.audio)}
+              >
+                <img src={item.images[0].url} alt={item.name} />
+                <div className="name">
+                  <span>#{index + 1}</span>
+                  <h3>{item.name}</h3>
+                </div>
+                <div className="playingAnimationContainer">
+                  <FaPlay className="playCircle" size={12} color="#1DB954" />
+                  <LineGraphAnimated className="lineGraph" />
+                </div>
+
+                <ArtistInfo>
+                  <div className="info followers">
+                    <span>Seguidores</span>
+                    <h4>{item.formattedFollowers}</h4>
+                  </div>
+                  <div className="info popularity">
+                    <span>Popularidade</span>
+                    <h4>{item.popularityTag}</h4>
+                  </div>
+                  <div className="info top-track">
+                    <span>Mais tocada</span>
+                    <h4>{item.topTrackName}</h4>
+                  </div>
+                </ArtistInfo>
+              </Artist>
+            ))}
+          </TopArtists>
+        </>
+      )}
     </Container>
   );
 };

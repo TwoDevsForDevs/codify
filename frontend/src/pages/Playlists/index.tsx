@@ -4,6 +4,7 @@ import { FaHeadphones } from 'react-icons/fa';
 
 import api from '../../services/api';
 
+import Spinner from '../../components/Spinner';
 import Modal from './Modal';
 
 import { Container, LeftContent, UserPlaylists, Playlist } from './styles';
@@ -20,6 +21,7 @@ const Playlists: React.FC = () => {
   const [mount, setMount] = useState(false);
   const [toggleModal, setToggleModal] = useState(false);
   const [playlistId, setPlaylistId] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleModal = useCallback(() => {
     setToggleModal(!toggleModal);
@@ -27,10 +29,16 @@ const Playlists: React.FC = () => {
 
   useEffect(() => {
     async function loadUserPlaylists(): Promise<void> {
+      setLoading(true);
+
       const response = await api.get('/me/playlists');
 
       setPlaylist(response.data);
-      setMount(true);
+      setLoading(false);
+
+      setTimeout(() => {
+        setMount(true);
+      }, [10]);
     }
 
     loadUserPlaylists();
@@ -54,46 +62,46 @@ const Playlists: React.FC = () => {
 
   return (
     <Container>
-      <>
-        {toggleModal && (
-          <Modal
-            visible={toggleModal}
-            handleModal={handleModal}
-            playlistId={playlistId}
-          />
-        )}
+      {loading ? (
+        <Spinner />
+      ) : (
+        <>
+          {toggleModal && (
+            <Modal handleModal={handleModal} playlistId={playlistId} />
+          )}
 
-        <LeftContent mount={mount}>
-          <div>
-            <FaHeadphones size={32} color="#fff" />
-          </div>
-          <h1>
-            Visualize Suas
-            <span className="green">Playlists</span>
-          </h1>
-          <p>Mostrando todas as playlists criadas por você!</p>
-        </LeftContent>
+          <LeftContent mount={mount}>
+            <div>
+              <FaHeadphones size={32} color="#fff" />
+            </div>
+            <h1>
+              Visualize Suas
+              <span className="green">Playlists</span>
+            </h1>
+            <p>Mostrando todas as playlists criadas por você!</p>
+          </LeftContent>
 
-        <UserPlaylists mount={mount}>
-          {playlistsWithTransition.map(({ item, key, props }, index) => (
-            <Playlist
-              key={key}
-              style={props}
-              onClick={() => {
-                setPlaylistId(item.id);
-                setToggleModal(true);
-              }}
-            >
-              <img src={item.avatar} alt={item.name} />
-              <div>
-                <strong>
-                  {index + 1}. {item.name}
-                </strong>
-              </div>
-            </Playlist>
-          ))}
-        </UserPlaylists>
-      </>
+          <UserPlaylists mount={mount}>
+            {playlistsWithTransition.map(({ item, key, props }, index) => (
+              <Playlist
+                key={key}
+                style={props}
+                onClick={() => {
+                  setPlaylistId(item.id);
+                  handleModal();
+                }}
+              >
+                <img src={item.avatar} alt={item.name} />
+                <div>
+                  <strong>
+                    {index + 1}. {item.name}
+                  </strong>
+                </div>
+              </Playlist>
+            ))}
+          </UserPlaylists>
+        </>
+      )}
     </Container>
   );
 };

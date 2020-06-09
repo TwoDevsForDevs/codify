@@ -6,8 +6,10 @@ import {
   FaTimes,
 } from 'react-icons/fa';
 import { useTransition } from 'react-spring';
+import { toast } from 'react-toastify';
 
 import SpotifyButton from '../../../components/SpotifyButton';
+import Spinner from '../../../components/Spinner';
 
 import api from '../../../services/api';
 import { playAudioWithFade, pauseAudioWithFade } from '../../../utils/audio';
@@ -15,6 +17,7 @@ import { playAudioWithFade, pauseAudioWithFade } from '../../../utils/audio';
 import {
   Background,
   Container,
+  ModalContainer,
   Info,
   Content,
   TracksList,
@@ -23,7 +26,6 @@ import {
 } from './styles';
 
 interface IModalProps {
-  visible: boolean;
   handleModal: (event: React.MouseEvent<HTMLButtonElement>) => void;
   playlistId: string;
 }
@@ -46,10 +48,11 @@ interface IPlaylist {
   uri: string;
 }
 
-const Modal: React.FC<IModalProps> = ({ visible, handleModal, playlistId }) => {
+const Modal: React.FC<IModalProps> = ({ handleModal, playlistId }) => {
   const [loading, setLoading] = useState(true);
   const [tracks, setTracks] = useState<ITrack[]>([]);
   const [playlist, setPlaylist] = useState<IPlaylist>({} as IPlaylist);
+  const [visible, setVisible] = useState(false);
 
   const handlePlay = useCallback(
     id => {
@@ -76,6 +79,10 @@ const Modal: React.FC<IModalProps> = ({ visible, handleModal, playlistId }) => {
   useEffect(() => {
     async function loadPlaylist(): Promise<void> {
       try {
+        setTimeout(() => {
+          setVisible(true);
+        }, 10);
+
         const [playlistResponse, tracksResponse] = await Promise.all([
           api.get(`/playlist/${playlistId}`),
           api.get(`/playlist/tracks/${playlistId}`),
@@ -90,7 +97,7 @@ const Modal: React.FC<IModalProps> = ({ visible, handleModal, playlistId }) => {
         setPlaylist(playlistResponse.data);
         setTracks(tracksData);
       } catch (err) {
-        console.log(err);
+        toast.error(err.response.data.error);
       } finally {
         setLoading(false);
       }
@@ -112,26 +119,31 @@ const Modal: React.FC<IModalProps> = ({ visible, handleModal, playlistId }) => {
   });
 
   return (
-    <>
+    <Container>
       <Background visible={visible} />
 
-      <Container visible={visible}>
+      <ModalContainer visible={visible}>
         {loading ? (
-          <div>Carregando...</div>
+          <Spinner width={48} height={48} />
         ) : (
           <>
-            <Info>
+            <Info visible={visible} loading={loading}>
               <img src={playlist.avatar} alt={playlist.name} />
               <SpotifyButton href={playlist.uri}>
                 Abrir no Spotify
               </SpotifyButton>
             </Info>
 
-            <Content>
+            <Content visible={visible}>
               <h1>{playlist.name}</h1>
               <TracksList>
                 {tracksWithTransition.map(({ item, key, props }, index) => (
-                  <Track key={key} style={props} isPlaying={item.playing}>
+                  <Track
+                    key={key}
+                    style={props}
+                    isPlaying={item.playing}
+                    visible={visible}
+                  >
                     <img src={item.albumImage} alt={item.name} />
                     <div>
                       <strong>
@@ -176,8 +188,8 @@ const Modal: React.FC<IModalProps> = ({ visible, handleModal, playlistId }) => {
             </Content>
           </>
         )}
-      </Container>
-    </>
+      </ModalContainer>
+    </Container>
   );
 };
 
