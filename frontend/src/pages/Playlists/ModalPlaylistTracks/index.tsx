@@ -152,7 +152,10 @@ const ModalPlaylistTracks: React.FC<IModalProps> = ({
         ) : (
           <>
             <LeftContent mount={mount}>
-              <img src={playlist.avatar} alt={playlist.name} />
+              <div>
+                <img src={playlist.avatar} alt={playlist.name} />
+              </div>
+
               <SpotifyButton href={playlist.uri}>
                 Abrir no Spotify
               </SpotifyButton>
@@ -165,11 +168,11 @@ const ModalPlaylistTracks: React.FC<IModalProps> = ({
                 <aside>
                   <div>
                     <FaUsers size={18} color="#33ff7a" />
-                    Seguidores: <strong>{playlist.followers}</strong>
+                    <strong>{playlist.followers} </strong>Seguidores
                   </div>
                   <div>
                     <FaCompactDisc size={18} color="#33ff7a" />
-                    Músicas: <strong>{playlist.totalTracks}</strong>
+                    <strong>{playlist.totalTracks} </strong>Músicas
                   </div>
                 </aside>
 
@@ -197,8 +200,11 @@ const ModalPlaylistTracks: React.FC<IModalProps> = ({
                     playing={item.playing ? 1 : 0}
                     mount={mount ? 1 : 0}
                   >
-                    <img src={item.albumImage} alt={item.name} />
-                    <div>
+                    <div className="track-image">
+                      <img src={item.albumImage} alt={item.name} />
+                    </div>
+
+                    <div className="track-info">
                       <strong>
                         {index + 1}. {item.name}
                       </strong>

@@ -17,19 +17,29 @@ export const LeftContent = styled.aside<IModal>`
   position: sticky;
   top: 20px;
 
-  img {
+  div {
     width: 400px;
     height: 400px;
     margin-bottom: 16px;
+    border-radius: 10px;
+    overflow: hidden;
 
-    opacity: ${props => (props.mount ? '1' : '0')};
-    clip-path: ${props =>
-      props.mount
-        ? 'inset(0px 0px 0px 0px round 10px)'
-        : 'inset(0px 100% 100% 0px round 10px)'};
-    transition: opacity 1s cubic-bezier(0.19, 1, 0.22, 1),
-      clip-path 1s cubic-bezier(0.19, 1, 0.22, 1);
-    transition-delay: 0.1s;
+    img {
+      width: 100%;
+      height: 100%;
+
+      opacity: ${props => (props.mount ? '1' : '0')};
+      clip-path: ${props =>
+        props.mount
+          ? 'inset(0px 0px 0px 0px round 10px)'
+          : 'inset(0px 100% 100% 0px round 10px)'};
+      transform: ${props =>
+        props.mount ? 'scale3d(1, 1, 1)' : 'scale3d(2.2, 2.2, 2.2)'};
+      transition: opacity 1s cubic-bezier(0.19, 1, 0.22, 1),
+        clip-path 1s cubic-bezier(0.19, 1, 0.22, 1),
+        transform 1.5s cubic-bezier(0.2, 0.6, 0.35, 1);
+      transition-delay: 0.1s;
+    }
   }
 
   a {
@@ -53,17 +63,14 @@ export const Content = styled.div<IModal>`
 
   h1 {
     font-size: 56px;
-    line-height: 56px;
-    font-weight: 500;
+    line-height: 1.14;
     color: #fff;
 
     opacity: ${props => (props.mount ? '1' : '0')};
-    clip-path: ${props =>
-      props.mount
-        ? 'inset(0px 0px 0px 0px round 10px)'
-        : 'inset(0px 100% 100% 0px round 10px)'};
+    transform: ${props =>
+      props.mount ? 'translateY(0px)' : 'translateY(40px)'};
     transition: opacity 1s cubic-bezier(0.19, 1, 0.22, 1),
-      clip-path 1s cubic-bezier(0.19, 1, 0.22, 1);
+      transform 1.5s cubic-bezier(0.19, 1, 0.22, 1);
     transition-delay: 0.6s;
   }
 `;
@@ -88,7 +95,7 @@ export const PlaylistInfo = styled.section<IModal>`
     div {
       background: rgba(51, 255, 122, 0.15);
       color: #fff;
-      font-weight: 500;
+      font-weight: bold;
       font-size: 14px;
       padding: 10px 14px;
       border-radius: 26px;
@@ -105,7 +112,7 @@ export const PlaylistInfo = styled.section<IModal>`
       }
 
       strong {
-        margin-left: 4px;
+        margin-right: 4px;
       }
     }
   }
@@ -157,18 +164,30 @@ export const Track = styled(animated.div)<IIsPlaying>`
 
   transition: opacity 1s cubic-bezier(0.19, 1, 0.22, 1),
     transform 1.5s cubic-bezier(0.19, 1, 0.22, 1);
-  transition-delay: 0.4s;
+  transition-delay: 0.2s;
 
   & + div {
     margin-top: 16px;
   }
 
-  img {
+  .track-image {
+    min-width: 80px;
     width: 80px;
+    height: 80px;
     margin-right: 16px;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+
+      transform: ${props => (props.mount ? 'scaleX(1)' : 'scale3d(3,3,3)')};
+      transition: transform 1.5s cubic-bezier(0.2, 0.6, 0.35, 1);
+      transition-delay: 0.8s;
+    }
   }
 
-  div {
+  .track-info {
     margin-right: 24px;
 
     display: flex;
@@ -176,13 +195,14 @@ export const Track = styled(animated.div)<IIsPlaying>`
 
     strong {
       font-size: 18px;
-      font-weight: 500;
       color: #fff;
     }
 
     span {
-      margin-top: 8px;
+      color: #7a8185;
       font-size: 14px;
+      font-weight: bold;
+      margin-top: 8px;
     }
   }
 
