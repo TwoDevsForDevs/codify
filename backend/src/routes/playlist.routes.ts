@@ -8,11 +8,21 @@ interface IImages {
   url: string;
 }
 
+interface IPlaylistFollwers {
+  total: number;
+}
+
+interface ITrack {
+  total: number;
+}
+
 interface IPlaylist {
   id: string;
   name: string;
   images: IImages[];
   uri: string;
+  followers: IPlaylistFollwers;
+  tracks: ITrack;
 }
 
 playlistRouter.get('/:id', async (req, res) => {
@@ -25,6 +35,8 @@ playlistRouter.get('/:id', async (req, res) => {
     name: playlist.name,
     avatar: playlist.images[0].url,
     uri: playlist.uri,
+    followers: playlist.followers.total,
+    totalTracks: playlist.tracks.total,
   };
 
   return res.json(formattedPlaylist);
@@ -52,7 +64,11 @@ interface ITracks {
 }
 
 playlistRouter.get('/tracks/:id', async (req, res) => {
-  const response = await api.get(`playlists/${req.params.id}/tracks`);
+  const { page = 0 } = req.query;
+
+  const response = await api.get(
+    `playlists/${req.params.id}/tracks?limit=50&offset=${page}`,
+  );
 
   const tracks: ITracks[] = response.data.items;
 
