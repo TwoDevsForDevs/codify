@@ -4,6 +4,10 @@ import {
   FaPauseCircle,
   FaSpotify,
   FaTimes,
+  FaCompactDisc,
+  FaUsers,
+  FaChevronLeft,
+  FaChevronRight,
 } from 'react-icons/fa';
 import { useTransition } from 'react-spring';
 import { toast } from 'react-toastify';
@@ -17,8 +21,9 @@ import { playAudioWithFade, pauseAudioWithFade } from '../../../utils/audio';
 
 import {
   Container,
-  Info,
+  LeftContent,
   Content,
+  PlaylistInfo,
   TracksList,
   Track,
   CloseModal,
@@ -38,7 +43,7 @@ interface ITrack {
   artistName: string;
   albumImage: string;
   audio: HTMLAudioElement;
-  playing: boolean;
+  playing: number;
 }
 
 interface IPlaylist {
@@ -46,6 +51,8 @@ interface IPlaylist {
   name: string;
   avatar: string;
   uri: string;
+  followers: number;
+  totalTracks: number;
 }
 
 const ModalPlaylistTracks: React.FC<IModalProps> = ({
@@ -56,13 +63,63 @@ const ModalPlaylistTracks: React.FC<IModalProps> = ({
   const [loading, setLoading] = useState(true);
   const [tracks, setTracks] = useState<ITrack[]>([]);
   const [playlist, setPlaylist] = useState<IPlaylist>({} as IPlaylist);
-  const [mount, setMount] = useState(false);
+  const [mount, setMount] = useState(0);
+  const [currentPage, setCurrentPage] = useState(0);
+
+  useEffect(() => {
+    async function loadPlaylist(): Promise<void> {
+      try {
+        const [playlistResponse, tracksResponse] = await Promise.all([
+          api.get(`/playlist/${playlistId}`),
+          api.get(`/playlist/tracks/${playlistId}`, {
+            params: {
+              page: currentPage,
+            },
+          }),
+        ]);
+
+        const tracksData = tracksResponse.data.map((track: ITrack) => ({
+          ...track,
+          audio: new Audio(`${track.preview}`),
+          playing: 0,
+        }));
+
+        setPlaylist(playlistResponse.data);
+        setTracks(tracksData);
+
+        setTimeout(() => {
+          setMount(1);
+        }, 10);
+      } catch (err) {
+        toast.error(err.response.data.error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loadPlaylist();
+  }, [playlistId, currentPage]);
+
+  const tracksWithTransition = useTransition(tracks, track => track.id, {
+    from: {
+      opacity: 0,
+      transform: 'translateY(40px)',
+    },
+    enter: {
+      opacity: 1,
+      transform: 'translateY(0)',
+    },
+    leave: {
+      opacity: 0,
+    },
+    trail: 100,
+  });
 
   const handlePlay = useCallback(
     id => {
       setTracks(
         tracks.map(track =>
-          track.id === id ? { ...track, playing: true } : track,
+          track.id === id ? { ...track, playing: 1 } : track,
         ),
       );
     },
@@ -73,53 +130,22 @@ const ModalPlaylistTracks: React.FC<IModalProps> = ({
     id => {
       setTracks(
         tracks.map(track =>
-          track.id === id ? { ...track, playing: false } : track,
+          track.id === id ? { ...track, playing: 0 } : track,
         ),
       );
     },
     [tracks],
   );
 
-  useEffect(() => {
-    async function loadPlaylist(): Promise<void> {
-      try {
-        const [playlistResponse, tracksResponse] = await Promise.all([
-          api.get(`/playlist/${playlistId}`),
-          api.get(`/playlist/tracks/${playlistId}`),
-        ]);
-
-        const tracksData = tracksResponse.data.map((track: ITrack) => ({
-          ...track,
-          audio: new Audio(`${track.preview}`),
-          playing: false,
-        }));
-
-        setPlaylist(playlistResponse.data);
-        setTracks(tracksData);
-        setTimeout(() => {
-          setMount(true);
-        }, 10);
-      } catch (err) {
-        toast.error(err.response.data.error);
-      } finally {
-        setLoading(false);
-      }
+  const handlePage = useCallback(page => {
+    if (page === 0) {
+      setCurrentPage(0);
+    } else {
+      setCurrentPage(page + 50);
     }
+  }, []);
 
-    loadPlaylist();
-  }, [playlistId]);
-
-  const tracksWithTransition = useTransition(tracks, track => track.id, {
-    from: {
-      opacity: 0,
-      transform: 'scale(0.8)',
-    },
-    enter: {
-      opacity: 1,
-      transform: 'scale(1)',
-    },
-    trail: 100,
-  });
+  console.log(!!setTracks);
 
   return (
     <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
@@ -128,22 +154,51 @@ const ModalPlaylistTracks: React.FC<IModalProps> = ({
           <Spinner width={48} height={48} />
         ) : (
           <>
-            <Info mount={mount}>
+            <LeftContent mount={mount}>
               <img src={playlist.avatar} alt={playlist.name} />
               <SpotifyButton href={playlist.uri}>
                 Abrir no Spotify
               </SpotifyButton>
-            </Info>
+            </LeftContent>
 
-            <Content>
+            <Content mount={mount}>
               <h1>{playlist.name}</h1>
+
+              <PlaylistInfo>
+                <aside>
+                  <div>
+                    <FaUsers size={18} color="#33ff7a" />
+                    Seguidores: <strong>{playlist.followers}</strong>
+                  </div>
+                  <div>
+                    <FaCompactDisc size={18} color="#33ff7a" />
+                    Músicas: <strong>{playlist.totalTracks}</strong>
+                  </div>
+                </aside>
+
+                <nav>
+                  <button
+                    type="button"
+                    onClick={() => handlePage(currentPage - 1)}
+                  >
+                    <FaChevronLeft />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => handlePage(currentPage + 1)}
+                  >
+                    <FaChevronRight />
+                  </button>
+                </nav>
+              </PlaylistInfo>
+
               <TracksList>
                 {tracksWithTransition.map(({ item, key, props }, index) => (
                   <Track
                     key={key}
                     style={props}
-                    isPlaying={item.playing}
-                    mount={mount}
+                    playing={item.playing ? 1 : 0}
+                    mount={mount ? 1 : 0}
                   >
                     <img src={item.albumImage} alt={item.name} />
                     <div>
