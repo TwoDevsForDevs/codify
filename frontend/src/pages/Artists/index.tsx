@@ -70,7 +70,7 @@ const Artists: React.FC = () => {
 
       setTimeout(() => {
         setMount(true);
-      }, [10]);
+      }, 100);
     }
 
     loadTopArtists();

@@ -38,8 +38,8 @@ export const LeftContent = styled.aside<IModal>`
     opacity: ${props => (props.mount ? '1' : '0')};
     transform: ${props => (props.mount ? 'translateY(0)' : 'translateY(40px)')};
     transition: opacity 1s cubic-bezier(0.19, 1, 0.22, 1),
-      transform 1s cubic-bezier(0.19, 1, 0.22, 1);
-    transition-delay: 0.3s;
+      transform 1.5s cubic-bezier(0.19, 1, 0.22, 1);
+    transition-delay: 0.4s;
 
     justify-content: center;
   }
@@ -64,16 +64,22 @@ export const Content = styled.div<IModal>`
         : 'inset(0px 100% 100% 0px round 10px)'};
     transition: opacity 1s cubic-bezier(0.19, 1, 0.22, 1),
       clip-path 1s cubic-bezier(0.19, 1, 0.22, 1);
-    transition-delay: 0.5s;
+    transition-delay: 0.6s;
   }
 `;
 
-export const PlaylistInfo = styled.section`
+export const PlaylistInfo = styled.section<IModal>`
   margin: 24px 0;
 
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  opacity: ${props => (props.mount ? '1' : '0')};
+  transform: ${props => (props.mount ? 'translateY(0)' : 'translateY(40px)')};
+  transition: opacity 1s cubic-bezier(0.19, 1, 0.22, 1),
+    transform 1.5s cubic-bezier(0.19, 1, 0.22, 1);
+  transition-delay: 0.8s;
 
   aside {
     display: flex;
@@ -111,14 +117,18 @@ export const PlaylistInfo = styled.section`
     button {
       background: none;
       border: none;
-      transition: color 0.2s;
 
       & + button {
         margin-left: 32px;
       }
 
-      &:hover {
-        color: #fff;
+      svg {
+        color: #7a8185;
+        transition: color 0.2s;
+
+        &:hover {
+          color: #fff;
+        }
       }
     }
   }
@@ -147,7 +157,7 @@ export const Track = styled(animated.div)<IIsPlaying>`
 
   transition: opacity 1s cubic-bezier(0.19, 1, 0.22, 1),
     transform 1.5s cubic-bezier(0.19, 1, 0.22, 1);
-  transition-delay: 0.1s;
+  transition-delay: 0.4s;
 
   & + div {
     margin-top: 16px;

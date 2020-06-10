@@ -38,7 +38,7 @@ const Playlists: React.FC = () => {
 
       setTimeout(() => {
         setMount(true);
-      }, [10]);
+      }, 100);
     }
 
     loadUserPlaylists();

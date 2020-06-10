@@ -86,14 +86,13 @@ const ModalPlaylistTracks: React.FC<IModalProps> = ({
 
         setPlaylist(playlistResponse.data);
         setTracks(tracksData);
+        setLoading(false);
 
         setTimeout(() => {
           setMount(1);
-        }, 10);
+        }, 100);
       } catch (err) {
         toast.error(err.response.data.error);
-      } finally {
-        setLoading(false);
       }
     }
 
@@ -145,8 +144,6 @@ const ModalPlaylistTracks: React.FC<IModalProps> = ({
     }
   }, []);
 
-  console.log(!!setTracks);
-
   return (
     <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
       <Container>
@@ -164,7 +161,7 @@ const ModalPlaylistTracks: React.FC<IModalProps> = ({
             <Content mount={mount}>
               <h1>{playlist.name}</h1>
 
-              <PlaylistInfo>
+              <PlaylistInfo mount={mount}>
                 <aside>
                   <div>
                     <FaUsers size={18} color="#33ff7a" />
