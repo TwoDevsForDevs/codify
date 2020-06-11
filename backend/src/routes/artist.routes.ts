@@ -4,6 +4,18 @@ import api from '../services/api';
 
 const artistRouter = Router();
 
+interface IAlbum {
+  images: IImages[];
+}
+
+interface ITrack {
+  id: string;
+  album: IAlbum;
+  name: string;
+  preview_url: string;
+  uri: string;
+}
+
 interface IImages {
   url: string;
 }
@@ -18,14 +30,19 @@ interface IArtist {
   genres: string[];
   images: IImages[];
   name: string;
-  popularity: string;
+  popularity: number;
   uri: string;
+  topTracks: ITrack[];
 }
 
 artistRouter.get('/:id', async (req, res) => {
-  const response = await api.get(`artists/${req.params.id}`);
+  const [artistResponse, artistTopTracksResponse] = await Promise.all([
+    api.get(`artists/${req.params.id}`),
+    api.get(`artists/${req.params.id}/top-tracks?market=BR`),
+  ]);
 
-  const artist: IArtist = response.data;
+  const artist: IArtist = artistResponse.data;
+  const artistTopTracks: ITrack = artistTopTracksResponse.data;
 
   const formattedArtist = {
     id: artist.id,
@@ -35,6 +52,7 @@ artistRouter.get('/:id', async (req, res) => {
     followers: artist.followers.total,
     genres: artist.genres,
     popularity: artist.popularity,
+    topTracks: artistTopTracks,
   };
 
   return res.json(formattedArtist);
