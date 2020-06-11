@@ -77,6 +77,7 @@ export const Artist = styled(animated.div)`
   overflow: hidden;
   width: 240px;
   height: 240px;
+  cursor: pointer;
 
   transition: transform 1.5s cubic-bezier(0.19, 1, 0.22, 1),
     opacity 1s cubic-bezier(0.19, 1, 0.22, 1);

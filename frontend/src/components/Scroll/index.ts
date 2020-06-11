@@ -12,8 +12,8 @@ const Scroll = styled(PerfectScrollbar)`
   .ps__rail-y {
     margin: 32px 0px;
     opacity: 1 !important;
-    width: 6px;
-    background: #252527;
+    width: 4px;
+    background: rgba(255, 255, 255, 0.1);
     border-radius: 5px;
 
     &:hover {
@@ -21,17 +21,18 @@ const Scroll = styled(PerfectScrollbar)`
       background: inherit;
 
       > .ps__thumb-y {
-        width: 6px;
+        width: 4px;
       }
     }
 
     .ps__thumb-y {
       background: #33ff7a;
+      width: 4px;
       height: 60px;
       right: 0px;
 
       &:hover {
-        width: 6px;
+        width: 4px;
       }
     }
   }

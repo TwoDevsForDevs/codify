@@ -74,6 +74,69 @@ export const Content = styled.div<IModal>`
   }
 `;
 
+export const Genres = styled.div<IModal>`
+  margin: 24px 0;
+
+  display: flex;
+  align-items: center;
+
+  span {
+    background: #2c2f30;
+    color: #fff;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 24px;
+    font-size: 14px;
+
+    opacity: ${props => (props.mount ? '1' : '0')};
+    transform: ${props =>
+      props.mount ? 'translateY(0px)' : 'translateY(40px)'};
+    transition: opacity 1s cubic-bezier(0.19, 1, 0.22, 1),
+      transform 1.5s cubic-bezier(0.19, 1, 0.22, 1);
+    transition-delay: 0.8s;
+
+    & + span {
+      margin-left: 16px;
+    }
+  }
+`;
+
+export const ArtistInfo = styled.section`
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+
+  > div {
+    background: #2d2f30;
+    border-radius: 10px;
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+
+    div[role='button'] {
+      width: 100px !important;
+      height: 100px !important;
+      margin: 0 !important;
+    }
+
+    .info {
+      display: flex;
+      flex-direction: column;
+
+      strong {
+        color: #fff;
+        margin-top: 8px;
+      }
+    }
+  }
+
+  .followers {
+    margin-left: 24px;
+  }
+`;
+
 export const PlaylistInfo = styled.section<IModal>`
   margin: 24px 0;
 

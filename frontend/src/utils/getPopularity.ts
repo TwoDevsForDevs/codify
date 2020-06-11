@@ -3,7 +3,7 @@ const getPopularity = (value: number): string => {
     return 'Pouco escutado';
   }
   if (value < 55) {
-    return 'Sutil';
+    return 'Chamando Atenção';
   }
   if (value < 80) {
     return 'Bem conhecido';

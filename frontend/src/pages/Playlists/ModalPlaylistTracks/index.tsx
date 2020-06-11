@@ -12,6 +12,8 @@ import {
 import { useTransition } from 'react-spring';
 import { toast } from 'react-toastify';
 
+import formatValue from '../../../utils/formatValue';
+
 import Modal from '../../../components/Modal';
 import SpotifyButton from '../../../components/SpotifyButton';
 import Spinner from '../../../components/Spinner';
@@ -53,6 +55,7 @@ interface IPlaylist {
   avatar: string;
   uri: string;
   followers: number;
+  formattedFollowers: number;
   totalTracks: number;
 }
 
@@ -79,21 +82,27 @@ const ModalPlaylistTracks: React.FC<IModalProps> = ({
           }),
         ]);
 
+        const playlistData = {
+          ...playlistResponse.data,
+          formattedFollowers: formatValue(playlistResponse.data.followers),
+        };
+
         const tracksData = tracksResponse.data.map((track: ITrack) => ({
           ...track,
           audio: new Audio(`${track.preview}`),
           playing: 0,
         }));
 
-        setPlaylist(playlistResponse.data);
+        setPlaylist(playlistData);
         setTracks(tracksData);
-        setLoading(false);
 
         setTimeout(() => {
           setMount(1);
         }, 100);
       } catch (err) {
-        toast.error(err.response.data.error);
+        toast.error('Não foi possível carregar as músicas da playlist.');
+      } finally {
+        setLoading(false);
       }
     }
 
@@ -170,7 +179,7 @@ const ModalPlaylistTracks: React.FC<IModalProps> = ({
                   <aside>
                     <div>
                       <FaUsers size={18} color="#33ff7a" />
-                      <strong>{playlist.followers} </strong>Seguidores
+                      <strong>{playlist.formattedFollowers} </strong>Seguidores
                     </div>
                     <div>
                       <FaCompactDisc size={18} color="#33ff7a" />
@@ -250,7 +259,7 @@ const ModalPlaylistTracks: React.FC<IModalProps> = ({
             </Scroll>
 
             <CloseModal type="button" onClick={setIsOpen}>
-              <FaTimes size={24} color="#f7415f" />
+              <FaTimes size={28} color="#f7415f" />
             </CloseModal>
           </>
         )}

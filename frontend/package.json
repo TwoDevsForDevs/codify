@@ -14,6 +14,8 @@
     "axios": "^0.19.2",
     "history": "^4.10.1",
     "js-cookie": "^2.2.1",
+    "lottie-react-web": "^2.2.2",
+    "lottie-web": "^5.6.10",
     "polished": "^3.6.3",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

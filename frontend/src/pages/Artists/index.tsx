@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useTransition } from 'react-spring';
 import { GiMicrophone } from 'react-icons/gi';
 import { FaPlay } from 'react-icons/fa';
+import { toast } from 'react-toastify';
 
 import ModalArtist from './ModalArtist';
 import LineGraphAnimated from '../../components/LineGraphAnimated';
@@ -56,24 +57,30 @@ const Artists: React.FC = () => {
 
   useEffect(() => {
     async function loadTopArtists(): Promise<void> {
-      setLoading(true);
+      try {
+        setLoading(true);
 
-      const response = await api.get('/me/top-artists');
+        const response = await api.get('/me/top-artists');
 
-      const data = response.data.map((artist: ITopArtists) => ({
-        ...artist,
-        formattedFollowers: formatValue(artist.followers.total),
-        popularityTag: getPopularity(artist.popularity),
-        audio: new Audio(`${artist.topTrackPreview}`),
-      }));
+        const data = response.data.map((artist: ITopArtists) => ({
+          ...artist,
+          formattedFollowers: formatValue(artist.followers.total),
+          popularityTag: getPopularity(artist.popularity),
+          audio: new Audio(`${artist.topTrackPreview}`),
+        }));
 
-      setTopArtists(data);
-      setFirstTopArtist(data[0]);
-      setLoading(false);
+        setTopArtists(data);
+        setFirstTopArtist(data[0]);
+        setLoading(false);
 
-      setTimeout(() => {
-        setMount(true);
-      }, 100);
+        setTimeout(() => {
+          setMount(true);
+        }, 100);
+      } catch (err) {
+        toast.error('Não foi possível carregar os artistas.');
+      } finally {
+        setLoading(false);
+      }
     }
 
     loadTopArtists();

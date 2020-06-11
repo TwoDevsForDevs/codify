@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useTransition } from 'react-spring';
 import { FaHeadphones } from 'react-icons/fa';
+import { toast } from 'react-toastify';
 
 import api from '../../services/api';
 
@@ -29,16 +30,21 @@ const Playlists: React.FC = () => {
 
   useEffect(() => {
     async function loadUserPlaylists(): Promise<void> {
-      setLoading(true);
+      try {
+        setLoading(true);
 
-      const response = await api.get('/me/playlists');
+        const response = await api.get('/me/playlists');
 
-      setPlaylist(response.data);
-      setLoading(false);
+        setPlaylist(response.data);
 
-      setTimeout(() => {
-        setMount(true);
-      }, 100);
+        setTimeout(() => {
+          setMount(true);
+        }, 100);
+      } catch (err) {
+        toast.error('Não foi possível carregar as playlists.');
+      } finally {
+        setLoading(false);
+      }
     }
 
     loadUserPlaylists();
