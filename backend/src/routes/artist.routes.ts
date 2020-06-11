@@ -16,6 +16,13 @@ interface ITrack {
   uri: string;
 }
 
+interface IRelatedArtist {
+  id: string;
+  name: string;
+  images: IImages[];
+  uri: string;
+}
+
 interface IImages {
   url: string;
 }
@@ -33,16 +40,38 @@ interface IArtist {
   popularity: number;
   uri: string;
   topTracks: ITrack[];
+  relatedArtists: IRelatedArtist[];
 }
 
 artistRouter.get('/:id', async (req, res) => {
-  const [artistResponse, artistTopTracksResponse] = await Promise.all([
+  const [
+    artistResponse,
+    artistTopTracksResponse,
+    relatedArtistsResponse,
+  ] = await Promise.all([
     api.get(`artists/${req.params.id}`),
     api.get(`artists/${req.params.id}/top-tracks?market=BR`),
+    api.get(`artists/${req.params.id}/related-artists`),
   ]);
 
   const artist: IArtist = artistResponse.data;
-  const artistTopTracks: ITrack = artistTopTracksResponse.data;
+  const artistTopTracks: ITrack[] = artistTopTracksResponse.data.tracks;
+  const relatedArtists: IRelatedArtist[] = relatedArtistsResponse.data.artists;
+
+  const formattedArtistTopTracks = artistTopTracks.map(topTrack => ({
+    id: topTrack.id,
+    image: topTrack.album.images[0].url,
+    name: topTrack.name,
+    preview_url: topTrack.preview_url,
+    uri: topTrack.uri,
+  }));
+
+  const formattedRelatedArtists = relatedArtists.map(relatedArtist => ({
+    id: relatedArtist.id,
+    image: relatedArtist.images[0].url,
+    name: relatedArtist.name,
+    uri: relatedArtist.uri,
+  }));
 
   const formattedArtist = {
     id: artist.id,
@@ -52,7 +81,8 @@ artistRouter.get('/:id', async (req, res) => {
     followers: artist.followers.total,
     genres: artist.genres,
     popularity: artist.popularity,
-    topTracks: artistTopTracks,
+    topTracks: formattedArtistTopTracks,
+    relatedArtists: formattedRelatedArtists,
   };
 
   return res.json(formattedArtist);
