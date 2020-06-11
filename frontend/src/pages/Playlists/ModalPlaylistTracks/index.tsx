@@ -15,6 +15,7 @@ import { toast } from 'react-toastify';
 import Modal from '../../../components/Modal';
 import SpotifyButton from '../../../components/SpotifyButton';
 import Spinner from '../../../components/Spinner';
+import Scroll from '../../../components/Scroll';
 
 import api from '../../../services/api';
 import { playAudioWithFade, pauseAudioWithFade } from '../../../utils/audio';
@@ -151,100 +152,106 @@ const ModalPlaylistTracks: React.FC<IModalProps> = ({
           <Spinner width={48} height={48} />
         ) : (
           <>
-            <LeftContent mount={mount}>
-              <div>
-                <img src={playlist.avatar} alt={playlist.name} />
-              </div>
+            <Scroll>
+              <LeftContent mount={mount}>
+                <div>
+                  <img src={playlist.avatar} alt={playlist.name} />
+                </div>
 
-              <SpotifyButton href={playlist.uri}>
-                Abrir no Spotify
-              </SpotifyButton>
-            </LeftContent>
+                <SpotifyButton href={playlist.uri}>
+                  Abrir no Spotify
+                </SpotifyButton>
+              </LeftContent>
 
-            <Content mount={mount}>
-              <h1>{playlist.name}</h1>
+              <Content mount={mount}>
+                <h1>{playlist.name}</h1>
 
-              <PlaylistInfo mount={mount}>
-                <aside>
-                  <div>
-                    <FaUsers size={18} color="#33ff7a" />
-                    <strong>{playlist.followers} </strong>Seguidores
-                  </div>
-                  <div>
-                    <FaCompactDisc size={18} color="#33ff7a" />
-                    <strong>{playlist.totalTracks} </strong>Músicas
-                  </div>
-                </aside>
-
-                <nav>
-                  <button
-                    type="button"
-                    onClick={() => handlePage(currentPage - 1)}
-                  >
-                    <FaChevronLeft />
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => handlePage(currentPage + 1)}
-                  >
-                    <FaChevronRight />
-                  </button>
-                </nav>
-              </PlaylistInfo>
-
-              <TracksList>
-                {tracksWithTransition.map(({ item, key, props }, index) => (
-                  <Track
-                    key={key}
-                    style={props}
-                    playing={item.playing ? 1 : 0}
-                    mount={mount ? 1 : 0}
-                  >
-                    <div className="track-image">
-                      <img src={item.albumImage} alt={item.name} />
+                <PlaylistInfo mount={mount}>
+                  <aside>
+                    <div>
+                      <FaUsers size={18} color="#33ff7a" />
+                      <strong>{playlist.followers} </strong>Seguidores
                     </div>
-
-                    <div className="track-info">
-                      <strong>
-                        {index + 1}. {item.name}
-                      </strong>
-                      <span>{item.artistName}</span>
+                    <div>
+                      <FaCompactDisc size={18} color="#33ff7a" />
+                      <strong>{playlist.totalTracks} </strong>Músicas
                     </div>
+                  </aside>
 
-                    <aside>
-                      <button
-                        type="button"
-                        className="pauseButton"
-                        onClick={() => {
-                          pauseAudioWithFade(item.audio, 100);
-                          handlePause(item.id);
-                        }}
-                      >
-                        <FaPauseCircle size={24} color="#33ff7a" />
-                      </button>
-                      <button
-                        type="button"
-                        className="playButton"
-                        onClick={() => {
-                          playAudioWithFade(item.audio, 100);
-                          handlePlay(item.id);
-                        }}
-                      >
-                        <FaPlayCircle size={24} color="#33ff7a" />
-                      </button>
+                  <nav>
+                    <button
+                      type="button"
+                      onClick={() => handlePage(currentPage - 1)}
+                    >
+                      <FaChevronLeft />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => handlePage(currentPage + 1)}
+                    >
+                      <FaChevronRight />
+                    </button>
+                  </nav>
+                </PlaylistInfo>
 
-                      <a href={item.uri}>
-                        <FaSpotify size={24} color="#fff" />
-                      </a>
-                    </aside>
-                  </Track>
-                ))}
-              </TracksList>
+                <TracksList>
+                  {tracksWithTransition.map(({ item, key, props }, index) => (
+                    <Track
+                      key={key}
+                      style={props}
+                      playing={item.playing ? 1 : 0}
+                      mount={mount ? 1 : 0}
+                      onMouseLeave={() => {
+                        pauseAudioWithFade(item.audio, 100);
+                        handlePause(item.id);
+                      }}
+                    >
+                      <div className="track-image">
+                        <img src={item.albumImage} alt={item.name} />
+                      </div>
 
-              <CloseModal type="button" onClick={setIsOpen}>
-                <FaTimes size={24} color="#f7415f" />
-              </CloseModal>
-            </Content>
+                      <div className="track-info">
+                        <strong>
+                          {index + 1}. {item.name}
+                        </strong>
+                        <span>{item.artistName}</span>
+                      </div>
+
+                      <aside>
+                        <button
+                          type="button"
+                          className="pauseButton"
+                          onClick={() => {
+                            pauseAudioWithFade(item.audio, 100);
+                            handlePause(item.id);
+                          }}
+                        >
+                          <FaPauseCircle size={24} color="#33ff7a" />
+                        </button>
+                        <button
+                          type="button"
+                          className="playButton"
+                          onClick={() => {
+                            playAudioWithFade(item.audio, 100);
+                            handlePlay(item.id);
+                          }}
+                        >
+                          <FaPlayCircle size={24} color="#33ff7a" />
+                        </button>
+
+                        <a href={item.uri}>
+                          <FaSpotify size={24} color="#fff" />
+                        </a>
+                      </aside>
+                    </Track>
+                  ))}
+                </TracksList>
+              </Content>
+            </Scroll>
+
+            <CloseModal type="button" onClick={setIsOpen}>
+              <FaTimes size={24} color="#f7415f" />
+            </CloseModal>
           </>
         )}
       </Container>

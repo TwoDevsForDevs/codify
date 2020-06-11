@@ -257,8 +257,8 @@ export const CloseModal = styled.button`
   background: transparent;
   border: 0;
   position: absolute;
-  right: 9px;
-  top: 40px;
+  right: -7px;
+  top: -3px;
   margin-right: 4px;
   transition: transform 0.2s;
 

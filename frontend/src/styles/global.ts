@@ -1,5 +1,8 @@
 import { createGlobalStyle } from 'styled-components';
 
+import 'react-perfect-scrollbar/dist/css/styles.css';
+import 'react-toastify/dist/ReactToastify.css';
+
 import ball from '../assets/ball.svg';
 
 export default createGlobalStyle`
@@ -52,5 +55,12 @@ export default createGlobalStyle`
 
   ::-webkit-scrollbar-thumb {
     background-color: hsla(0, 0%, 100%, 0.3);
+  }
+
+  /* Toastify */
+  .foo {
+    border-radius: 4px;
+    padding: 10px 20px;
+    font-size: 16px;
   }
 `;

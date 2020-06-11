@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useTransition } from 'react-spring';
 import { GiMicrophone } from 'react-icons/gi';
 import { FaPlay } from 'react-icons/fa';
 
+import ModalArtist from './ModalArtist';
 import LineGraphAnimated from '../../components/LineGraphAnimated';
 import Spinner from '../../components/Spinner';
 
@@ -50,6 +51,8 @@ const Artists: React.FC = () => {
   );
   const [mount, setMount] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [toggleModal, setToggleModal] = useState(false);
+  const [artistId, setArtistId] = useState('');
 
   useEffect(() => {
     async function loadTopArtists(): Promise<void> {
@@ -76,6 +79,10 @@ const Artists: React.FC = () => {
     loadTopArtists();
   }, []);
 
+  const handleModal = useCallback(() => {
+    setToggleModal(!toggleModal);
+  }, [toggleModal]);
+
   const artistsWithTransition = useTransition(
     topArtists,
     topArtist => topArtist.id,
@@ -97,6 +104,14 @@ const Artists: React.FC = () => {
         <Spinner />
       ) : (
         <>
+          {toggleModal && (
+            <ModalArtist
+              isOpen={toggleModal}
+              setIsOpen={handleModal}
+              artistId={artistId}
+            />
+          )}
+
           <LeftContent mount={mount}>
             <div>
               <GiMicrophone size={32} color="#fff" />
@@ -118,6 +133,10 @@ const Artists: React.FC = () => {
                 style={props}
                 onMouseEnter={() => playAudioWithFade(item.audio)}
                 onMouseLeave={() => pauseAudioWithFade(item.audio)}
+                onClick={() => {
+                  setArtistId(item.id);
+                  handleModal();
+                }}
               >
                 <img src={item.images[0].url} alt={item.name} />
                 <div className="name">
