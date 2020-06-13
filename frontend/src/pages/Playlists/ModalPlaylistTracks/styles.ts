@@ -253,11 +253,11 @@ export const Track = styled(animated.div)<IIsPlaying>`
   }
 `;
 
-export const CloseModal = styled.button`
+export const CloseModal = styled.button<IModal>`
   background: transparent;
   border: 0;
   position: absolute;
-  right: 18px;
+  right: 16px;
   top: 40px;
   margin-right: 4px;
   transition: transform 0.2s;
@@ -265,6 +265,9 @@ export const CloseModal = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  opacity: ${props => (props.mount ? '1' : '0')};
+  transition: opacity 1s cubic-bezier(0.19, 1, 0.22, 1) 0.8s, transform 0.2s;
 
   &:hover {
     transform: scale(1.2);

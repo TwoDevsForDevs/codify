@@ -258,7 +258,7 @@ const ModalPlaylistTracks: React.FC<IModalProps> = ({
               </Content>
             </Scroll>
 
-            <CloseModal type="button" onClick={setIsOpen}>
+            <CloseModal type="button" onClick={setIsOpen} mount={mount}>
               <FaTimes size={28} color="#f7415f" />
             </CloseModal>
           </>

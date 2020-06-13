@@ -1,9 +1,12 @@
 import React, { useEffect, useState, useCallback } from 'react';
+import { useTransition } from 'react-spring';
 import {
   FaSpotify,
   FaTimes,
   FaChevronLeft,
   FaChevronRight,
+  FaPlayCircle,
+  FaPauseCircle,
 } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 
@@ -23,13 +26,44 @@ import Popular from '../../../components/AnimatedVectors/Popular';
 import Estourando from '../../../components/AnimatedVectors/Estourando';
 
 import getPopularity from '../../../utils/getPopularity';
+import { playAudioWithFade, pauseAudioWithFade } from '../../../utils/audio';
 
-import { Container, LeftContent, Content, Genres, ArtistInfo } from './styles';
+import {
+  Container,
+  LeftContent,
+  Content,
+  Genres,
+  ArtistInfo,
+  ArtistTopTracks,
+  TopTracksList,
+  TopTrack,
+  CloseModal,
+  RelatedArtists,
+  RelatedArtistsList,
+  RelatedArtist,
+} from './styles';
 
 interface IModalProps {
   isOpen: boolean;
   setIsOpen: () => void;
   artistId: string;
+}
+
+interface ITopTrack {
+  id: string;
+  image: string;
+  name: string;
+  preview: string;
+  audio: HTMLAudioElement;
+  uri: string;
+  playing: number;
+}
+
+interface IRelatedArtist {
+  id: string;
+  name: string;
+  image: string;
+  uri: string;
 }
 
 interface IArtist {
@@ -42,6 +76,7 @@ interface IArtist {
   popularity: number;
   popularityTag: string;
   uri: string;
+  topTracks: ITopTrack[];
 }
 
 const ModalArtist: React.FC<IModalProps> = ({
@@ -50,8 +85,12 @@ const ModalArtist: React.FC<IModalProps> = ({
   artistId,
 }) => {
   const [artist, setArtist] = useState<IArtist>({} as IArtist);
+  const [topTracks, setTopTracks] = useState<ITopTrack[]>([]);
+  const [relatedArtists, setRelatedArtists] = useState<IRelatedArtist[]>([]);
   const [loading, setLoading] = useState(true);
   const [mount, setMount] = useState(0);
+  const [slideTracks, setSlideTracks] = useState(false);
+  const [slideRelatedArtists, setSlideRelatedArtists] = useState(false);
 
   useEffect(() => {
     async function loadArtist(): Promise<void> {
@@ -66,9 +105,17 @@ const ModalArtist: React.FC<IModalProps> = ({
           formattedFollowers: formatValue(data.followers),
         };
 
-        console.log(artistData);
+        const topTracksFormatted = data.topTracks
+          .slice(0, 6)
+          .map((track: ITopTrack) => ({
+            ...track,
+            audio: new Audio(`${track.preview}`),
+            playing: 0,
+          }));
 
         setArtist(artistData);
+        setTopTracks(topTracksFormatted);
+        setRelatedArtists(data.relatedArtists.slice(0, 6));
         setTimeout(() => {
           setMount(1);
         }, 100);
@@ -81,6 +128,64 @@ const ModalArtist: React.FC<IModalProps> = ({
 
     loadArtist();
   }, [artistId]);
+
+  const handleSlideTracks = useCallback(() => {
+    setSlideTracks(!slideTracks);
+  }, [slideTracks]);
+
+  const handleSlideRelatedArtists = useCallback(() => {
+    setSlideRelatedArtists(!slideRelatedArtists);
+  }, [slideRelatedArtists]);
+
+  const handlePlay = useCallback(
+    id => {
+      setTopTracks(
+        topTracks.map(track =>
+          track.id === id ? { ...track, playing: 1 } : track,
+        ),
+      );
+    },
+    [topTracks],
+  );
+
+  const handlePause = useCallback(
+    id => {
+      setTopTracks(
+        topTracks.map(track =>
+          track.id === id ? { ...track, playing: 0 } : track,
+        ),
+      );
+    },
+    [topTracks],
+  );
+
+  const topTracksWithTransition = useTransition(topTracks, track => track.id, {
+    from: {
+      opacity: 0,
+      transform: 'scale(0.8)',
+    },
+    enter: {
+      opacity: 1,
+      transform: 'scale(1)',
+    },
+    trail: 100,
+  });
+
+  const relatedArtistsWithTransition = useTransition(
+    relatedArtists,
+    related => related.id,
+    {
+      from: {
+        opacity: 0,
+        transform: 'scale(0.8)',
+      },
+      enter: {
+        opacity: 1,
+        transform: 'scale(1)',
+      },
+      trail: 100,
+    },
+  );
 
   return (
     <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
@@ -108,7 +213,7 @@ const ModalArtist: React.FC<IModalProps> = ({
                   ))}
                 </Genres>
 
-                <ArtistInfo>
+                <ArtistInfo mount={mount}>
                   <div className="popularity">
                     {artist.popularityTag === 'Pouco escutado' && (
                       <PoucoEscutado />
@@ -137,8 +242,115 @@ const ModalArtist: React.FC<IModalProps> = ({
                     </div>
                   </div>
                 </ArtistInfo>
+
+                <ArtistTopTracks mount={mount}>
+                  <div>
+                    <h3>Músicas mais tocadas</h3>
+
+                    <nav>
+                      <button
+                        type="button"
+                        disabled={!slideTracks}
+                        onClick={handleSlideTracks}
+                      >
+                        <FaChevronLeft />
+                      </button>
+                      <button
+                        type="button"
+                        disabled={slideTracks}
+                        onClick={handleSlideTracks}
+                      >
+                        <FaChevronRight />
+                      </button>
+                    </nav>
+                  </div>
+
+                  <TopTracksList slideTracks={slideTracks}>
+                    {topTracksWithTransition.map(
+                      ({ item, key, props }, index) => (
+                        <TopTrack
+                          key={key}
+                          style={props}
+                          playing={item.playing ? 1 : 0}
+                        >
+                          <img src={item.image} alt={item.name} />
+
+                          <div>
+                            <strong>
+                              {index + 1}. {item.name}
+                            </strong>
+
+                            <button
+                              type="button"
+                              className="playButton"
+                              onClick={() => {
+                                playAudioWithFade(item.audio, 100);
+                                handlePlay(item.id);
+                              }}
+                            >
+                              <FaPlayCircle size={24} color="#33ff7a" />
+                            </button>
+                            <button
+                              type="button"
+                              className="pauseButton"
+                              onClick={() => {
+                                pauseAudioWithFade(item.audio, 100);
+                                handlePause(item.id);
+                              }}
+                            >
+                              <FaPauseCircle size={24} color="#33ff7a" />
+                            </button>
+                          </div>
+                        </TopTrack>
+                      ),
+                    )}
+                  </TopTracksList>
+                </ArtistTopTracks>
+
+                <RelatedArtists>
+                  <div>
+                    <h3>Artistas relacionados</h3>
+
+                    <nav>
+                      <button
+                        type="button"
+                        disabled={!slideRelatedArtists}
+                        onClick={handleSlideRelatedArtists}
+                      >
+                        <FaChevronLeft />
+                      </button>
+                      <button
+                        type="button"
+                        disabled={slideRelatedArtists}
+                        onClick={handleSlideRelatedArtists}
+                      >
+                        <FaChevronRight />
+                      </button>
+                    </nav>
+                  </div>
+
+                  <RelatedArtistsList slideRelatedArtists={slideRelatedArtists}>
+                    {relatedArtistsWithTransition.map(
+                      ({ item, key, props }, index) => (
+                        <RelatedArtist key={key} style={props}>
+                          <img src={item.image} alt={item.name} />
+
+                          <div>
+                            <strong>
+                              {index + 1}. {item.name}
+                            </strong>
+                          </div>
+                        </RelatedArtist>
+                      ),
+                    )}
+                  </RelatedArtistsList>
+                </RelatedArtists>
               </Content>
             </Scroll>
+
+            <CloseModal type="button" onClick={setIsOpen} mount={mount}>
+              <FaTimes size={28} color="#f7415f" />
+            </CloseModal>
           </>
         )}
       </Container>

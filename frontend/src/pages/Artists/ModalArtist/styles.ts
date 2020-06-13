@@ -56,6 +56,7 @@ export const LeftContent = styled.aside<IModal>`
 
 export const Content = styled.div<IModal>`
   width: 100%;
+  padding-bottom: 32px;
 
   display: flex;
   flex-direction: column;
@@ -101,7 +102,7 @@ export const Genres = styled.div<IModal>`
   }
 `;
 
-export const ArtistInfo = styled.section`
+export const ArtistInfo = styled.section<IModal>`
   width: 100%;
 
   display: flex;
@@ -115,9 +116,23 @@ export const ArtistInfo = styled.section`
     display: flex;
     align-items: center;
 
+    opacity: ${props => (props.mount ? '1' : '0')};
+    transform: ${props =>
+      props.mount ? 'translateY(0px)' : 'translateY(40px)'};
+    transition: opacity 1s cubic-bezier(0.19, 1, 0.22, 1),
+      transform 1.5s cubic-bezier(0.19, 1, 0.22, 1);
+
+    &:nth-child(1) {
+      transition-delay: 1s;
+    }
+
+    &:nth-child(2) {
+      transition-delay: 1.1s;
+    }
+
     div[role='button'] {
-      width: 100px !important;
-      height: 100px !important;
+      width: 80px !important;
+      height: 80px !important;
       margin: 0 !important;
     }
 
@@ -125,9 +140,15 @@ export const ArtistInfo = styled.section`
       display: flex;
       flex-direction: column;
 
+      span {
+        font-size: 14px;
+        font-weight: bold;
+      }
+
       strong {
         color: #fff;
         margin-top: 8px;
+        font-size: 18px;
       }
     }
   }
@@ -137,197 +158,317 @@ export const ArtistInfo = styled.section`
   }
 `;
 
-export const PlaylistInfo = styled.section<IModal>`
-  margin: 24px 0;
+export const ArtistTopTracks = styled.section<IModal>`
+  width: 100%;
+  margin-top: 32px;
+  overflow-x: hidden;
 
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: column;
 
-  opacity: ${props => (props.mount ? '1' : '0')};
-  transform: ${props => (props.mount ? 'translateY(0)' : 'translateY(40px)')};
-  transition: opacity 1s cubic-bezier(0.19, 1, 0.22, 1),
-    transform 1.5s cubic-bezier(0.19, 1, 0.22, 1);
-  transition-delay: 0.8s;
+  > div {
+    margin-bottom: 24px;
 
-  aside {
     display: flex;
-    align-items: center;
+    justify-content: space-between;
 
-    div {
-      background: rgba(51, 255, 122, 0.15);
+    h3 {
       color: #fff;
-      font-weight: bold;
-      font-size: 14px;
-      padding: 10px 14px;
-      border-radius: 26px;
-
-      display: flex;
-      align-items: center;
-
-      & + div {
-        margin-left: 8px;
-      }
-
-      svg {
-        margin-right: 8px;
-      }
-
-      strong {
-        margin-right: 4px;
-      }
     }
-  }
 
-  nav {
-    display: flex;
-    align-items: center;
+    nav {
+      display: flex;
 
-    button {
-      background: none;
-      border: none;
+      button {
+        background: none;
+        border: 0;
 
-      & + button {
-        margin-left: 32px;
-      }
+        &:disabled {
+          pointer-events: none;
+        }
 
-      svg {
-        color: #7a8185;
-        transition: color 0.2s;
+        & + button {
+          margin-left: 32px;
+        }
 
-        &:hover {
-          color: #fff;
+        svg {
+          color: #7a8185;
+          transition: color 0.2s;
+
+          &:hover {
+            color: #fff;
+          }
         }
       }
     }
   }
 `;
 
-export const TracksList = styled.section`
-  padding-bottom: 56px;
+interface ITopTracksList {
+  slideTracks: boolean;
+}
+
+export const TopTracksList = styled.ul<ITopTracksList>`
+  max-width: 608px;
+  width: 100%;
 
   display: flex;
-  flex-direction: column;
+
+  transform: ${props =>
+    props.slideTracks
+      ? 'translate3d(calc(-100% - 15px), 0px, 0px)'
+      : 'translate3d(calc(0% - 0px), 0px, 0px)'};
+  transition: transform 1s cubic-bezier(0.19, 1, 0.22, 1);
 `;
 
 interface IIsPlaying {
   playing: number;
-  mount: number;
 }
 
-export const Track = styled(animated.div)<IIsPlaying>`
-  background: #252527;
-  padding: 0 24px;
+export const TopTrack = styled(animated.li)<IIsPlaying>`
+  min-width: 192px;
+  height: 256px;
+  position: relative;
   border-radius: 10px;
-  height: 80px;
+  overflow: hidden;
 
   display: flex;
-  align-items: center;
+  flex-direction: column;
 
-  transition: opacity 1s cubic-bezier(0.19, 1, 0.22, 1),
-    transform 1.5s cubic-bezier(0.19, 1, 0.22, 1);
-  transition-delay: 0.2s;
-
-  & + div {
-    margin-top: 16px;
+  & + li {
+    margin-left: 16px;
   }
 
-  .track-image {
-    min-width: 80px;
-    width: 80px;
-    height: 80px;
-    margin-right: 16px;
-    overflow: hidden;
-
+  &:hover {
     img {
-      width: 100%;
-      height: 100%;
+      transform: scale(1.1);
+    }
 
-      transform: ${props => (props.mount ? 'scaleX(1)' : 'scale3d(3,3,3)')};
-      transition: transform 1.5s cubic-bezier(0.2, 0.6, 0.35, 1);
-      transition-delay: 0.8s;
+    div {
+      height: 128px;
+
+      strong {
+        position: absolute;
+        top: 0;
+        margin-top: 16px;
+      }
+
+      button {
+        visibility: visible;
+      }
     }
   }
 
-  .track-info {
-    margin-right: 24px;
-
-    display: flex;
-    flex-direction: column;
-
-    strong {
-      font-size: 18px;
-      color: #fff;
-    }
-
-    span {
-      color: #7a8185;
-      font-size: 14px;
-      font-weight: bold;
-      margin-top: 8px;
-    }
+  img {
+    width: 100%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    transition: transform 0.3s;
   }
 
-  aside {
-    margin-left: auto;
+  div {
+    position: absolute;
+    bottom: 0;
+
+    background: #272727;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    height: 64px;
+    width: 100%;
+    padding: 0 16px;
+    z-index: 99;
+    transition: height 0.3s;
 
     display: flex;
     align-items: center;
 
+    strong {
+      display: block;
+      color: #fff;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+
     button {
-      background: transparent;
+      visibility: hidden;
+      background: none;
       border: 0;
       transition: transform 0.2s;
 
       &:hover {
         transform: scale(1.2);
       }
+
+      ${props =>
+        props.playing
+          ? css`
+              .playButton {
+                display: none;
+              }
+
+              .pauseButton {
+                display: block;
+              }
+            `
+          : css`
+              .playButton {
+                display: block;
+              }
+
+              .pauseButton {
+                display: none;
+              }
+            `}
+    }
+  }
+`;
+
+export const RelatedArtists = styled.section`
+  width: 100%;
+  margin-top: 32px;
+  overflow-x: hidden;
+
+  display: flex;
+  flex-direction: column;
+
+  > div {
+    margin-bottom: 24px;
+
+    display: flex;
+    justify-content: space-between;
+
+    h3 {
+      color: #fff;
     }
 
-    ${props =>
-      props.playing
-        ? css`
-            .playButton {
-              display: none;
-            }
+    nav {
+      display: flex;
 
-            .pauseButton {
-              display: block;
-            }
-          `
-        : css`
-            .playButton {
-              display: block;
-            }
+      button {
+        background: none;
+        border: 0;
 
-            .pauseButton {
-              display: none;
-            }
-          `}
+        &:disabled {
+          pointer-events: none;
+        }
 
-    a {
-      margin-left: 16px;
-      transition: transform 0.2s;
+        & + button {
+          margin-left: 32px;
+        }
 
-      &:hover {
-        transform: scale(1.2);
+        svg {
+          color: #7a8185;
+          transition: color 0.2s;
+
+          &:hover {
+            color: #fff;
+          }
+        }
       }
     }
   }
 `;
 
-export const CloseModal = styled.button`
+interface IRelatedArtistsList {
+  slideRelatedArtists: boolean;
+}
+
+export const RelatedArtistsList = styled.ul<IRelatedArtistsList>`
+  max-width: 608px;
+  width: 100%;
+
+  display: flex;
+
+  transform: ${props =>
+    props.slideRelatedArtists
+      ? 'translate3d(calc(-100% - 15px), 0px, 0px)'
+      : 'translate3d(calc(0% - 0px), 0px, 0px)'};
+  transition: transform 1s cubic-bezier(0.19, 1, 0.22, 1);
+`;
+
+export const RelatedArtist = styled(animated.li)`
+  min-width: 192px;
+  height: 256px;
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+
+  & + li {
+    margin-left: 16px;
+  }
+
+  &:hover {
+    img {
+      transform: scale(1.1);
+    }
+
+    div {
+      height: 128px;
+
+      strong {
+        position: absolute;
+        top: 0;
+        margin-top: 16px;
+      }
+
+      button {
+        visibility: visible;
+      }
+    }
+  }
+
+  img {
+    width: 100%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    transition: transform 0.3s;
+  }
+
+  div {
+    position: absolute;
+    bottom: 0;
+
+    background: #272727;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    height: 64px;
+    width: 100%;
+    padding: 0 16px;
+    z-index: 99;
+    transition: height 0.3s;
+
+    display: flex;
+    align-items: center;
+
+    strong {
+      display: block;
+      color: #fff;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+  }
+`;
+
+export const CloseModal = styled.button<IModal>`
   background: transparent;
   border: 0;
   position: absolute;
-  right: -7px;
-  top: -3px;
+  right: 16px;
+  top: 40px;
   margin-right: 4px;
   transition: transform 0.2s;
 
   display: flex;
   justify-content: center;
   align-items: center;
+
+  opacity: ${props => (props.mount ? '1' : '0')};
+  transition: opacity 1s cubic-bezier(0.19, 1, 0.22, 1) 0.8s, transform 0.2s;
 
   &:hover {
     transform: scale(1.2);
