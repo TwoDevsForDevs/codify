@@ -12,15 +12,9 @@ import {
 } from './styles';
 
 const SignIn: React.FC = () => {
-  const [mount, setMount] = useState(false);
-
-  useEffect(() => {
-    setMount(true);
-  }, []);
-
   return (
     <Container>
-      <SignInContainer mount={mount}>
+      <SignInContainer>
         <h1>
           <div className="word-container">
             <span>Descubra</span>
@@ -35,20 +29,24 @@ const SignIn: React.FC = () => {
             <span>escuta.</span>
           </div>
         </h1>
+
         <p>
-          Explore diversas músicas no seu perfil e crie playlists incríveis.
+          Descubra suas músicas mais escutadas e artistas preferidos da sua
+          conta do Spotify.
         </p>
+
         <SpotifyButton href="http://localhost:3333/sessions">
           Continue com o Spotify
         </SpotifyButton>
       </SignInContainer>
 
-      <ArtistImage mount={mount}>
+      <ArtistImage>
         <img src={edSheeran} alt="Ed Sheeran" />
       </ArtistImage>
 
-      <SignUpContainer mount={mount}>
+      <SignUpContainer>
         <span>Não possui uma conta no Spotify?</span>
+
         <a
           href="https://www.spotify.com/br/signup/"
           target="_blank"

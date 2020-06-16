@@ -1,16 +1,14 @@
 import styled from 'styled-components';
 import { animated } from 'react-spring';
 
+import { fadeUp } from '../../styles/animations';
+
 export const Container = styled.div`
   display: flex;
   align-items: flex-start;
 `;
 
-interface IMountProps {
-  mount: boolean;
-}
-
-export const LeftContent = styled.div<IMountProps>`
+export const LeftContent = styled.div`
   position: sticky;
   top: 71px;
   margin-right: 72px;
@@ -24,11 +22,9 @@ export const LeftContent = styled.div<IMountProps>`
     padding: 16px;
     border-radius: 10px;
 
-    opacity: ${props => (props.mount ? '1' : '0')};
-    transform: ${props => (props.mount ? 'translateY(0)' : 'translateY(40px)')};
-    transition: transform 1.5s cubic-bezier(0.19, 1, 0.22, 1),
-      opacity 1s cubic-bezier(0.19, 1, 0.22, 1);
-    transition-delay: 0.1s;
+    opacity: 0;
+    animation: ${fadeUp} 1.5s forwards cubic-bezier(0.19, 1, 0.22, 1);
+    animation-delay: 0.1s;
 
     display: flex;
     justify-content: center;
@@ -41,14 +37,12 @@ export const LeftContent = styled.div<IMountProps>`
     line-height: 1.25;
     margin: 32px 0;
 
+    opacity: 0;
+    animation: ${fadeUp} 1.5s forwards cubic-bezier(0.19, 1, 0.22, 1);
+    animation-delay: 0.3s;
+
     display: flex;
     flex-wrap: wrap;
-
-    opacity: ${props => (props.mount ? '1' : '0')};
-    transform: ${props => (props.mount ? 'translateY(0)' : 'translateY(40px)')};
-    transition: transform 1.5s cubic-bezier(0.19, 1, 0.22, 1),
-      opacity 1s cubic-bezier(0.19, 1, 0.22, 1);
-    transition-delay: 0.3s;
 
     .green {
       color: #33ff7a;
@@ -59,15 +53,13 @@ export const LeftContent = styled.div<IMountProps>`
     font-size: 18px;
     line-height: 2;
 
-    opacity: ${props => (props.mount ? '1' : '0')};
-    transform: ${props => (props.mount ? 'translateY(0)' : 'translateY(40px)')};
-    transition: transform 1.5s cubic-bezier(0.19, 1, 0.22, 1),
-      opacity 1s cubic-bezier(0.19, 1, 0.22, 1);
-    transition-delay: 0.5s;
+    opacity: 0;
+    animation: ${fadeUp} 1.5s forwards cubic-bezier(0.19, 1, 0.22, 1);
+    animation-delay: 0.5s;
   }
 `;
 
-export const UserPlaylists = styled.div<IMountProps>`
+export const UserPlaylists = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 24px;

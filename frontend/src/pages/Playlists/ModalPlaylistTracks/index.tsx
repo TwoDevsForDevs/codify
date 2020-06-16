@@ -67,7 +67,6 @@ const ModalPlaylistTracks: React.FC<IModalProps> = ({
   const [loading, setLoading] = useState(true);
   const [tracks, setTracks] = useState<ITrack[]>([]);
   const [playlist, setPlaylist] = useState<IPlaylist>({} as IPlaylist);
-  const [mount, setMount] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
 
   useEffect(() => {
@@ -95,10 +94,6 @@ const ModalPlaylistTracks: React.FC<IModalProps> = ({
 
         setPlaylist(playlistData);
         setTracks(tracksData);
-
-        setTimeout(() => {
-          setMount(1);
-        }, 100);
       } catch (err) {
         toast.error('Não foi possível carregar as músicas da playlist.');
       } finally {
@@ -146,13 +141,13 @@ const ModalPlaylistTracks: React.FC<IModalProps> = ({
     [tracks],
   );
 
-  const handlePage = useCallback(page => {
-    if (page === 0) {
-      setCurrentPage(0);
-    } else {
-      setCurrentPage(page + 50);
-    }
-  }, []);
+  // const handlePage = useCallback(page => {
+  //   if (page === 0) {
+  //     setCurrentPage(0);
+  //   } else {
+  //     setCurrentPage(page + 50);
+  //   }
+  // }, []);
 
   return (
     <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
@@ -162,7 +157,7 @@ const ModalPlaylistTracks: React.FC<IModalProps> = ({
         ) : (
           <>
             <Scroll>
-              <LeftContent mount={mount}>
+              <LeftContent>
                 <div>
                   <img src={playlist.avatar} alt={playlist.name} />
                 </div>
@@ -172,10 +167,10 @@ const ModalPlaylistTracks: React.FC<IModalProps> = ({
                 </SpotifyButton>
               </LeftContent>
 
-              <Content mount={mount}>
+              <Content>
                 <h1>{playlist.name}</h1>
 
-                <PlaylistInfo mount={mount}>
+                <PlaylistInfo>
                   <aside>
                     <div>
                       <FaUsers size={18} color="#33ff7a" />
@@ -187,7 +182,7 @@ const ModalPlaylistTracks: React.FC<IModalProps> = ({
                     </div>
                   </aside>
 
-                  <nav>
+                  {/* <nav>
                     <button
                       type="button"
                       onClick={() => handlePage(currentPage - 1)}
@@ -200,7 +195,7 @@ const ModalPlaylistTracks: React.FC<IModalProps> = ({
                     >
                       <FaChevronRight />
                     </button>
-                  </nav>
+                  </nav> */}
                 </PlaylistInfo>
 
                 <TracksList>
@@ -209,7 +204,6 @@ const ModalPlaylistTracks: React.FC<IModalProps> = ({
                       key={key}
                       style={props}
                       playing={item.playing ? 1 : 0}
-                      mount={mount ? 1 : 0}
                       onMouseLeave={() => {
                         pauseAudioWithFade(item.audio, 100);
                         handlePause(item.id);
@@ -258,7 +252,7 @@ const ModalPlaylistTracks: React.FC<IModalProps> = ({
               </Content>
             </Scroll>
 
-            <CloseModal type="button" onClick={setIsOpen} mount={mount}>
+            <CloseModal type="button" onClick={setIsOpen}>
               <FaTimes size={28} color="#f7415f" />
             </CloseModal>
           </>

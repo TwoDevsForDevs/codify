@@ -1,5 +1,38 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { lighten } from 'polished';
+
+import { fadeUp } from '../../styles/animations';
+
+const wordUp = keyframes`
+  from {
+    transform: translateY(110%);
+  }
+  to {
+    transform: translateY(0);
+  }
+`;
+
+const fadeScaleUp = keyframes`
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+`;
+
+const fadeLeft = keyframes`
+  from {
+    transform: translateX(80px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0px);
+    opacity: 1;
+  }
+`;
 
 export const Container = styled.div`
   padding: 32px;
@@ -11,11 +44,7 @@ export const Container = styled.div`
   justify-content: center;
 `;
 
-interface IMountProps {
-  mount: boolean;
-}
-
-export const SignInContainer = styled.div<IMountProps>`
+export const SignInContainer = styled.div`
   width: 500px;
   margin-right: 120px;
 
@@ -39,9 +68,8 @@ export const SignInContainer = styled.div<IMountProps>`
       span {
         display: inline-block;
 
-        transform: ${props =>
-          props.mount ? 'translateY(0)' : 'translateY(110%)'};
-        transition: transform 0.8s cubic-bezier(0.075, 0.82, 0.165, 1);
+        transform: translateY(110%);
+        animation: ${wordUp} 0.8s forwards cubic-bezier(0.075, 0.82, 0.165, 1);
       }
     }
 
@@ -49,7 +77,7 @@ export const SignInContainer = styled.div<IMountProps>`
       left: 0px;
 
       span {
-        transition-delay: 0.2s;
+        animation-delay: 0.2s;
       }
     }
 
@@ -58,7 +86,7 @@ export const SignInContainer = styled.div<IMountProps>`
       left: 0px;
 
       span {
-        transition-delay: 0.3s;
+        animation-delay: 0.3s;
       }
     }
 
@@ -67,7 +95,7 @@ export const SignInContainer = styled.div<IMountProps>`
       left: 230.375px;
 
       span {
-        transition-delay: 0.4s;
+        animation-delay: 0.4s;
       }
     }
 
@@ -76,7 +104,7 @@ export const SignInContainer = styled.div<IMountProps>`
       left: 0px;
 
       span {
-        transition-delay: 0.5s;
+        animation-delay: 0.5s;
       }
     }
 
@@ -90,42 +118,37 @@ export const SignInContainer = styled.div<IMountProps>`
     font-size: 20px;
     line-height: 2;
 
-    opacity: ${props => (props.mount ? '1' : '0')};
-    transform: ${props => (props.mount ? 'translateY(0)' : 'translateY(40px)')};
-    transition: transform 1.5s cubic-bezier(0.19, 1, 0.22, 1),
-      opacity 1s cubic-bezier(0.19, 1, 0.22, 1);
-    transition-delay: 0.8s;
+    opacity: 0;
+    animation: ${fadeUp} 1.5s forwards cubic-bezier(0.19, 1, 0.22, 1);
+    animation-delay: 0.8s;
   }
 
   a {
-    opacity: ${props => (props.mount ? '1' : '0')};
-    transform: ${props => (props.mount ? 'translateY(0)' : 'translateY(40px)')};
+    opacity: 0;
+    animation: ${fadeUp} 1.5s forwards cubic-bezier(0.19, 1, 0.22, 1);
+    animation-delay: 1s;
   }
 `;
 
-export const ArtistImage = styled.div<IMountProps>`
-  opacity: ${props => (props.mount ? '1' : '0')};
-  transform: ${props => (props.mount ? 'scale(1)' : 'scale(0.8)')};
-  transition: transform 1.5s cubic-bezier(0.19, 1, 0.22, 1) 1s,
-    opacity 1s cubic-bezier(0.19, 1, 0.22, 1);
-  transition-delay: 0.8s;
+export const ArtistImage = styled.div`
+  opacity: 0;
+  animation: ${fadeScaleUp} 1.5s forwards cubic-bezier(0.19, 1, 0.22, 1);
+  animation-delay: 0.8s;
 
   img {
     width: 600px;
   }
 `;
 
-export const SignUpContainer = styled.div<IMountProps>`
+export const SignUpContainer = styled.div`
   position: absolute;
   bottom: 24px;
   left: 24px;
   font-size: 16px;
 
-  opacity: ${props => (props.mount ? '1' : '0')};
-  transform: ${props => (props.mount ? 'translateX(0)' : 'translateX(80px)')};
-  transition: transform 1.5s cubic-bezier(0.19, 1, 0.22, 1),
-    opacity 1s cubic-bezier(0.19, 1, 0.22, 1);
-  transition-delay: 1s;
+  opacity: 0;
+  animation: ${fadeLeft} 1.5s forwards cubic-bezier(0.19, 1, 0.22, 1);
+  animation-delay: 1s;
 
   display: flex;
   flex-direction: column;

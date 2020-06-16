@@ -45,7 +45,6 @@ interface ITrack {
 
 const FavoriteTracks: React.FC = () => {
   const [loading, setLoading] = useState(false);
-  const [mount, setMount] = useState(false);
   const [favoriteTracks, setFavoriteTracks] = useState<ITrack[]>([]);
 
   useEffect(() => {
@@ -63,10 +62,6 @@ const FavoriteTracks: React.FC = () => {
         }));
 
         setFavoriteTracks(tracksData);
-
-        setTimeout(() => {
-          setMount(true);
-        }, 100);
       } catch (err) {
         toast.error('Não foi possível carregar suas músicas favoritas.');
       } finally {
@@ -120,7 +115,7 @@ const FavoriteTracks: React.FC = () => {
         <Spinner />
       ) : (
         <>
-          <LeftContent mount={mount}>
+          <LeftContent>
             <div>
               <FaHeart size={32} color="#fff" />
             </div>

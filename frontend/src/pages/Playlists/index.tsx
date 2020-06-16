@@ -19,7 +19,6 @@ interface IPlaylists {
 
 const Playlists: React.FC = () => {
   const [playlists, setPlaylist] = useState<IPlaylists[]>([]);
-  const [mount, setMount] = useState(false);
   const [toggleModal, setToggleModal] = useState(false);
   const [playlistId, setPlaylistId] = useState('');
   const [loading, setLoading] = useState(false);
@@ -36,10 +35,6 @@ const Playlists: React.FC = () => {
         const response = await api.get('/me/playlists');
 
         setPlaylist(response.data);
-
-        setTimeout(() => {
-          setMount(true);
-        }, 100);
       } catch (err) {
         toast.error('Não foi possível carregar as playlists.');
       } finally {
@@ -62,7 +57,7 @@ const Playlists: React.FC = () => {
         opacity: 1,
         transform: 'scale(1)',
       },
-      trail: 100,
+      trail: 125,
     },
   );
 
@@ -80,7 +75,7 @@ const Playlists: React.FC = () => {
             />
           )}
 
-          <LeftContent mount={mount}>
+          <LeftContent>
             <div>
               <FaHeadphones size={32} color="#fff" />
             </div>
@@ -93,7 +88,7 @@ const Playlists: React.FC = () => {
             </p>
           </LeftContent>
 
-          <UserPlaylists mount={mount}>
+          <UserPlaylists>
             {playlistsWithTransition.map(({ item, key, props }, index) => (
               <Playlist
                 key={key}

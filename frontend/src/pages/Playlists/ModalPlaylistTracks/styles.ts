@@ -1,15 +1,18 @@
 import styled, { css } from 'styled-components';
 import { animated } from 'react-spring';
 
+import {
+  fade,
+  fadeUp,
+  fadeScaleDown,
+  scaleDown,
+} from '../../../styles/animations';
+
 export const Container = styled.div`
   display: flex;
 `;
 
-interface IModal {
-  mount: number;
-}
-
-export const LeftContent = styled.aside<IModal>`
+export const LeftContent = styled.aside`
   padding-bottom: 56px;
   margin-right: 104px;
 
@@ -27,34 +30,22 @@ export const LeftContent = styled.aside<IModal>`
       width: 100%;
       height: 100%;
 
-      opacity: ${props => (props.mount ? '1' : '0')};
-      clip-path: ${props =>
-        props.mount
-          ? 'inset(0px 0px 0px 0px round 10px)'
-          : 'inset(0px 100% 100% 0px round 10px)'};
-      transform: ${props =>
-        props.mount ? 'scale3d(1, 1, 1)' : 'scale3d(2.2, 2.2, 2.2)'};
-      transition: opacity 1s cubic-bezier(0.19, 1, 0.22, 1),
-        clip-path 1s cubic-bezier(0.19, 1, 0.22, 1),
-        transform 1.5s cubic-bezier(0.2, 0.6, 0.35, 1);
-      transition-delay: 0.1s;
+      opacity: 0;
+      animation: ${fadeScaleDown} 1.3s forwards cubic-bezier(0.19, 0.8, 0.28, 1);
+      animation-delay: 0.1s;
     }
   }
 
   a {
     width: 100%;
 
-    opacity: ${props => (props.mount ? '1' : '0')};
-    transform: ${props => (props.mount ? 'translateY(0)' : 'translateY(40px)')};
-    transition: opacity 1s cubic-bezier(0.19, 1, 0.22, 1),
-      transform 1.5s cubic-bezier(0.19, 1, 0.22, 1);
-    transition-delay: 0.4s;
-
-    justify-content: center;
+    opacity: 0;
+    animation: ${fadeUp} 1.5s forwards cubic-bezier(0.19, 0.8, 0.28, 1);
+    animation-delay: 0.4s;
   }
 `;
 
-export const Content = styled.div<IModal>`
+export const Content = styled.div`
   width: 100%;
 
   display: flex;
@@ -65,27 +56,22 @@ export const Content = styled.div<IModal>`
     line-height: 1.14;
     color: #fff;
 
-    opacity: ${props => (props.mount ? '1' : '0')};
-    transform: ${props =>
-      props.mount ? 'translateY(0px)' : 'translateY(40px)'};
-    transition: opacity 1s cubic-bezier(0.19, 1, 0.22, 1),
-      transform 1.5s cubic-bezier(0.19, 1, 0.22, 1);
-    transition-delay: 0.6s;
+    opacity: 0;
+    animation: ${fadeUp} 1.5s forwards cubic-bezier(0.19, 1, 0.22, 1);
+    animation-delay: 0.6s;
   }
 `;
 
-export const PlaylistInfo = styled.section<IModal>`
+export const PlaylistInfo = styled.section`
   margin: 24px 0;
 
   display: flex;
   align-items: center;
   justify-content: space-between;
 
-  opacity: ${props => (props.mount ? '1' : '0')};
-  transform: ${props => (props.mount ? 'translateY(0)' : 'translateY(40px)')};
-  transition: opacity 1s cubic-bezier(0.19, 1, 0.22, 1),
-    transform 1.5s cubic-bezier(0.19, 1, 0.22, 1);
-  transition-delay: 0.8s;
+  opacity: 0;
+  animation: ${fadeUp} 1.5s forwards cubic-bezier(0.19, 1, 0.22, 1);
+  animation-delay: 0.8s;
 
   aside {
     display: flex;
@@ -149,7 +135,6 @@ export const TracksList = styled.section`
 
 interface IIsPlaying {
   playing: number;
-  mount: number;
 }
 
 export const Track = styled(animated.div)<IIsPlaying>`
@@ -180,9 +165,8 @@ export const Track = styled(animated.div)<IIsPlaying>`
       width: 100%;
       height: 100%;
 
-      transform: ${props => (props.mount ? 'scaleX(1)' : 'scale3d(3,3,3)')};
-      transition: transform 1.5s cubic-bezier(0.2, 0.6, 0.35, 1);
-      transition-delay: 0.8s;
+      animation: ${scaleDown} 1.3s forwards cubic-bezier(0.2, 0.6, 0.35, 1);
+      animation-delay: 0.8s;
     }
   }
 
@@ -253,7 +237,7 @@ export const Track = styled(animated.div)<IIsPlaying>`
   }
 `;
 
-export const CloseModal = styled.button<IModal>`
+export const CloseModal = styled.button`
   background: transparent;
   border: 0;
   position: absolute;
@@ -266,8 +250,9 @@ export const CloseModal = styled.button<IModal>`
   justify-content: center;
   align-items: center;
 
-  opacity: ${props => (props.mount ? '1' : '0')};
-  transition: opacity 1s cubic-bezier(0.19, 1, 0.22, 1) 0.8s, transform 0.2s;
+  opacity: 0;
+  animation: ${fade} 1s forwards cubic-bezier(0.19, 1, 0.22, 1);
+  animation-delay: 0.8s;
 
   &:hover {
     transform: scale(1.2);

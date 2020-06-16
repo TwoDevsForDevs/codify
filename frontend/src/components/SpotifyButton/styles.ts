@@ -8,12 +8,11 @@ export const Container = styled.a`
   font-weight: bold;
   padding: 32px 48px;
   border-radius: 10px;
-
-  transition: transform 1.5s cubic-bezier(0.19, 1, 0.22, 1) 1s,
-    opacity 1s cubic-bezier(0.19, 1, 0.22, 1) 1s, background 0.2s;
+  transition: background 0.2s;
 
   display: flex;
   align-items: center;
+  justify-content: center;
 
   &:hover {
     background: ${lighten(0.03, '#1db954')};

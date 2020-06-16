@@ -50,7 +50,6 @@ const Artists: React.FC = () => {
   const [firstTopArtist, setFirstTopArtist] = useState<ITopArtists>(
     {} as ITopArtists,
   );
-  const [mount, setMount] = useState(false);
   const [loading, setLoading] = useState(false);
   const [toggleModal, setToggleModal] = useState(false);
   const [artistId, setArtistId] = useState('');
@@ -72,10 +71,6 @@ const Artists: React.FC = () => {
         setTopArtists(data);
         setFirstTopArtist(data[0]);
         setLoading(false);
-
-        setTimeout(() => {
-          setMount(true);
-        }, 100);
       } catch (err) {
         toast.error('Não foi possível carregar os artistas.');
       } finally {
@@ -102,6 +97,7 @@ const Artists: React.FC = () => {
         opacity: 1,
         transform: 'scale(1)',
       },
+      trail: 125,
     },
   );
 
@@ -119,7 +115,7 @@ const Artists: React.FC = () => {
             />
           )}
 
-          <LeftContent mount={mount}>
+          <LeftContent>
             <div>
               <GiMicrophone size={32} color="#fff" />
             </div>
@@ -133,7 +129,7 @@ const Artists: React.FC = () => {
             </p>
           </LeftContent>
 
-          <TopArtists mount={mount}>
+          <TopArtists>
             {artistsWithTransition.map(({ item, key, props }, index) => (
               <Artist
                 key={key}

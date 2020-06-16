@@ -1,38 +1,7 @@
-import styled, { css, keyframes } from 'styled-components';
+import styled, { css } from 'styled-components';
 import { animated } from 'react-spring';
 
-const fade = keyframes`
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-`;
-
-const fadeUp = keyframes`
-  from {
-    transform: translateY(40px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0px);
-    opacity: 1;
-  }
-`;
-
-const fadeScaleDown = keyframes`
-  from {
-    clip-path: inset(0px 100% 100% 0px round 10px);
-    transform: scale3d(2.2, 2.2, 2.2);
-    opacity: 0;
-  }
-  to {
-    clip-path: inset(0px 0px 0px 0px round 10px);
-    transform: scale3d(1, 1, 1);
-    opacity: 1;
-  }
-`;
+import { fade, fadeUp, fadeScaleDown } from '../../../styles/animations';
 
 export const Container = styled.div`
   display: flex;
