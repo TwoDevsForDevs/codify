@@ -91,6 +91,7 @@ interface IFavoriteTrackAlbum {
   id: string;
   name: string;
   uri: string;
+  images: IImages[];
 }
 
 interface IFavoriteTrackArtists {
@@ -129,6 +130,7 @@ userRouter.get('/favorite-tracks', async (req, res) => {
       id: track.album.id,
       name: track.album.name,
       uri: track.album.uri,
+      image: track.album.images[0].url,
     },
     artist: {
       id: track.artists[0].id,
