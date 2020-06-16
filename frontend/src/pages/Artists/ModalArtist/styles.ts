@@ -1,15 +1,44 @@
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import { animated } from 'react-spring';
+
+const fade = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`;
+
+const fadeUp = keyframes`
+  from {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+`;
+
+const fadeScaleDown = keyframes`
+  from {
+    clip-path: inset(0px 100% 100% 0px round 10px);
+    transform: scale3d(2.2, 2.2, 2.2);
+    opacity: 0;
+  }
+  to {
+    clip-path: inset(0px 0px 0px 0px round 10px);
+    transform: scale3d(1, 1, 1);
+    opacity: 1;
+  }
+`;
 
 export const Container = styled.div`
   display: flex;
 `;
 
-interface IModal {
-  mount: number;
-}
-
-export const LeftContent = styled.aside<IModal>`
+export const LeftContent = styled.aside`
   padding-bottom: 56px;
   margin-right: 104px;
 
@@ -26,35 +55,26 @@ export const LeftContent = styled.aside<IModal>`
     img {
       width: 100%;
       height: 100%;
+      border-radius: 10px;
 
-      opacity: ${props => (props.mount ? '1' : '0')};
-      clip-path: ${props =>
-        props.mount
-          ? 'inset(0px 0px 0px 0px round 10px)'
-          : 'inset(0px 100% 100% 0px round 10px)'};
-      transform: ${props =>
-        props.mount ? 'scale3d(1, 1, 1)' : 'scale3d(2.2, 2.2, 2.2)'};
-      transition: opacity 1s cubic-bezier(0.19, 1, 0.22, 1),
-        clip-path 1s cubic-bezier(0.19, 1, 0.22, 1),
-        transform 1.5s cubic-bezier(0.2, 0.6, 0.35, 1);
-      transition-delay: 0.1s;
+      opacity: 0;
+      animation: ${fadeScaleDown} 1.3s forwards cubic-bezier(0.19, 0.8, 0.28, 1);
+      animation-delay: 0.1s;
     }
   }
 
   a {
     width: 100%;
 
-    opacity: ${props => (props.mount ? '1' : '0')};
-    transform: ${props => (props.mount ? 'translateY(0)' : 'translateY(40px)')};
-    transition: opacity 1s cubic-bezier(0.19, 1, 0.22, 1),
-      transform 1.5s cubic-bezier(0.19, 1, 0.22, 1);
-    transition-delay: 0.4s;
+    opacity: 0;
+    animation: ${fadeUp} 1.5s forwards cubic-bezier(0.19, 1, 0.22, 1);
+    animation-delay: 0.4s;
 
     justify-content: center;
   }
 `;
 
-export const Content = styled.div<IModal>`
+export const Content = styled.div`
   width: 100%;
   padding-bottom: 32px;
 
@@ -66,16 +86,13 @@ export const Content = styled.div<IModal>`
     line-height: 1.14;
     color: #fff;
 
-    opacity: ${props => (props.mount ? '1' : '0')};
-    transform: ${props =>
-      props.mount ? 'translateY(0px)' : 'translateY(40px)'};
-    transition: opacity 1s cubic-bezier(0.19, 1, 0.22, 1),
-      transform 1.5s cubic-bezier(0.19, 1, 0.22, 1);
-    transition-delay: 0.6s;
+    opacity: 0;
+    animation: ${fadeUp} 1.5s forwards cubic-bezier(0.19, 1, 0.22, 1);
+    animation-delay: 0.7s;
   }
 `;
 
-export const Genres = styled.div<IModal>`
+export const Genres = styled.div`
   margin: 24px 0;
 
   display: flex;
@@ -89,12 +106,9 @@ export const Genres = styled.div<IModal>`
     border-radius: 24px;
     font-size: 14px;
 
-    opacity: ${props => (props.mount ? '1' : '0')};
-    transform: ${props =>
-      props.mount ? 'translateY(0px)' : 'translateY(40px)'};
-    transition: opacity 1s cubic-bezier(0.19, 1, 0.22, 1),
-      transform 1.5s cubic-bezier(0.19, 1, 0.22, 1);
-    transition-delay: 0.8s;
+    opacity: 0;
+    animation: ${fadeUp} 1.5s forwards cubic-bezier(0.19, 1, 0.22, 1);
+    animation-delay: 0.9s;
 
     & + span {
       margin-left: 16px;
@@ -102,7 +116,7 @@ export const Genres = styled.div<IModal>`
   }
 `;
 
-export const ArtistInfo = styled.section<IModal>`
+export const ArtistInfo = styled.section`
   width: 100%;
 
   display: flex;
@@ -113,21 +127,18 @@ export const ArtistInfo = styled.section<IModal>`
     border-radius: 10px;
     width: 100%;
 
+    opacity: 0;
+    animation: ${fadeUp} 1.5s forwards cubic-bezier(0.19, 1, 0.22, 1);
+
     display: flex;
     align-items: center;
 
-    opacity: ${props => (props.mount ? '1' : '0')};
-    transform: ${props =>
-      props.mount ? 'translateY(0px)' : 'translateY(40px)'};
-    transition: opacity 1s cubic-bezier(0.19, 1, 0.22, 1),
-      transform 1.5s cubic-bezier(0.19, 1, 0.22, 1);
-
     &:nth-child(1) {
-      transition-delay: 1s;
+      animation-delay: 1.1s;
     }
 
     &:nth-child(2) {
-      transition-delay: 1.1s;
+      animation-delay: 1.2s;
     }
 
     div[role='button'] {
@@ -158,7 +169,7 @@ export const ArtistInfo = styled.section<IModal>`
   }
 `;
 
-export const ArtistTopTracks = styled.section<IModal>`
+export const ArtistTopTracks = styled.section`
   width: 100%;
   margin-top: 32px;
   overflow-x: hidden;
@@ -168,6 +179,10 @@ export const ArtistTopTracks = styled.section<IModal>`
 
   > div {
     margin-bottom: 24px;
+
+    opacity: 0;
+    animation: ${fadeUp} 1.5s forwards cubic-bezier(0.19, 1, 0.22, 1);
+    animation-delay: 1.3s;
 
     display: flex;
     justify-content: space-between;
@@ -232,6 +247,10 @@ export const TopTrack = styled(animated.li)<IIsPlaying>`
   border-radius: 10px;
   overflow: hidden;
 
+  transition: transform 1.5s cubic-bezier(0.19, 1, 0.22, 1),
+    opacity 1s cubic-bezier(0.19, 1, 0.22, 1);
+  transition-delay: 0.9s;
+
   display: flex;
   flex-direction: column;
 
@@ -245,7 +264,7 @@ export const TopTrack = styled(animated.li)<IIsPlaying>`
     }
 
     div {
-      height: 128px;
+      height: 96px;
 
       strong {
         position: absolute;
@@ -253,7 +272,8 @@ export const TopTrack = styled(animated.li)<IIsPlaying>`
         margin-top: 16px;
       }
 
-      button {
+      button,
+      a {
         visibility: visible;
       }
     }
@@ -290,16 +310,22 @@ export const TopTrack = styled(animated.li)<IIsPlaying>`
       overflow: hidden;
     }
 
-    button {
-      visibility: hidden;
-      background: none;
-      border: 0;
-      transition: transform 0.2s;
+    footer {
+      margin-top: 32px;
 
-      &:hover {
-        transform: scale(1.2);
+      display: flex;
+      align-items: center;
+
+      button {
+        visibility: hidden;
+        background: none;
+        border: 0;
+        transition: transform 0.2s;
+
+        &:hover {
+          transform: scale(1.2);
+        }
       }
-
       ${props =>
         props.playing
           ? css`
@@ -320,6 +346,16 @@ export const TopTrack = styled(animated.li)<IIsPlaying>`
                 display: none;
               }
             `}
+
+      a {
+        margin-left: 8px;
+        visibility: hidden;
+        transition: transform 0.2s;
+
+        &:hover {
+          transform: scale(1.2);
+        }
+      }
     }
   }
 `;
@@ -334,6 +370,10 @@ export const RelatedArtists = styled.section`
 
   > div {
     margin-bottom: 24px;
+
+    opacity: 0;
+    animation: ${fadeUp} 1.5s forwards cubic-bezier(0.19, 1, 0.22, 1);
+    animation-delay: 1.9s;
 
     display: flex;
     justify-content: space-between;
@@ -394,6 +434,10 @@ export const RelatedArtist = styled(animated.li)`
   border-radius: 10px;
   overflow: hidden;
 
+  transition: transform 1.5s cubic-bezier(0.19, 1, 0.22, 1),
+    opacity 1s cubic-bezier(0.19, 1, 0.22, 1);
+  transition-delay: 1.5s;
+
   display: flex;
   flex-direction: column;
 
@@ -404,20 +448,6 @@ export const RelatedArtist = styled(animated.li)`
   &:hover {
     img {
       transform: scale(1.1);
-    }
-
-    div {
-      height: 128px;
-
-      strong {
-        position: absolute;
-        top: 0;
-        margin-top: 16px;
-      }
-
-      button {
-        visibility: visible;
-      }
     }
   }
 
@@ -454,7 +484,7 @@ export const RelatedArtist = styled(animated.li)`
   }
 `;
 
-export const CloseModal = styled.button<IModal>`
+export const CloseModal = styled.button`
   background: transparent;
   border: 0;
   position: absolute;
@@ -463,12 +493,13 @@ export const CloseModal = styled.button<IModal>`
   margin-right: 4px;
   transition: transform 0.2s;
 
+  opacity: 0;
+  animation: ${fade} 1s forwards cubic-bezier(0.19, 1, 0.22, 1);
+  animation-delay: 0.8s;
+
   display: flex;
   justify-content: center;
   align-items: center;
-
-  opacity: ${props => (props.mount ? '1' : '0')};
-  transition: opacity 1s cubic-bezier(0.19, 1, 0.22, 1) 0.8s, transform 0.2s;
 
   &:hover {
     transform: scale(1.2);

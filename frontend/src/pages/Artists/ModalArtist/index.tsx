@@ -53,7 +53,7 @@ interface ITopTrack {
   id: string;
   image: string;
   name: string;
-  preview: string;
+  preview_url: string;
   audio: HTMLAudioElement;
   uri: string;
   playing: number;
@@ -88,7 +88,6 @@ const ModalArtist: React.FC<IModalProps> = ({
   const [topTracks, setTopTracks] = useState<ITopTrack[]>([]);
   const [relatedArtists, setRelatedArtists] = useState<IRelatedArtist[]>([]);
   const [loading, setLoading] = useState(true);
-  const [mount, setMount] = useState(0);
   const [slideTracks, setSlideTracks] = useState(false);
   const [slideRelatedArtists, setSlideRelatedArtists] = useState(false);
 
@@ -109,16 +108,13 @@ const ModalArtist: React.FC<IModalProps> = ({
           .slice(0, 6)
           .map((track: ITopTrack) => ({
             ...track,
-            audio: new Audio(`${track.preview}`),
+            audio: new Audio(`${track.preview_url}`),
             playing: 0,
           }));
 
         setArtist(artistData);
         setTopTracks(topTracksFormatted);
         setRelatedArtists(data.relatedArtists.slice(0, 6));
-        setTimeout(() => {
-          setMount(1);
-        }, 100);
       } catch (err) {
         toast.error('Não foi possível carregar as informações do artista.');
       } finally {
@@ -168,7 +164,7 @@ const ModalArtist: React.FC<IModalProps> = ({
       opacity: 1,
       transform: 'scale(1)',
     },
-    trail: 100,
+    trail: 150,
   });
 
   const relatedArtistsWithTransition = useTransition(
@@ -183,7 +179,7 @@ const ModalArtist: React.FC<IModalProps> = ({
         opacity: 1,
         transform: 'scale(1)',
       },
-      trail: 100,
+      trail: 150,
     },
   );
 
@@ -195,7 +191,7 @@ const ModalArtist: React.FC<IModalProps> = ({
         ) : (
           <>
             <Scroll>
-              <LeftContent mount={mount}>
+              <LeftContent>
                 <div>
                   <img src={artist.avatar} alt={artist.name} />
                 </div>
@@ -205,15 +201,15 @@ const ModalArtist: React.FC<IModalProps> = ({
                 </SpotifyButton>
               </LeftContent>
 
-              <Content mount={mount}>
+              <Content>
                 <h1>{artist.name}</h1>
-                <Genres mount={mount}>
+                <Genres>
                   {artist.genres.map(genre => (
                     <span key={genre}>{genre}</span>
                   ))}
                 </Genres>
 
-                <ArtistInfo mount={mount}>
+                <ArtistInfo>
                   <div className="popularity">
                     {artist.popularityTag === 'Pouco escutado' && (
                       <PoucoEscutado />
@@ -243,7 +239,7 @@ const ModalArtist: React.FC<IModalProps> = ({
                   </div>
                 </ArtistInfo>
 
-                <ArtistTopTracks mount={mount}>
+                <ArtistTopTracks>
                   <div>
                     <h3>Músicas mais tocadas</h3>
 
@@ -280,26 +276,32 @@ const ModalArtist: React.FC<IModalProps> = ({
                               {index + 1}. {item.name}
                             </strong>
 
-                            <button
-                              type="button"
-                              className="playButton"
-                              onClick={() => {
-                                playAudioWithFade(item.audio, 100);
-                                handlePlay(item.id);
-                              }}
-                            >
-                              <FaPlayCircle size={24} color="#33ff7a" />
-                            </button>
-                            <button
-                              type="button"
-                              className="pauseButton"
-                              onClick={() => {
-                                pauseAudioWithFade(item.audio, 100);
-                                handlePause(item.id);
-                              }}
-                            >
-                              <FaPauseCircle size={24} color="#33ff7a" />
-                            </button>
+                            <footer>
+                              <button
+                                type="button"
+                                className="playButton"
+                                onClick={() => {
+                                  playAudioWithFade(item.audio, 250);
+                                  handlePlay(item.id);
+                                }}
+                              >
+                                <FaPlayCircle size={24} color="#33ff7a" />
+                              </button>
+                              <button
+                                type="button"
+                                className="pauseButton"
+                                onClick={() => {
+                                  pauseAudioWithFade(item.audio, 250);
+                                  handlePause(item.id);
+                                }}
+                              >
+                                <FaPauseCircle size={24} color="#33ff7a" />
+                              </button>
+
+                              <a href={item.uri}>
+                                <FaSpotify size={24} color="#fff" />
+                              </a>
+                            </footer>
                           </div>
                         </TopTrack>
                       ),
@@ -348,7 +350,7 @@ const ModalArtist: React.FC<IModalProps> = ({
               </Content>
             </Scroll>
 
-            <CloseModal type="button" onClick={setIsOpen} mount={mount}>
+            <CloseModal type="button" onClick={setIsOpen}>
               <FaTimes size={28} color="#f7415f" />
             </CloseModal>
           </>

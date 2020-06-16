@@ -88,7 +88,9 @@ const Playlists: React.FC = () => {
               Visualize Suas
               <span className="green">Playlists</span>
             </h1>
-            <p>Quando você é o DJ da festa, essas são suas preferidas!</p>
+            <p>
+              Quando você é o DJ da festa, essas são sempre as mais tocadas!
+            </p>
           </LeftContent>
 
           <UserPlaylists mount={mount}>

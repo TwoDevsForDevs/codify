@@ -58,9 +58,9 @@ export default createGlobalStyle`
   }
 
   /* Toastify */
-  .foo {
+  .Toastify__toast {
     border-radius: 4px;
-    padding: 10px 20px;
+    padding: 10px 16px;
     font-size: 16px;
   }
 `;

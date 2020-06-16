@@ -8,6 +8,7 @@ import Authenticate from '../pages/Authenticate';
 
 import Artists from '../pages/Artists';
 import Playlists from '../pages/Playlists';
+import FavoriteTracks from '../pages/FavoriteTracks';
 import Error from '../pages/Error';
 
 const Routes: React.FC = () => {
@@ -18,6 +19,7 @@ const Routes: React.FC = () => {
 
       <Route path="/top-artists" component={Artists} isPrivate />
       <Route path="/playlists" component={Playlists} isPrivate />
+      <Route path="/favorite-tracks" component={FavoriteTracks} isPrivate />
 
       <Route path="/error" component={Error} />
     </Switch>

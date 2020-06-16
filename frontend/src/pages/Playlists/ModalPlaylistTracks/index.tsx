@@ -4,7 +4,7 @@ import {
   FaPauseCircle,
   FaSpotify,
   FaTimes,
-  FaCompactDisc,
+  FaRecordVinyl,
   FaUsers,
   FaChevronLeft,
   FaChevronRight,
@@ -182,7 +182,7 @@ const ModalPlaylistTracks: React.FC<IModalProps> = ({
                       <strong>{playlist.formattedFollowers} </strong>Seguidores
                     </div>
                     <div>
-                      <FaCompactDisc size={18} color="#33ff7a" />
+                      <FaRecordVinyl size={18} color="#33ff7a" />
                       <strong>{playlist.totalTracks} </strong>Músicas
                     </div>
                   </aside>
