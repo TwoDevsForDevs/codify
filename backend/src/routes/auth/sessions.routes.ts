@@ -22,6 +22,7 @@ sessionsRouter.get('/', (req, res) => {
       scope,
       redirect_uri: redirectURI,
       state,
+      // show_dialog: true,
     })}`,
   );
 });

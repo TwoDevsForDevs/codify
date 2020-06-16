@@ -87,21 +87,71 @@ userRouter.get('/playlists', async (req, res) => {
   return res.json(formattedPlaylists);
 });
 
-// userRouter.get("/recently-played", async (req, res) => {
-//   const response = await api.get("/me/player/recently-played");
+interface IFavoriteTrackAlbum {
+  id: string;
+  name: string;
+  uri: string;
+}
 
-//   console.log(response.data);
-//   // const { id, type, display_name, email, images } = response.data;
+interface IFavoriteTrackArtists {
+  id: string;
+  name: string;
+  uri: string;
+  image: string;
+}
 
-//   // const user = {
-//   //   id,
-//   //   type,
-//   //   display_name,
-//   //   email,
-//   //   avatar: images[0].url,
-//   // };
+interface IFavoriteTrack {
+  id: string;
+  name: string;
+  popularity: number;
+  preview_url: string;
+  uri: string;
+  album: IFavoriteTrackAlbum;
+  artists: IFavoriteTrackArtists[];
+}
 
-//   return res.json(response.data);
-// });
+userRouter.get('/favorite-tracks', async (req, res) => {
+  const response = await api.get('/me/top/tracks', {
+    params: {
+      limit: 10,
+    },
+  });
+
+  const favoriteTracks: IFavoriteTrack[] = response.data.items;
+
+  const formattedFavoriteTracks = favoriteTracks.map(track => ({
+    id: track.id,
+    name: track.name,
+    popularity: track.popularity,
+    preview_url: track.preview_url,
+    uri: track.uri,
+    album: {
+      id: track.album.id,
+      name: track.album.name,
+      uri: track.album.uri,
+    },
+    artist: {
+      id: track.artists[0].id,
+      name: track.artists[0].name,
+      uri: track.artists[0].uri,
+    },
+  }));
+
+  await Promise.all(
+    formattedFavoriteTracks.map(async formattedTrack => {
+      const artistImageResponse = await api.get(
+        `/artists/${formattedTrack.artist.id}`,
+      );
+
+      const { images } = artistImageResponse.data;
+
+      Object.assign(formattedTrack.artist, {
+        image: images[0].url,
+      });
+    }),
+  );
+
+  return res.json(formattedFavoriteTracks);
+});
 
 export default userRouter;
