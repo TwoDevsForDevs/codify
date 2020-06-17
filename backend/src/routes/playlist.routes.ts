@@ -73,12 +73,12 @@ playlistRouter.get('/tracks/:id', async (req, res) => {
   const tracks: ITracks[] = response.data.items;
 
   const formattedTracks = tracks.map(item => ({
-    id: item.track.id,
-    name: item.track.name,
-    preview: item.track.preview_url,
-    uri: item.track.uri,
-    artistName: item.track.artists[0].name,
-    albumImage: item.track.album.images[0].url,
+    id: item?.track.id,
+    name: item?.track.name,
+    preview: item?.track.preview_url,
+    uri: item?.track.uri,
+    artistName: item?.track.artists[0].name,
+    albumImage: item?.track.album.images[0].url,
   }));
 
   return res.json(formattedTracks);

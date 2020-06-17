@@ -98,7 +98,7 @@ interface IFavoriteTrackArtists {
   id: string;
   name: string;
   uri: string;
-  image: string;
+  image?: string;
 }
 
 interface IFavoriteTrack {
@@ -147,9 +147,11 @@ userRouter.get('/favorite-tracks', async (req, res) => {
 
       const { images } = artistImageResponse.data;
 
-      Object.assign(formattedTrack.artist, {
-        image: images[0].url,
-      });
+      if (images.url) {
+        Object.assign(formattedTrack.artist, {
+          image: images[0].url,
+        });
+      }
     }),
   );
 
