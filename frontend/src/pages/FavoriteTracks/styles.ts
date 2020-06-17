@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { animated } from 'react-spring';
 
 import { fadeUp } from '../../styles/animations';
@@ -64,7 +64,11 @@ export const UserFavoriteTracks = styled.div`
   flex-direction: column;
 `;
 
-export const Track = styled(animated.div)`
+interface IIsPlaying {
+  playing: number;
+}
+
+export const Track = styled(animated.div)<IIsPlaying>`
   background: #252527;
   padding: 0 24px;
   border-radius: 10px;
@@ -73,6 +77,10 @@ export const Track = styled(animated.div)`
 
   display: flex;
   align-items: center;
+
+  transition: transform 1.5s cubic-bezier(0.19, 1, 0.22, 1),
+    opacity 1s cubic-bezier(0.19, 1, 0.22, 1);
+  transition-delay: 0.05s;
 
   & + div {
     margin-top: 16px;
@@ -125,6 +133,27 @@ export const Track = styled(animated.div)`
         transform: scale(1.2);
       }
     }
+
+    ${props =>
+      props.playing
+        ? css`
+            .playButton {
+              display: none;
+            }
+
+            .pauseButton {
+              display: block;
+            }
+          `
+        : css`
+            .playButton {
+              display: block;
+            }
+
+            .pauseButton {
+              display: none;
+            }
+          `}
 
     a {
       margin-left: 16px;

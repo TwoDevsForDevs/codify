@@ -26,6 +26,7 @@ const Scroll = styled(PerfectScrollbar)`
     background: rgba(255, 255, 255, 0.1);
     border-radius: 5px;
 
+    opacity: 1 !important;
     animation: ${scrollHeightAnimation} 1s forwards
       cubic-bezier(0.19, 1, 0.22, 1);
     animation-delay: 2s;

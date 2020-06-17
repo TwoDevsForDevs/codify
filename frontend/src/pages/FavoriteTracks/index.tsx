@@ -100,12 +100,13 @@ const FavoriteTracks: React.FC = () => {
     {
       from: {
         opacity: 0,
-        transform: 'scale(0.8)',
+        transform: 'translateY(80px)',
       },
       enter: {
         opacity: 1,
-        transform: 'scale(1)',
+        transform: 'translateY(0px)',
       },
+      trail: 150,
     },
   );
 
@@ -131,6 +132,7 @@ const FavoriteTracks: React.FC = () => {
               <Track
                 key={key}
                 style={props}
+                playing={item.playing ? 1 : 0}
                 onMouseLeave={() => {
                   pauseAudioWithFade(item.audio, 100);
                   handlePause(item.id);

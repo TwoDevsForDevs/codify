@@ -67,6 +67,7 @@ export const SignInContainer = styled.div`
 
       span {
         display: inline-block;
+        overflow: hidden;
 
         transform: translateY(110%);
         animation: ${wordUp} 0.8s forwards cubic-bezier(0.075, 0.82, 0.165, 1);

@@ -3,15 +3,16 @@ import styled from 'styled-components';
 export const Container = styled.header`
   width: 100%;
   min-height: 80px;
-  padding: 0 32px;
   margin-bottom: 80px;
 
   display: flex;
 `;
 
 export const Content = styled.div`
+  max-width: 1366px;
   width: 100%;
   margin: 0 auto;
+  padding: 0 32px;
 
   display: flex;
   justify-content: space-between;
