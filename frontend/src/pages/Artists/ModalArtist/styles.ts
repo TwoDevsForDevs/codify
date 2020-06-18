@@ -68,7 +68,7 @@ export const Genres = styled.div`
   align-items: center;
 
   span {
-    background: #2c2f30;
+    background: #424548;
     color: #fff;
     font-weight: 500;
     padding: 8px 16px;
@@ -218,7 +218,7 @@ export const TopTrack = styled(animated.li)<IIsPlaying>`
 
   transition: transform 1.5s cubic-bezier(0.19, 1, 0.22, 1),
     opacity 1s cubic-bezier(0.19, 1, 0.22, 1);
-  transition-delay: 0.9s;
+  transition-delay: 0.8s;
 
   display: flex;
   flex-direction: column;
@@ -233,17 +233,21 @@ export const TopTrack = styled(animated.li)<IIsPlaying>`
     }
 
     div {
-      height: 96px;
+      height: 108px;
 
       strong {
         position: absolute;
         top: 0;
+
         margin-top: 16px;
+        height: 40px;
+        white-space: normal;
       }
 
       button,
       a {
         visibility: visible;
+        opacity: 1;
       }
     }
   }
@@ -280,7 +284,7 @@ export const TopTrack = styled(animated.li)<IIsPlaying>`
     }
 
     footer {
-      margin-top: 32px;
+      margin-top: 48px;
 
       display: flex;
       align-items: center;
@@ -295,6 +299,7 @@ export const TopTrack = styled(animated.li)<IIsPlaying>`
           transform: scale(1.2);
         }
       }
+
       ${props =>
         props.playing
           ? css`
@@ -318,6 +323,7 @@ export const TopTrack = styled(animated.li)<IIsPlaying>`
 
       a {
         margin-left: 8px;
+        opacity: 0;
         visibility: hidden;
         transition: transform 0.2s;
 
@@ -342,7 +348,7 @@ export const RelatedArtists = styled.section`
 
     opacity: 0;
     animation: ${fadeUp} 1.5s forwards cubic-bezier(0.19, 1, 0.22, 1);
-    animation-delay: 1.9s;
+    animation-delay: 1.5s;
 
     display: flex;
     justify-content: space-between;
@@ -405,7 +411,7 @@ export const RelatedArtist = styled(animated.li)`
 
   transition: transform 1.5s cubic-bezier(0.19, 1, 0.22, 1),
     opacity 1s cubic-bezier(0.19, 1, 0.22, 1);
-  transition-delay: 1.5s;
+  transition-delay: 1.4s;
 
   display: flex;
   flex-direction: column;
@@ -417,6 +423,29 @@ export const RelatedArtist = styled(animated.li)`
   &:hover {
     img {
       transform: scale(1.1);
+    }
+
+    div {
+      height: 132px;
+
+      strong {
+        position: absolute;
+        top: 0;
+
+        margin-top: 16px;
+      }
+
+      footer {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+
+        p,
+        a {
+          opacity: 1;
+          visibility: visible;
+        }
+      }
     }
   }
 
@@ -449,6 +478,35 @@ export const RelatedArtist = styled(animated.li)`
       white-space: nowrap;
       text-overflow: ellipsis;
       overflow: hidden;
+    }
+
+    footer {
+      margin-top: 48px;
+
+      display: none;
+
+      p {
+        visibility: hidden;
+        opacity: 0;
+        font-size: 12px;
+        color: #7a8185;
+        font-weight: 500;
+        line-height: 1.3;
+
+        position: absolute;
+        top: 44px;
+      }
+
+      a {
+        visibility: hidden;
+        opacity: 0;
+        margin-top: 24px;
+        transition: transform 0.2s;
+
+        &:hover {
+          transform: scale(1.2);
+        }
+      }
     }
   }
 `;

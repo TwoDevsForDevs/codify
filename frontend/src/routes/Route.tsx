@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Redirect, RouteProps } from 'react-router-dom';
+import { parseISO, isAfter } from 'date-fns';
 
 import { useAuth } from '../hooks/auth';
 
@@ -16,9 +17,16 @@ const RouteWrapper: React.FC<IRouteProps> = ({
   isPrivate = false,
   ...rest
 }) => {
-  const { user } = useAuth();
+  const { user, exp, signOut } = useAuth();
 
-  const signed = !!user;
+  let signed = !!user;
+
+  if (exp) {
+    if (isAfter(new Date(), parseISO(exp.toString()))) {
+      signed = false;
+      signOut();
+    }
+  }
 
   if (!signed && isPrivate) {
     return <Redirect to="/" />;

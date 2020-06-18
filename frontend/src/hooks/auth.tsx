@@ -1,4 +1,5 @@
 import React, { createContext, useCallback, useState, useContext } from 'react';
+import { addHours } from 'date-fns';
 
 import api from '../services/api';
 
@@ -13,10 +14,12 @@ interface IUserData {
 interface IAuthState {
   access_token: string;
   user: IUserData;
+  exp: Date;
 }
 
 interface IAuthContextData {
   user: IUserData;
+  exp: Date;
   getCredentials(): void;
   signOut(): void;
 }
@@ -27,9 +30,10 @@ export const AuthProvider: React.FC = ({ children }) => {
   const [data, setData] = useState<IAuthState>(() => {
     const access_token = localStorage.getItem('@Spotify:access_token');
     const user = localStorage.getItem('@Spotify:user');
+    const exp = localStorage.getItem('@Spotify:exp');
 
-    if (access_token && user) {
-      return { access_token, user: JSON.parse(user) };
+    if (access_token && user && exp) {
+      return { access_token, user: JSON.parse(user), exp: JSON.parse(exp) };
     }
 
     return {} as IAuthState;
@@ -53,9 +57,14 @@ export const AuthProvider: React.FC = ({ children }) => {
     localStorage.setItem('@Spotify:access_token', access_token);
     localStorage.setItem('@Spotify:user', JSON.stringify(response.data));
 
+    const exp = addHours(new Date(), 1);
+
+    localStorage.setItem('@Spotify:exp', JSON.stringify(exp));
+
     setData({
       access_token,
       user: response.data,
+      exp,
     });
 
     window.location.href = '/top-artists';
@@ -64,12 +73,15 @@ export const AuthProvider: React.FC = ({ children }) => {
   const signOut = useCallback(() => {
     localStorage.removeItem('@Spotify:access_token');
     localStorage.removeItem('@Spotify:user');
+    localStorage.removeItem('@Spotify:exp');
 
     setData({} as IAuthState);
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user: data.user, getCredentials, signOut }}>
+    <AuthContext.Provider
+      value={{ user: data.user, exp: data.exp, getCredentials, signOut }}
+    >
       {children}
     </AuthContext.Provider>
   );

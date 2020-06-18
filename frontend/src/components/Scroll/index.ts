@@ -21,7 +21,7 @@ const Scroll = styled(PerfectScrollbar)`
   align-items: flex-start;
 
   .ps__rail-y {
-    margin: 32px 0px;
+    /* margin: 32px 0px; */
     width: 4px;
     background: rgba(255, 255, 255, 0.1);
     border-radius: 5px;

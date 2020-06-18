@@ -64,6 +64,7 @@ interface IRelatedArtist {
   name: string;
   image: string;
   uri: string;
+  genres: string[];
 }
 
 interface IArtist {
@@ -196,7 +197,7 @@ const ModalArtist: React.FC<IModalProps> = ({
                   <img src={artist.avatar} alt={artist.name} />
                 </div>
 
-                <SpotifyButton href={ArtistInfo.uri}>
+                <SpotifyButton href={artist.uri}>
                   Abrir no Spotify
                 </SpotifyButton>
               </LeftContent>
@@ -341,6 +342,14 @@ const ModalArtist: React.FC<IModalProps> = ({
                             <strong>
                               {index + 1}. {item.name}
                             </strong>
+
+                            <footer>
+                              <p>{item.genres.join(', ')}</p>
+
+                              <a href={item.uri}>
+                                <FaSpotify size={24} color="#fff" />
+                              </a>
+                            </footer>
                           </div>
                         </RelatedArtist>
                       ),

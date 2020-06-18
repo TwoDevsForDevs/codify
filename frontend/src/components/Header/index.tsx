@@ -1,16 +1,18 @@
 import React, { useState, useCallback } from 'react';
 import { NavLink } from 'react-router-dom';
-import { FaSpotify } from 'react-icons/fa';
+import { MdLink } from 'react-icons/md';
 import { FiMoreVertical } from 'react-icons/fi';
 
 import { useAuth } from '../../hooks/auth';
 
 import DropdownMenu from './Dropdown';
+import About from './About';
 
-import { Container, Content, ProfileData } from './styles';
+import { Container, Content, Nav, ProfileData } from './styles';
 
 const Header: React.FC = () => {
   const [showDropdown, setShowDropdown] = useState(false);
+  const [showAbout, setShowAbout] = useState(false);
 
   const { user } = useAuth();
 
@@ -18,11 +20,19 @@ const Header: React.FC = () => {
     setShowDropdown(!showDropdown);
   }, [showDropdown]);
 
+  const handleAbout = useCallback(() => {
+    setShowAbout(!showAbout);
+  }, [showAbout]);
+
   return (
     <Container>
       <Content>
-        <nav>
-          <FaSpotify color="#fff" size={24} />
+        <Nav showAbout={showAbout}>
+          <button type="button" onClick={handleAbout}>
+            <MdLink size={22} />
+            Sobre
+          </button>
+
           <NavLink to="/top-artists" activeClassName="selected">
             Artistas
           </NavLink>
@@ -32,7 +42,9 @@ const Header: React.FC = () => {
           <NavLink to="/playlists" activeClassName="selected">
             Playlists
           </NavLink>
-        </nav>
+
+          <About showAbout={showAbout} />
+        </Nav>
 
         <ProfileData showDropdown={showDropdown}>
           <img src={user.avatar} alt={user.display_name} />

@@ -12,6 +12,7 @@
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
     "axios": "^0.19.2",
+    "date-fns": "^2.14.0",
     "history": "^4.10.1",
     "js-cookie": "^2.2.1",
     "lottie-react-web": "^2.2.2",

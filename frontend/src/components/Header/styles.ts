@@ -17,32 +17,57 @@ export const Content = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+`;
 
-  nav {
+interface INavProps {
+  showAbout: boolean;
+}
+
+export const Nav = styled.nav<INavProps>`
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  button {
+    background: ${props =>
+      props.showAbout ? 'rgba(51, 255, 122, 0.15)' : 'transparent'};
+    border: 0;
+    padding: 4px 8px;
+    border-radius: 20px;
+    color: #fff;
+    font-weight: bold;
+    transition: opacity 0.2s;
+
     display: flex;
     align-items: center;
 
-    a {
-      margin-left: 32px;
-      color: #fff;
-      font-weight: bold;
-      position: relative;
-      transition: opacity 0.2s;
-
-      &:hover {
-        opacity: 0.7;
-      }
+    svg {
+      margin-right: 8px;
+      color: ${props => (props.showAbout ? '#33ff7a' : '#fff')};
     }
+  }
 
-    .selected::after {
-      content: '';
-      width: 100%;
-      height: 3px;
-      background: #1db954;
-      position: absolute;
-      bottom: -16px;
-      left: 0;
+  > a {
+    margin-left: 32px;
+    color: #fff;
+    font-weight: bold;
+    position: relative;
+    transition: opacity 0.2s;
+
+    &:hover {
+      opacity: 0.7;
     }
+  }
+
+  .selected::after {
+    content: '';
+    width: 100%;
+    height: 3px;
+    background: #1db954;
+    position: absolute;
+    bottom: -16px;
+    left: 0;
   }
 `;
 
