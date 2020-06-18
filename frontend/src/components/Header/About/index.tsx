@@ -1,10 +1,10 @@
 import React from 'react';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 
-import matheusImg from '../../../assets/matheus.png';
+import matheusImg from '../../../assets/matheus.jpeg';
 import pauloImg from '../../../assets/paulo.png';
 
-import { Container, AboutApp, Privacy, We, Devs, Dev, DevInfo } from './styles';
+import { Container, Devs, Dev, DevInfo } from './styles';
 
 interface IAboutProps {
   showAbout: boolean;
@@ -13,9 +13,9 @@ interface IAboutProps {
 const About: React.FC<IAboutProps> = ({ showAbout }) => {
   return (
     <Container showAbout={showAbout}>
-      <AboutApp showAbout={showAbout}>
+      <section>
         <h1>Sobre o app</h1>
-        <p>
+        <p className="about-text">
           Codify é uma aplicação criada a partir do
           <a
             href="https://developer.spotify.com/documentation/web-api/"
@@ -24,21 +24,21 @@ const About: React.FC<IAboutProps> = ({ showAbout }) => {
           >
             Spotify’s Web API
           </a>
-          para coletar informações de sua conta Spotify. Não somos afiliados com
-          o Spotify.
+          para coletar informações de sua conta Spotify. Não somos, de forma
+          alguma, afiliados com o Spotify.
         </p>
-      </AboutApp>
+      </section>
 
-      <Privacy showAbout={showAbout}>
-        <h3>Privacidade</h3>
-        <p>
+      <section>
+        <h3 className="privacy-title">Privacidade</h3>
+        <p className="privacy-text">
           Codify requer acesso à sua conta do Spotify mas não armazena nenhum
           dado em servidor.
         </p>
-      </Privacy>
+      </section>
 
-      <We showAbout={showAbout}>
-        <h3>Quem somos</h3>
+      <section>
+        <h3 className="we-title">Quem somos</h3>
 
         <Devs showAbout={showAbout}>
           <Dev>
@@ -67,7 +67,7 @@ const About: React.FC<IAboutProps> = ({ showAbout }) => {
           </Dev>
 
           <Dev>
-            <img src={pauloImg} alt="Matheus Pires" />
+            <img src={pauloImg} alt="Paulo Henrique" />
 
             <DevInfo>
               <strong>Paulo Henrique</strong>
@@ -91,7 +91,7 @@ const About: React.FC<IAboutProps> = ({ showAbout }) => {
             </DevInfo>
           </Dev>
         </Devs>
-      </We>
+      </section>
     </Container>
   );
 };

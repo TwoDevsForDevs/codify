@@ -1,4 +1,9 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+
+import {
+  profileOptionsDropdown,
+  incresedFadeUp,
+} from '../../../styles/animations';
 
 interface IDropdownMenuProps {
   showDropdown: boolean;
@@ -10,19 +15,18 @@ export const Container = styled.div<IDropdownMenuProps>`
   width: 325px;
   box-shadow: 2px 2px 16px #000;
   z-index: 100;
+
   position: absolute;
   right: 0px;
   top: 54px;
 
-  visibility: ${props => (props.showDropdown ? 'visible' : 'hidden')};
-  clip-path: ${props =>
-    props.showDropdown
-      ? 'inset(0px 0px 0px 0px round 20px)'
-      : 'inset(0px 0px 100% 100% round 20px)'};
-  transform: ${props =>
-    props.showDropdown ? 'translateY(0)' : 'translateY(20px)'};
-  transition: transform 1s cubic-bezier(0.19, 1, 0.22, 1),
-    clip-path 0.5s cubic-bezier(0.2, 0.6, 0.35, 1);
+  visibility: hidden;
+  ${props =>
+    props.showDropdown &&
+    css`
+      animation: ${profileOptionsDropdown} 0.75s forwards
+        cubic-bezier(0.19, 0.8, 0.28, 1);
+    `}
 
   ul {
     overflow: hidden;
@@ -35,22 +39,24 @@ export const Container = styled.div<IDropdownMenuProps>`
       display: flex;
       justify-content: flex-start;
 
-      opacity: ${props => (props.showDropdown ? 1 : 0)};
-      transform: ${props =>
-        props.showDropdown ? 'translateY(0)' : 'translateY(80px)'};
-      transition: transform 0.8s cubic-bezier(0.19, 1, 0.22, 1),
-        opacity 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+      ${props =>
+        props.showDropdown &&
+        css`
+          opacity: 0;
+          animation: ${incresedFadeUp} 0.8s forwards
+            cubic-bezier(0.19, 1, 0.22, 1);
+        `}
 
       &:nth-child(1) {
-        transition-delay: 0.2s;
+        animation-delay: 0.2s;
       }
 
       &:nth-child(2) {
-        transition-delay: 0.3s;
+        animation-delay: 0.3s;
       }
 
       &:nth-child(3) {
-        transition-delay: 0.4s;
+        animation-delay: 0.4s;
       }
 
       &:hover svg {

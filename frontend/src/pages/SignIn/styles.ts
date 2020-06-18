@@ -52,6 +52,10 @@ export const SignInContainer = styled.div`
   flex-direction: column;
   align-items: flex-start;
 
+  @media (max-width: 1160px) {
+    margin-right: 0px;
+  }
+
   h1 {
     font-size: 72px;
     color: #fff;
@@ -128,6 +132,10 @@ export const SignInContainer = styled.div`
     opacity: 0;
     animation: ${fadeUp} 1.5s forwards cubic-bezier(0.19, 1, 0.22, 1);
     animation-delay: 1s;
+
+    @media (max-width: 1160px) {
+      width: 100%;
+    }
   }
 `;
 
@@ -135,6 +143,10 @@ export const ArtistImage = styled.div`
   opacity: 0;
   animation: ${fadeScaleUp} 1.5s forwards cubic-bezier(0.19, 1, 0.22, 1);
   animation-delay: 0.8s;
+
+  @media (max-width: 1160px) {
+    display: none;
+  }
 
   img {
     width: 600px;

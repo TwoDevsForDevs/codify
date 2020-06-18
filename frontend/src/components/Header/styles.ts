@@ -33,11 +33,11 @@ export const Nav = styled.nav<INavProps>`
     background: ${props =>
       props.showAbout ? 'rgba(51, 255, 122, 0.15)' : 'transparent'};
     border: 0;
-    padding: 4px 8px;
+    padding: 6px 10px;
     border-radius: 20px;
-    color: #fff;
+    color: ${props => (props.showAbout ? '#33ff7a' : '#fff')};
     font-weight: bold;
-    transition: opacity 0.2s;
+    transition: background 0.2s;
 
     display: flex;
     align-items: center;

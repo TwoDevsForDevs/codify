@@ -20,6 +20,17 @@ const fadeUp = keyframes`
   }
 `;
 
+const incresedFadeUp = keyframes`
+  from {
+    transform: translateY(140px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+`;
+
 const scaleDown = keyframes`
   from {
     transform: scale3d(3,3,3);
@@ -42,4 +53,38 @@ const fadeScaleDown = keyframes`
   }
 `;
 
-export { fade, fadeUp, fadeScaleDown, scaleDown };
+const profileOptionsDropdown = keyframes`
+  from {
+    visibility: hidden;
+    clip-path: inset(0px 0px 100% 100% round 20px);
+    transform: translateY(20px);
+  }
+  to {
+    visibility: visible;
+    clip-path: inset(0px 0px 0px 0px round 20px);
+    transform: translateY(0);
+  }
+`;
+
+const aboutDropdown = keyframes`
+  from {
+    visibility: hidden;
+    clip-path: inset(0px 100% 100% 0px round 20px);
+    transform: translateY(20px);
+  }
+  to {
+    visibility: visible;
+    clip-path: inset(0px 0px 0px 0px round 20px);
+    transform: translateY(0);
+  }
+`;
+
+export {
+  fade,
+  fadeUp,
+  incresedFadeUp,
+  fadeScaleDown,
+  scaleDown,
+  profileOptionsDropdown,
+  aboutDropdown,
+};
