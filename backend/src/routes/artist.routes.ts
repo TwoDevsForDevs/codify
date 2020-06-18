@@ -21,6 +21,7 @@ interface IRelatedArtist {
   name: string;
   images: IImages[];
   uri: string;
+  genres: string[];
 }
 
 interface IImages {
@@ -71,6 +72,7 @@ artistRouter.get('/:id', async (req, res) => {
     image: relatedArtist.images[0].url,
     name: relatedArtist.name,
     uri: relatedArtist.uri,
+    genres: [relatedArtist.genres[0], relatedArtist?.genres[1]],
   }));
 
   const formattedArtist = {
