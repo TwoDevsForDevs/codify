@@ -6,6 +6,12 @@ import { fadeUp } from '../../styles/animations';
 export const Container = styled.div`
   display: flex;
   align-items: center;
+
+  @media (max-width: 1220px) {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 export const LeftContent = styled.div`
@@ -14,6 +20,21 @@ export const LeftContent = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+
+  @media (max-width: 1220px) {
+    position: relative;
+    top: 0px;
+    margin-right: 0px;
+    margin-bottom: 32px;
+
+    align-items: center;
+
+    h1 {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
 
   div {
     background: linear-gradient(134.4deg, #20ac9a, #1db954 52%, #91c040);
@@ -54,6 +75,26 @@ export const LeftContent = styled.div`
     opacity: 0;
     animation: ${fadeUp} 1.5s forwards cubic-bezier(0.19, 1, 0.22, 1);
     animation-delay: 0.5s;
+  }
+
+  @media (max-width: 1200px) {
+    div {
+      padding: 14px;
+
+      svg {
+        width: 24px;
+        height: 24px;
+      }
+    }
+
+    h1 {
+      margin: 24px 0;
+      font-size: 52px;
+    }
+
+    p {
+      font-size: 14px;
+    }
   }
 `;
 
@@ -193,6 +234,36 @@ export const Artist = styled(animated.div)`
 
   &:hover .lineGraph {
     display: flex;
+  }
+
+  @media (max-width: 1200px) {
+    &:nth-child(1) {
+      grid-column-start: 3;
+      grid-column-end: 3;
+    }
+
+    &:nth-child(2) {
+      grid-column-start: 5;
+      grid-column-end: 5;
+    }
+
+    &:nth-child(3) {
+      grid-row-start: 2;
+      grid-column-start: 3;
+      grid-column-end: 3;
+    }
+
+    &:nth-child(4) {
+      grid-row-start: 2;
+      grid-column-start: 5;
+      grid-column-end: 5;
+    }
+
+    &:nth-child(5) {
+      grid-row-start: 3;
+      grid-column-start: 3;
+      grid-column-end: 3;
+    }
   }
 `;
 
