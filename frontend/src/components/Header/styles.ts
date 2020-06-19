@@ -25,6 +25,8 @@ export const Content = styled.div`
 
   @media (max-width: 992px) {
     padding: 0 16px 0 10px;
+
+    flex-direction: row-reverse;
   }
 `;
 
@@ -35,6 +37,31 @@ interface INavProps {
 export const Nav = styled.nav<INavProps>`
   position: relative;
 
+  button {
+    border: 0;
+    background: transparent;
+
+    display: none;
+    justify-content: center;
+    align-items: center;
+  }
+
+  @media (max-width: 992px) {
+    button {
+      position: relative;
+      z-index: 103;
+
+      display: flex;
+    }
+  }
+`;
+
+interface INavigationMenuProps {
+  showAbout: boolean;
+  showMenu: boolean;
+}
+
+export const NavigationMenu = styled.div<INavigationMenuProps>`
   display: flex;
   align-items: center;
 
@@ -58,6 +85,9 @@ export const Nav = styled.nav<INavProps>`
   }
 
   div {
+    display: flex;
+    align-items: center;
+
     > a {
       margin-left: 32px;
       color: #fff;
@@ -82,8 +112,39 @@ export const Nav = styled.nav<INavProps>`
   }
 
   @media (max-width: 992px) {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 102;
+    background: rgba(0, 0, 0, 0.85);
+
+    display: ${props => (props.showMenu ? 'flex' : 'none')};
+    justify-content: center;
+    flex-direction: column;
+
+    button {
+      font-size: 18px;
+
+      svg {
+        display: none;
+      }
+    }
+
     div {
-      display: none;
+      flex-direction: column;
+      justify-content: center;
+
+      > a {
+        font-size: 18px;
+        margin-left: 0px;
+        margin-top: 24px;
+      }
+    }
+
+    .selected::after {
+      bottom: -12px;
     }
   }
 `;
@@ -108,10 +169,6 @@ export const ProfileData = styled.aside<IProfileDataProps>`
     color: #fff;
     font-weight: bold;
     margin: 0 16px;
-
-    @media (max-width: 992px) {
-      display: none;
-    }
   }
 
   > button {
@@ -133,14 +190,22 @@ export const ProfileData = styled.aside<IProfileDataProps>`
   }
 
   @media (max-width: 992px) {
+    flex-direction: row-reverse;
+
+    span {
+      display: none;
+    }
+
+    > button {
+      margin-right: 8px;
+    }
+  }
+
+  @media (max-width: 768px) {
     img {
       width: 32px;
       height: 32px;
       border-radius: 16px;
-    }
-
-    > button {
-      margin-left: 16px;
     }
   }
 `;

@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components';
 
 import {
   profileOptionsDropdown,
+  profileOptionsDropdownMobile,
   incresedFadeUp,
 } from '../../../styles/animations';
 
@@ -87,7 +88,17 @@ export const Container = styled.div<IDropdownMenuProps>`
   }
 
   @media (max-width: 992px) {
-    width: 200px;
+    width: 220px;
+
+    left: 0px;
+    top: 54px;
+
+    ${props =>
+      props.showDropdown &&
+      css`
+        animation: ${profileOptionsDropdownMobile} 0.75s forwards
+          cubic-bezier(0.19, 0.8, 0.28, 1);
+      `}
 
     ul {
       li {

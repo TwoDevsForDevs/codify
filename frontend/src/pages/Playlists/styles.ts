@@ -13,7 +13,7 @@ export const Container = styled.div`
   }
 
   @media (max-width: 768px) {
-    align-items: center;
+    align-items: flex-start;
   }
 `;
 
@@ -117,6 +117,7 @@ export const UserPlaylists = styled.div`
   }
 
   @media (max-width: 768px) {
+    width: 100%;
     grid-template-columns: 1fr 1fr;
   }
 `;
@@ -124,7 +125,6 @@ export const UserPlaylists = styled.div`
 export const Playlist = styled(animated.div)`
   border-radius: 10px;
   width: 240px;
-  height: 240px;
   overflow: hidden;
   cursor: pointer;
 
@@ -141,7 +141,7 @@ export const Playlist = styled(animated.div)`
 
   img {
     width: 100%;
-    height: 100%;
+    height: 240px;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     transition: all 0.3s;
@@ -168,7 +168,18 @@ export const Playlist = styled(animated.div)`
   }
 
   @media (max-width: 992px) {
-    width: 160px;
-    height: 160px;
+    width: 100%;
+
+    img {
+      height: 100%;
+    }
+
+    div {
+      height: 48px;
+
+      strong {
+        font-size: 14px;
+      }
+    }
   }
 `;
