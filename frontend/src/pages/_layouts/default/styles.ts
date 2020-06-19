@@ -14,4 +14,11 @@ export const Main = styled.main`
   padding: 0 32px 32px;
 
   display: flex;
+
+  @media (max-width: 1200px) {
+    padding: 0 16px 24px;
+
+    justify-content: center;
+    align-items: center;
+  }
 `;

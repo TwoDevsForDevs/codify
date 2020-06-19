@@ -10,7 +10,7 @@ interface ISpotifyButtonProps {
 const SpotifyButton: React.FC<ISpotifyButtonProps> = ({ children, href }) => {
   return (
     <Container href={href}>
-      <FaSpotify size={24} color="#fff" />
+      <FaSpotify color="#fff" />
       {children}
     </Container>
   );

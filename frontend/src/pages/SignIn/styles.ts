@@ -42,6 +42,10 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  @media (max-width: 1160px) {
+    padding-top: 0px;
+  }
 `;
 
 export const SignInContainer = styled.div`
@@ -63,11 +67,20 @@ export const SignInContainer = styled.div`
     position: relative;
     overflow-wrap: break-word;
 
+    @media (max-width: 768px) {
+      font-size: 52px;
+      height: 220px;
+    }
+
     div {
       line-height: 93.6px;
       position: absolute;
       top: 0px;
       overflow: hidden;
+
+      @media (max-width: 768px) {
+        line-height: 50.6px;
+      }
 
       span {
         display: inline-block;
@@ -99,6 +112,10 @@ export const SignInContainer = styled.div`
       top: 72px;
       left: 230.375px;
 
+      @media (max-width: 768px) {
+        left: 168.375px;
+      }
+
       span {
         animation-delay: 0.4s;
       }
@@ -126,6 +143,11 @@ export const SignInContainer = styled.div`
     opacity: 0;
     animation: ${fadeUp} 1.5s forwards cubic-bezier(0.19, 1, 0.22, 1);
     animation-delay: 0.8s;
+
+    @media (max-width: 768px) {
+      margin-bottom: 32px;
+      font-size: 16px;
+    }
   }
 
   a {
@@ -169,16 +191,24 @@ export const SignUpContainer = styled.div`
   span {
     color: #fff;
     font-weight: bold;
+
+    @media (max-width: 992px) {
+      font-size: 14px;
+    }
   }
 
   a {
     color: #1db954;
     font-weight: bold;
     margin-top: 8px;
-    transition: color 0.2s;
+    transition: all 0.2s;
 
     &:hover {
       color: ${lighten(0.03, '#1db954')};
+    }
+
+    @media (max-width: 992px) {
+      font-size: 14px;
     }
   }
 `;

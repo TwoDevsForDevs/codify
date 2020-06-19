@@ -6,6 +6,12 @@ import { fadeUp } from '../../styles/animations';
 export const Container = styled.div`
   display: flex;
   align-items: flex-start;
+
+  @media (max-width: 1220px) {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 export const LeftContent = styled.div`
@@ -16,6 +22,12 @@ export const LeftContent = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+
+  @media (max-width: 1220px) {
+    position: relative;
+    top: 0px;
+    margin-right: 0px;
+  }
 
   div {
     background: linear-gradient(134.4deg, #20ac9a, #1db954 52%, #91c040);
@@ -57,17 +69,46 @@ export const LeftContent = styled.div`
     animation: ${fadeUp} 1.5s forwards cubic-bezier(0.19, 1, 0.22, 1);
     animation-delay: 0.5s;
   }
+
+  @media (max-width: 1200px) {
+    div {
+      padding: 14px;
+
+      svg {
+        width: 24px;
+        height: 24px;
+      }
+    }
+
+    h1 {
+      margin: 24px 0;
+      font-size: 52px;
+    }
+
+    p {
+      font-size: 14px;
+    }
+  }
 `;
 
 export const UserPlaylists = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 24px;
+
+  @media (max-width: 1220px) {
+    margin-top: 32px;
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+  }
 `;
 
 export const Playlist = styled(animated.div)`
   border-radius: 10px;
   width: 240px;
+  height: 240px;
   overflow: hidden;
   cursor: pointer;
 
@@ -84,6 +125,7 @@ export const Playlist = styled(animated.div)`
 
   img {
     width: 100%;
+    height: 240px;
     height: 240px;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
@@ -107,6 +149,16 @@ export const Playlist = styled(animated.div)`
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+    }
+  }
+
+  @media (max-width: 992px) {
+    width: 160px;
+    height: 160px;
+
+    img {
+      width: 160px;
+      height: 160px;
     }
   }
 `;

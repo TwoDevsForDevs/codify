@@ -18,7 +18,19 @@ export const Container = styled.a`
     background: ${lighten(0.03, '#1db954')};
   }
 
+  @media (max-width: 992px) {
+    font-size: 14px;
+    padding: 24px 40px;
+  }
+
   svg {
     margin-right: 16px;
+    width: 24px;
+    height: 24px;
+
+    @media (max-width: 992px) {
+      width: 20px;
+      height: 20px;
+    }
   }
 `;
