@@ -10,6 +10,9 @@ export const Container = styled.div`
   @media (max-width: 1220px) {
     flex-direction: column;
     justify-content: center;
+  }
+
+  @media (max-width: 768px) {
     align-items: center;
   }
 `;
@@ -71,6 +74,12 @@ export const LeftContent = styled.div`
   }
 
   @media (max-width: 1200px) {
+    .green {
+      margin-left: 14px;
+    }
+  }
+
+  @media (max-width: 992px) {
     div {
       padding: 14px;
 
@@ -83,6 +92,13 @@ export const LeftContent = styled.div`
     h1 {
       margin: 24px 0;
       font-size: 52px;
+
+      display: flex;
+      flex-direction: column;
+
+      .green {
+        margin-left: 0px;
+      }
     }
 
     p {
@@ -125,8 +141,7 @@ export const Playlist = styled(animated.div)`
 
   img {
     width: 100%;
-    height: 240px;
-    height: 240px;
+    height: 100%;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     transition: all 0.3s;
@@ -155,10 +170,5 @@ export const Playlist = styled(animated.div)`
   @media (max-width: 992px) {
     width: 160px;
     height: 160px;
-
-    img {
-      width: 160px;
-      height: 160px;
-    }
   }
 `;
