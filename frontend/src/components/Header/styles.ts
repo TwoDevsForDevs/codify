@@ -6,6 +6,11 @@ export const Container = styled.header`
   margin-bottom: 80px;
 
   display: flex;
+
+  @media (max-width: 992px) {
+    min-height: 64px;
+    margin-bottom: 24px;
+  }
 `;
 
 export const Content = styled.div`
@@ -17,6 +22,10 @@ export const Content = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  @media (max-width: 992px) {
+    padding: 0 16px 0 10px;
+  }
 `;
 
 interface INavProps {
@@ -48,15 +57,17 @@ export const Nav = styled.nav<INavProps>`
     }
   }
 
-  > a {
-    margin-left: 32px;
-    color: #fff;
-    font-weight: bold;
-    position: relative;
-    transition: opacity 0.2s;
+  div {
+    > a {
+      margin-left: 32px;
+      color: #fff;
+      font-weight: bold;
+      position: relative;
+      transition: opacity 0.2s;
 
-    &:hover {
-      opacity: 0.7;
+      &:hover {
+        opacity: 0.7;
+      }
     }
   }
 
@@ -68,6 +79,12 @@ export const Nav = styled.nav<INavProps>`
     position: absolute;
     bottom: -16px;
     left: 0;
+  }
+
+  @media (max-width: 992px) {
+    div {
+      display: none;
+    }
   }
 `;
 
@@ -91,6 +108,10 @@ export const ProfileData = styled.aside<IProfileDataProps>`
     color: #fff;
     font-weight: bold;
     margin: 0 16px;
+
+    @media (max-width: 992px) {
+      display: none;
+    }
   }
 
   > button {
@@ -108,6 +129,18 @@ export const ProfileData = styled.aside<IProfileDataProps>`
 
     svg {
       color: ${props => (props.showDropdown ? '#33ff7a' : '#fff')};
+    }
+  }
+
+  @media (max-width: 992px) {
+    img {
+      width: 32px;
+      height: 32px;
+      border-radius: 16px;
+    }
+
+    > button {
+      margin-left: 16px;
     }
   }
 `;

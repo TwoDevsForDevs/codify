@@ -33,15 +33,17 @@ const Header: React.FC = () => {
             Sobre
           </button>
 
-          <NavLink to="/top-artists" activeClassName="selected">
-            Artistas
-          </NavLink>
-          <NavLink to="/favorite-tracks" activeClassName="selected">
-            Músicas favoritas
-          </NavLink>
-          <NavLink to="/playlists" activeClassName="selected">
-            Playlists
-          </NavLink>
+          <div>
+            <NavLink to="/top-artists" activeClassName="selected">
+              Artistas
+            </NavLink>
+            <NavLink to="/favorite-tracks" activeClassName="selected">
+              Músicas favoritas
+            </NavLink>
+            <NavLink to="/playlists" activeClassName="selected">
+              Playlists
+            </NavLink>
+          </div>
 
           <About showAbout={showAbout} />
         </Nav>

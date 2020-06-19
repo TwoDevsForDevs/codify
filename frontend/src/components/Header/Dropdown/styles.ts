@@ -76,9 +76,32 @@ export const Container = styled.div<IDropdownMenuProps>`
         align-items: center;
 
         svg {
+          width: 22px;
+          height: 22px;
           color: #fff;
           margin-right: 16px;
           transition: color 0.2s;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 992px) {
+    width: 200px;
+
+    ul {
+      li {
+        height: 54px;
+        padding: 0 16px;
+
+        button,
+        a {
+          font-size: 14px;
+
+          svg {
+            width: 20px;
+            height: 20px;
+          }
         }
       }
     }

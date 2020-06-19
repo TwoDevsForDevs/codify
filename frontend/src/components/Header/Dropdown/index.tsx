@@ -42,7 +42,7 @@ const Dropdown: React.FC<IDropdownProps> = ({
       <ul>
         <li>
           <button type="button" onClick={() => toggleFullScreen(fullScreen)}>
-            <FiMaximize size={22} />
+            <FiMaximize />
             {fullScreen ? 'Sair da tela cheia' : 'Tela cheia'}
           </button>
         </li>
@@ -52,13 +52,13 @@ const Dropdown: React.FC<IDropdownProps> = ({
             target="_blank"
             rel="noopener noreferrer"
           >
-            <FiGithub size={22} />
+            <FiGithub />
             Contribue
           </a>
         </li>
         <li>
           <button type="button" onClick={signOut}>
-            <FiLogOut size={22} />
+            <FiLogOut />
             Sair
           </button>
         </li>
