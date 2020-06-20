@@ -37,35 +37,9 @@ interface INavProps {
 export const Nav = styled.nav<INavProps>`
   position: relative;
 
-  button {
-    border: 0;
-    background: transparent;
-
-    display: none;
-    justify-content: center;
-    align-items: center;
-  }
-
-  @media (max-width: 992px) {
-    button {
-      position: relative;
-      z-index: 103;
-
-      display: flex;
-    }
-  }
-`;
-
-interface INavigationMenuProps {
-  showAbout: boolean;
-  showMenu: boolean;
-}
-
-export const NavigationMenu = styled.div<INavigationMenuProps>`
   display: flex;
-  align-items: center;
 
-  button {
+  .about-button {
     background: ${props =>
       props.showAbout ? 'rgba(51, 255, 122, 0.15)' : 'transparent'};
     border: 0;
@@ -83,6 +57,38 @@ export const NavigationMenu = styled.div<INavigationMenuProps>`
       color: ${props => (props.showAbout ? '#33ff7a' : '#fff')};
     }
   }
+
+  .mobile-menu-button {
+    border: 0;
+    background: transparent;
+
+    display: none;
+    justify-content: center;
+    align-items: center;
+  }
+
+  @media (max-width: 992px) {
+    .about-button {
+      margin-right: 16px;
+    }
+
+    .mobile-menu-button {
+      position: relative;
+      z-index: 103;
+
+      display: flex;
+    }
+  }
+`;
+
+interface INavigationMenuProps {
+  showAbout: boolean;
+  showMenu: boolean;
+}
+
+export const NavigationMenu = styled.div<INavigationMenuProps>`
+  display: flex;
+  align-items: center;
 
   div {
     display: flex;
@@ -118,19 +124,15 @@ export const NavigationMenu = styled.div<INavigationMenuProps>`
     top: 0;
     left: 0;
     z-index: 102;
-    background: rgba(0, 0, 0, 0.85);
+    background: rgba(0, 0, 0, 0.9);
 
-    display: ${props => (props.showMenu ? 'flex' : 'none')};
+    visibility: ${props => (props.showMenu ? 'visible' : 'hidden')};
+    opacity: ${props => (props.showMenu ? 1 : 0)};
+    transition: opacity 0.2s;
+
+    display: flex;
     justify-content: center;
     flex-direction: column;
-
-    button {
-      font-size: 18px;
-
-      svg {
-        display: none;
-      }
-    }
 
     div {
       flex-direction: column;
@@ -139,12 +141,15 @@ export const NavigationMenu = styled.div<INavigationMenuProps>`
       > a {
         font-size: 18px;
         margin-left: 0px;
-        margin-top: 24px;
+
+        & + a {
+          margin-top: 40px;
+        }
       }
     }
 
     .selected::after {
-      bottom: -12px;
+      bottom: -10px;
     }
   }
 `;

@@ -9,6 +9,10 @@
   }
 }
 
+.ReactModal__Overlay {
+  z-index: 9999;
+}
+
 .ReactModal__Content {
   animation: openModal 0.4s;
 }

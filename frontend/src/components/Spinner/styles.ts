@@ -159,4 +159,16 @@ export const Container = styled.div`
     -webkit-animation-delay: -0.1s;
     animation-delay: -0.1s;
   }
+
+  @media (max-width: 992px) {
+    .sk-child {
+      width: 85%;
+      height: 85%;
+
+      &:before {
+        width: 13%;
+        height: 13%;
+      }
+    }
+  }
 `;

@@ -88,8 +88,6 @@ export const Container = styled.div<IDropdownMenuProps>`
   }
 
   @media (max-width: 992px) {
-    width: 220px;
-
     left: 0px;
     top: 54px;
 
@@ -99,6 +97,10 @@ export const Container = styled.div<IDropdownMenuProps>`
         animation: ${profileOptionsDropdownMobile} 0.75s forwards
           cubic-bezier(0.19, 0.8, 0.28, 1);
       `}
+  }
+
+  @media (max-width: 768px) {
+    width: 220px;
 
     ul {
       li {

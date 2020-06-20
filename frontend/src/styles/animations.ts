@@ -92,6 +92,19 @@ const aboutDropdown = keyframes`
   }
 `;
 
+const aboutDropdownMobile = keyframes`
+  from {
+    visibility: hidden;
+    clip-path: inset(0px 0px 100% 100% round 20px);
+    transform: translateY(20px);
+  }
+  to {
+    visibility: visible;
+    clip-path: inset(0px 0px 0px 0px round 20px);
+    transform: translateY(0);
+  }
+`;
+
 export {
   fade,
   fadeUp,
@@ -101,4 +114,5 @@ export {
   profileOptionsDropdown,
   profileOptionsDropdownMobile,
   aboutDropdown,
+  aboutDropdownMobile,
 };

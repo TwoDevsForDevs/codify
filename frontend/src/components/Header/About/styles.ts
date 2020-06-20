@@ -1,7 +1,11 @@
 import styled, { css } from 'styled-components';
 import { lighten } from 'polished';
 
-import { aboutDropdown, incresedFadeUp } from '../../../styles/animations';
+import {
+  aboutDropdown,
+  aboutDropdownMobile,
+  incresedFadeUp,
+} from '../../../styles/animations';
 
 interface IAboutProps {
   showAbout: boolean;
@@ -105,6 +109,40 @@ export const Container = styled.div<IAboutProps>`
       }
     }
   }
+
+  @media (max-width: 992px) {
+    padding: 32px;
+
+    right: 0;
+    left: auto;
+
+    ${props =>
+      props.showAbout &&
+      css`
+        animation: ${aboutDropdownMobile} 0.8s forwards
+          cubic-bezier(0.19, 0.8, 0.28, 1);
+      `}
+
+    section {
+      h1 {
+        font-size: 24px;
+        line-height: 24px;
+        margin-bottom: 12px;
+      }
+
+      h3 {
+        margin-bottom: 8px;
+      }
+
+      p {
+        font-size: 14px;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    width: 92vw;
+  }
 `;
 
 export const Devs = styled.div<IAboutProps>`
@@ -118,6 +156,10 @@ export const Devs = styled.div<IAboutProps>`
     `}
 
   animation-delay: 0.6s;
+
+  @media (max-width: 992px) {
+    flex-direction: column;
+  }
 `;
 
 export const Dev = styled.div`
@@ -137,6 +179,18 @@ export const Dev = styled.div`
     height: 80px;
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
+  }
+
+  @media (max-width: 992px) {
+    & + div {
+      margin-top: 24px;
+      margin-left: 0;
+    }
+
+    img {
+      width: 64px;
+      height: 64px;
+    }
   }
 `;
 
@@ -179,6 +233,21 @@ export const DevInfo = styled.aside`
         width: 23px;
         height: 23px;
         transition: color 0.2s;
+      }
+    }
+  }
+
+  @media (max-width: 992px) {
+    strong {
+      margin-bottom: 6px;
+    }
+
+    div {
+      a {
+        svg {
+          width: 20px;
+          height: 20px;
+        }
       }
     }
   }

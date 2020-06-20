@@ -19,26 +19,30 @@ const Header: React.FC = () => {
 
   const handleDropdown = useCallback(() => {
     setShowDropdown(!showDropdown);
+    setShowAbout(false);
   }, [showDropdown]);
 
   const handleAbout = useCallback(() => {
     setShowAbout(!showAbout);
+    setShowDropdown(false);
   }, [showAbout]);
 
   const handleMenu = useCallback(() => {
     setShowMenu(!showMenu);
+    setShowDropdown(false);
+    setShowAbout(false);
   }, [showMenu]);
 
   return (
     <Container>
       <Content>
         <Nav showAbout={showAbout}>
-          <NavigationMenu showAbout={showAbout} showMenu={showMenu}>
-            <button type="button" onClick={handleAbout}>
-              <MdLink size={22} />
-              Sobre
-            </button>
+          <button className="about-button" type="button" onClick={handleAbout}>
+            <MdLink size={22} />
+            Sobre
+          </button>
 
+          <NavigationMenu showAbout={showAbout} showMenu={showMenu}>
             <div>
               <NavLink
                 to="/top-artists"
@@ -64,7 +68,11 @@ const Header: React.FC = () => {
             </div>
           </NavigationMenu>
 
-          <button type="button" onClick={handleMenu}>
+          <button
+            className="mobile-menu-button"
+            type="button"
+            onClick={handleMenu}
+          >
             {showMenu ? (
               <MdClose color="#f7415f" size={24} />
             ) : (
