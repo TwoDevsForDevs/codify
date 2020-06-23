@@ -103,6 +103,10 @@ export const TopArtists = styled.div`
   display: grid;
   grid-template-columns: auto auto auto auto auto auto;
   grid-gap: 24px;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+  }
 `;
 
 export const Artist = styled(animated.div)`
@@ -150,7 +154,6 @@ export const Artist = styled(animated.div)`
 
   img {
     width: 100%;
-    max-height: 240px;
     height: 100%;
     border-radius: 10px;
     opacity: 0.8;
@@ -268,11 +271,21 @@ export const Artist = styled(animated.div)`
     }
   }
 
-  @media (max-width: 992px) {
-    width: 100%;
-
-    img {
+  @media (max-width: 768px) {
+    & {
+      grid-column: initial !important;
+      grid-row-start: initial !important;
+      width: 100%;
       height: 100%;
+
+      .name {
+        left: 12px;
+        bottom: 12px;
+
+        h3 {
+          font-size: 16px;
+        }
+      }
     }
   }
 `;

@@ -242,6 +242,11 @@ export const Track = styled(animated.div)<IIsPlaying>`
       &:hover {
         transform: scale(1.2);
       }
+
+      svg {
+        width: 24px;
+        height: 24px;
+      }
     }
 
     ${props =>
@@ -271,6 +276,11 @@ export const Track = styled(animated.div)<IIsPlaying>`
 
       &:hover {
         transform: scale(1.2);
+      }
+
+      svg {
+        width: 24px;
+        height: 24px;
       }
     }
   }

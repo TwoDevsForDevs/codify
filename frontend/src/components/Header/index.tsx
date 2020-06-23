@@ -33,6 +33,10 @@ const Header: React.FC = () => {
     setShowAbout(false);
   }, [showMenu]);
 
+  const closeMenu = useCallback(() => {
+    setShowMenu(false);
+  }, []);
+
   return (
     <Container>
       <Content>
@@ -47,21 +51,21 @@ const Header: React.FC = () => {
               <NavLink
                 to="/top-artists"
                 activeClassName="selected"
-                onClick={handleMenu}
+                onClick={closeMenu}
               >
                 Artistas
               </NavLink>
               <NavLink
                 to="/favorite-tracks"
                 activeClassName="selected"
-                onClick={handleMenu}
+                onClick={closeMenu}
               >
                 Músicas favoritas
               </NavLink>
               <NavLink
                 to="/playlists"
                 activeClassName="selected"
-                onClick={handleMenu}
+                onClick={closeMenu}
               >
                 Playlists
               </NavLink>
