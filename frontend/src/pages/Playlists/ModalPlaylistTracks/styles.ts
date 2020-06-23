@@ -43,6 +43,17 @@ export const LeftContent = styled.aside`
     animation: ${fadeUp} 1.5s forwards cubic-bezier(0.19, 0.8, 0.28, 1);
     animation-delay: 0.4s;
   }
+
+  @media (max-width: 1220px) {
+    position: initial;
+    margin-right: 0;
+    padding-bottom: 24px;
+
+    div {
+      width: 100%;
+      height: 100%;
+    }
+  }
 `;
 
 export const Content = styled.div`
@@ -59,6 +70,12 @@ export const Content = styled.div`
     opacity: 0;
     animation: ${fadeUp} 1.5s forwards cubic-bezier(0.19, 1, 0.22, 1);
     animation-delay: 0.6s;
+  }
+
+  @media (max-width: 1220px) {
+    h1 {
+      font-size: 40px;
+    }
   }
 `;
 
@@ -93,6 +110,8 @@ export const PlaylistInfo = styled.section`
       }
 
       svg {
+        width: 18px;
+        height: 18px;
         margin-right: 8px;
       }
 
@@ -124,6 +143,22 @@ export const PlaylistInfo = styled.section`
       }
     }
   }
+
+  @media (max-width: 1220px) {
+    margin: 16px 0;
+
+    aside {
+      div {
+        font-size: 12px;
+        padding: 8px 12px;
+
+        svg {
+          width: 16px;
+          height: 16px;
+        }
+      }
+    }
+  }
 `;
 
 export const TracksList = styled.section`
@@ -131,6 +166,10 @@ export const TracksList = styled.section`
 
   display: flex;
   flex-direction: column;
+
+  @media (max-width: 1220px) {
+    padding-bottom: 42px;
+  }
 `;
 
 interface IIsPlaying {
@@ -235,6 +274,45 @@ export const Track = styled(animated.div)<IIsPlaying>`
       }
     }
   }
+
+  @media (max-width: 992px) {
+    width: 100%;
+    height: 100%;
+  }
+
+  @media (max-width: 768px) {
+    padding: 16px 24px;
+
+    .track-image {
+      display: none;
+    }
+
+    .track-info {
+      margin-right: 16px;
+
+      strong {
+        font-size: 16px;
+      }
+    }
+
+    aside {
+      button {
+        svg {
+          width: 22px;
+          height: 22px;
+        }
+      }
+
+      a {
+        margin-left: 12px;
+
+        svg {
+          width: 22px;
+          height: 22px;
+        }
+      }
+    }
+  }
 `;
 
 export const CloseModal = styled.button`
@@ -256,5 +334,21 @@ export const CloseModal = styled.button`
 
   &:hover {
     transform: scale(1.2);
+  }
+
+  svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  @media (max-width: 992px) {
+    margin-right: 0;
+    top: 8px;
+    right: 8px;
+
+    svg {
+      width: 22px;
+      height: 22px;
+    }
   }
 `;

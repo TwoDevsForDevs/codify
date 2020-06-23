@@ -269,6 +269,10 @@ const ModalArtist: React.FC<IModalProps> = ({
                           key={key}
                           style={props}
                           playing={item.playing ? 1 : 0}
+                          onMouseLeave={() => {
+                            pauseAudioWithFade(item.audio, 250);
+                            handlePause(item.id);
+                          }}
                         >
                           <img src={item.image} alt={item.name} />
 

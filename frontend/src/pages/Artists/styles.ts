@@ -21,21 +21,6 @@ export const LeftContent = styled.div`
   flex-direction: column;
   align-items: flex-start;
 
-  @media (max-width: 1220px) {
-    position: relative;
-    top: 0px;
-    margin-right: 0px;
-    margin-bottom: 32px;
-
-    align-items: center;
-
-    h1 {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-  }
-
   div {
     background: linear-gradient(134.4deg, #20ac9a, #1db954 52%, #91c040);
     padding: 16px;
@@ -77,7 +62,14 @@ export const LeftContent = styled.div`
     animation-delay: 0.5s;
   }
 
-  @media (max-width: 1200px) {
+  @media (max-width: 1220px) {
+    position: relative;
+    top: 0px;
+    margin-right: 0px;
+    margin-bottom: 32px;
+
+    align-items: center;
+
     div {
       padding: 14px;
 
@@ -89,7 +81,16 @@ export const LeftContent = styled.div`
 
     h1 {
       margin: 24px 0;
-      font-size: 52px;
+      font-size: 40px;
+      text-align: center;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .green {
+        width: 343px;
+      }
     }
 
     p {
@@ -149,6 +150,7 @@ export const Artist = styled(animated.div)`
 
   img {
     width: 100%;
+    max-height: 240px;
     height: 100%;
     border-radius: 10px;
     opacity: 0.8;
@@ -263,6 +265,14 @@ export const Artist = styled(animated.div)`
       grid-row-start: 3;
       grid-column-start: 3;
       grid-column-end: 3;
+    }
+  }
+
+  @media (max-width: 992px) {
+    width: 100%;
+
+    img {
+      height: 100%;
     }
   }
 `;

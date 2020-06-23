@@ -51,6 +51,17 @@ const Scroll = styled(PerfectScrollbar)`
       }
     }
   }
+
+  @media (max-width: 992px) {
+    max-height: 575px;
+    padding-right: 0px;
+
+    flex-direction: column;
+
+    .ps__rail-y {
+      display: none;
+    }
+  }
 `;
 
 export default Scroll;

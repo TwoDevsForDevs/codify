@@ -10,10 +10,7 @@ export const Container = styled.div`
   @media (max-width: 1220px) {
     flex-direction: column;
     justify-content: center;
-  }
-
-  @media (max-width: 768px) {
-    align-items: flex-start;
+    align-items: center;
   }
 `;
 
@@ -25,12 +22,6 @@ export const LeftContent = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-
-  @media (max-width: 1220px) {
-    position: relative;
-    top: 0px;
-    margin-right: 0px;
-  }
 
   div {
     background: linear-gradient(134.4deg, #20ac9a, #1db954 52%, #91c040);
@@ -73,9 +64,34 @@ export const LeftContent = styled.div`
     animation-delay: 0.5s;
   }
 
-  @media (max-width: 1200px) {
-    .green {
-      margin-left: 14px;
+  @media (max-width: 1220px) {
+    position: relative;
+    top: 0px;
+    margin-right: 0px;
+    margin-bottom: 32px;
+
+    align-items: center;
+
+    div {
+      padding: 14px;
+
+      svg {
+        width: 24px;
+        height: 24px;
+      }
+    }
+
+    h1 {
+      margin: 24px 0;
+      font-size: 52px;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    p {
+      font-size: 14px;
     }
   }
 
@@ -91,7 +107,8 @@ export const LeftContent = styled.div`
 
     h1 {
       margin: 24px 0;
-      font-size: 52px;
+      font-size: 40px;
+      text-align: center;
 
       display: flex;
       flex-direction: column;
@@ -111,10 +128,6 @@ export const UserPlaylists = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 24px;
-
-  @media (max-width: 1220px) {
-    margin-top: 32px;
-  }
 
   @media (max-width: 768px) {
     width: 100%;

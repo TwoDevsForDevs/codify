@@ -158,7 +158,7 @@ const FavoriteTracks: React.FC = () => {
                       handlePause(item.id);
                     }}
                   >
-                    <FaPauseCircle size={24} color="#33ff7a" />
+                    <FaPauseCircle color="#33ff7a" />
                   </button>
                   <button
                     type="button"
@@ -168,11 +168,11 @@ const FavoriteTracks: React.FC = () => {
                       handlePlay(item.id);
                     }}
                   >
-                    <FaPlayCircle size={24} color="#33ff7a" />
+                    <FaPlayCircle color="#33ff7a" />
                   </button>
 
                   <a href={item.uri}>
-                    <FaSpotify size={24} color="#fff" />
+                    <FaSpotify color="#fff" />
                   </a>
                 </aside>
               </Track>

@@ -31,11 +31,7 @@ const Modal: React.FC<IModalProps> = ({ children, isOpen, setIsOpen }) => {
           transform: 'translate(-50%, -50%)',
           background: '#191919',
           borderRadius: 16,
-          maxWidth: 1240,
-          width: '100%',
-          height: 640,
           border: 'none',
-          padding: '56px 32px 0 56px',
           overflow: 'hidden',
         },
         overlay: {

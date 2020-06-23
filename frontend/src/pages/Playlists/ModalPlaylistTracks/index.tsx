@@ -67,18 +67,13 @@ const ModalPlaylistTracks: React.FC<IModalProps> = ({
   const [loading, setLoading] = useState(true);
   const [tracks, setTracks] = useState<ITrack[]>([]);
   const [playlist, setPlaylist] = useState<IPlaylist>({} as IPlaylist);
-  const [currentPage, setCurrentPage] = useState(0);
 
   useEffect(() => {
     async function loadPlaylist(): Promise<void> {
       try {
         const [playlistResponse, tracksResponse] = await Promise.all([
           api.get(`/playlist/${playlistId}`),
-          api.get(`/playlist/tracks/${playlistId}`, {
-            params: {
-              page: currentPage,
-            },
-          }),
+          api.get(`/playlist/tracks/${playlistId}`),
         ]);
 
         const playlistData = {
@@ -102,7 +97,7 @@ const ModalPlaylistTracks: React.FC<IModalProps> = ({
     }
 
     loadPlaylist();
-  }, [playlistId, currentPage]);
+  }, [playlistId]);
 
   const tracksWithTransition = useTransition(tracks, track => track.id, {
     from: {
@@ -141,14 +136,6 @@ const ModalPlaylistTracks: React.FC<IModalProps> = ({
     [tracks],
   );
 
-  // const handlePage = useCallback(page => {
-  //   if (page === 0) {
-  //     setCurrentPage(0);
-  //   } else {
-  //     setCurrentPage(page + 50);
-  //   }
-  // }, []);
-
   return (
     <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
       <Container>
@@ -173,29 +160,14 @@ const ModalPlaylistTracks: React.FC<IModalProps> = ({
                 <PlaylistInfo>
                   <aside>
                     <div>
-                      <FaUsers size={18} color="#33ff7a" />
+                      <FaUsers color="#33ff7a" />
                       <strong>{playlist.formattedFollowers} </strong>Seguidores
                     </div>
                     <div>
-                      <FaRecordVinyl size={18} color="#33ff7a" />
+                      <FaRecordVinyl color="#33ff7a" />
                       <strong>{playlist.totalTracks} </strong>Músicas
                     </div>
                   </aside>
-
-                  {/* <nav>
-                    <button
-                      type="button"
-                      onClick={() => handlePage(currentPage - 1)}
-                    >
-                      <FaChevronLeft />
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => handlePage(currentPage + 1)}
-                    >
-                      <FaChevronRight />
-                    </button>
-                  </nav> */}
                 </PlaylistInfo>
 
                 <TracksList>
@@ -229,7 +201,7 @@ const ModalPlaylistTracks: React.FC<IModalProps> = ({
                             handlePause(item.id);
                           }}
                         >
-                          <FaPauseCircle size={24} color="#33ff7a" />
+                          <FaPauseCircle color="#33ff7a" />
                         </button>
                         <button
                           type="button"
@@ -239,11 +211,11 @@ const ModalPlaylistTracks: React.FC<IModalProps> = ({
                             handlePlay(item.id);
                           }}
                         >
-                          <FaPlayCircle size={24} color="#33ff7a" />
+                          <FaPlayCircle color="#33ff7a" />
                         </button>
 
                         <a href={item.uri}>
-                          <FaSpotify size={24} color="#fff" />
+                          <FaSpotify color="#fff" />
                         </a>
                       </aside>
                     </Track>
@@ -253,7 +225,7 @@ const ModalPlaylistTracks: React.FC<IModalProps> = ({
             </Scroll>
 
             <CloseModal type="button" onClick={setIsOpen}>
-              <FaTimes size={28} color="#f7415f" />
+              <FaTimes color="#f7415f" />
             </CloseModal>
           </>
         )}

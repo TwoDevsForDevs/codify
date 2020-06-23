@@ -6,6 +6,18 @@ import { fadeUp } from '../../styles/animations';
 export const Container = styled.div`
   display: flex;
   align-items: flex-start;
+
+  @media (max-width: 1220px) {
+    width: 100%;
+
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  @media (max-width: 992px) {
+    width: 100%;
+  }
 `;
 
 export const LeftContent = styled.div`
@@ -57,11 +69,58 @@ export const LeftContent = styled.div`
     animation: ${fadeUp} 1.5s forwards cubic-bezier(0.19, 1, 0.22, 1);
     animation-delay: 0.5s;
   }
+
+  @media (max-width: 1220px) {
+    position: relative;
+    top: 0px;
+    margin-right: 0px;
+    margin-bottom: 32px;
+
+    align-items: center;
+
+    h1 {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
+  @media (max-width: 992px) {
+    div {
+      padding: 14px;
+
+      svg {
+        width: 24px;
+        height: 24px;
+      }
+    }
+
+    h1 {
+      margin: 24px 0;
+      font-size: 40px;
+      text-align: center;
+
+      display: flex;
+      flex-direction: column;
+
+      .green {
+        margin-left: 0px;
+      }
+    }
+
+    p {
+      font-size: 14px;
+    }
+  }
 `;
 
 export const UserFavoriteTracks = styled.div`
   display: flex;
   flex-direction: column;
+
+  @media (max-width: 992px) {
+    width: 100%;
+  }
 `;
 
 interface IIsPlaying {
@@ -132,6 +191,11 @@ export const Track = styled(animated.div)<IIsPlaying>`
       &:hover {
         transform: scale(1.2);
       }
+
+      svg {
+        width: 24px;
+        height: 24px;
+      }
     }
 
     ${props =>
@@ -161,6 +225,50 @@ export const Track = styled(animated.div)<IIsPlaying>`
 
       &:hover {
         transform: scale(1.2);
+      }
+
+      svg {
+        width: 24px;
+        height: 24px;
+      }
+    }
+  }
+
+  @media (max-width: 992px) {
+    width: 100%;
+    height: 100%;
+  }
+
+  @media (max-width: 768px) {
+    padding: 16px 24px;
+
+    .track-image {
+      display: none;
+    }
+
+    .track-info {
+      margin-right: 16px;
+
+      strong {
+        font-size: 16px;
+      }
+    }
+
+    aside {
+      button {
+        svg {
+          width: 22px;
+          height: 22px;
+        }
+      }
+
+      a {
+        margin-left: 12px;
+
+        svg {
+          width: 22px;
+          height: 22px;
+        }
       }
     }
   }
