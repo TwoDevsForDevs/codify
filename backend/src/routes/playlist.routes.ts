@@ -64,11 +64,7 @@ interface ITracks {
 }
 
 playlistRouter.get('/tracks/:id', async (req, res) => {
-  const { page = 0 } = req.query;
-
-  const response = await api.get(
-    `playlists/${req.params.id}/tracks?limit=50&offset=${page}`,
-  );
+  const response = await api.get(`playlists/${req.params.id}/tracks?limit=100`);
 
   const tracks: ITracks[] = response.data.items;
 
