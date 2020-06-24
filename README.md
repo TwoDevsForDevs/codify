@@ -1,5 +1,14 @@
 <h1 align="center">
-  <img alt="Codify" src="https://ik.imagekit.io/hwyksvj4iv/codify_WZgmf2ZiU.svg" width="250px" />
+  <img alt="Codify" src="https://ik.imagekit.io/hwyksvj4iv/codify_AKvByfygl.png" width="250px" />
+  <h2 align="center">
+    Uma forma incrível de você ter acesso a curiosidades da sua conta do Spotify! 🎧
+  </h2>
+  <p align="center">
+      <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/TwoDevsForDevs/codify?color=1db954">
+      <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/TwoDevsForDevs/codify?color=1db954">
+      <img alt="Stars" src="https://img.shields.io/github/stars/TwoDevsForDevs/codify?color=1db954">
+      <img alt="Repository Size" src="https://img.shields.io/github/repo-size/TwoDevsForDevs/codify?color=1db954">
+  </p>
 </h1>
 
 <p align="center">
@@ -10,22 +19,16 @@
   <a href="#computer-iniciando-front-end">ReactJS</a>
 </p>
 
-<h1 align="center">
-  
-</h1>
-
 ## :page_with_curl: Sobre
-Este repositório contém um API REST em Node.js como back-end, uma aplicação em ReactJS como front-end e um app mobile em React Native, todos utilizando TypeScript.
+Codify é uma aplicação criada a partir do [**Spotify’s Web API**](https://developer.spotify.com/documentation/web-api/) para coletar informações de sua conta Spotify.
 
-Essa é a aplicação GoBarber, que é uma plataforma de agendamento de serviços para proprietários de barbearias ou salões de beleza. Nessa aplicação o usuário consegue ter acesso a todos os prostadores de serviços cadastrados através de um aplicativo mobile, com isso usuário consegue escolher um prestador para marcar seu agendamento.
+Nela o usuário tem acesso aos seus artistas mais escutados, músicas mais curtidas e suas playlists, dentre diversas outras curiosidades incríveis.
 
-Já o prestador de serviço, através de um interface Web, consegue ter acesso a todos os seus horários, podendo ver todos os que estão ocupados quanto os que estão disponíveis.
+Nesse projeto tivemos como principal objetivo aprender a consumir uma API externa e estudar toda a documentação por trás dela. Além disso, no processo tivemos que estudar sobre a biblioteca de Audio do JavaScript para podermos tocar músicas.
 
-**Node.js**: é uma API REST que faz todo o CRUD da aplicação, persistência de dados, tratativa de exceções e que serve dados tanto ao front-end quanto ao mobile.
+**Node.js**: realiza todas as chamadas a API do Spotify e customizamos as respostas pra serem da forma que queremos. Serve todos os dados para o front-end.
 
-**ReactJS**: é uma página Web no qual o prestador de serviço tem acesso a todo o seu calendário de agendamentos.
-
-**React Native**: é um aplicativo em que o usuário tem acesso a todos os prestadores de serviço cadastrados no App, com isso ele pode fazer um agendamento que o prestador de preferência.
+**ReactJS**: é uma página Web no qual o usuário terá acesso a informações da sua conta do Spotify.
 
 ## :books: Requisitos
 - Ter [**Git**](https://git-scm.com/) para clonar o projeto.
