@@ -1,8 +1,10 @@
 <h1 align="center">
-  <img alt="Codify" src="https://ik.imagekit.io/hwyksvj4iv/codify_AKvByfygl.png" width="250px" />
-  <h2 align="center">
+  <p align="center">
+    <img alt="Codify" src="https://ik.imagekit.io/hwyksvj4iv/codify_AKvByfygl.png" width="250px" />
+  </p>
+  <h3 align="center">
     Uma forma incrível de você ter acesso a curiosidades da sua conta do Spotify! 🎧
-  </h2>
+  </h3>
   <p align="center">
       <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/TwoDevsForDevs/codify?color=1db954">
       <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/TwoDevsForDevs/codify?color=1db954">
