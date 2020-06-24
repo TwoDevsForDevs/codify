@@ -35,15 +35,16 @@ Nesse projeto tivemos como principal objetivo aprender a consumir uma API extern
 ## :books: Requisitos
 - Ter [**Git**](https://git-scm.com/) para clonar o projeto.
 - Ter [**Node.js**](https://nodejs.org/en/) instalado.
-- Ter credências do Spotify.
+= Ter [**Yarn**](https://classic.yarnpkg.com/pt-BR/docs/install/) instalado.
+- Ter credencias do Spotify.
 
-## Credênciais do Spotify para rodar o projeto localmente
+## :lock: Credenciais do Spotify para rodar o projeto localmente
 
 Para você poder rodar o projeto localmente na sua máquina é preciso ter uma [**conta de desenvolvedor no Spotify**](https://developer.spotify.com/dashboard/) (para criar essa conta é totalmente gratuito e pode usar sua própria conta do Spotify).
 
-Com a conta criada basta clicar no botão **CREATE AN APP** e preencher os dados que forém pedidos.
+Com a conta criada basta clicar no botão **CREATE AN APP** e preencher os dados que forem pedidos.
 
-Após isso você terá acesso ao Dashboard da sua aplicação. No lado esquerdo estará suas credênciais, Client ID e Client Secret que serão usuadas para prencher o arquivo .env do backend.
+Após isso você terá acesso ao Dashboard da sua aplicação. No lado esquerdo estará suas credenciais, Client ID e Client Secret que serão usuadas para prencher o arquivo .env do backend.
 
 Por fim, no lado direito clique no botão **EDIT SETTINGS**. No modal que abrir haverá um compo chamado **Redirects URIs**, nele você irá preencher com a URL em que o seu backend estará rodando com a rota **/callback** (Ex: http://localhost:3333/callback). Após isso basta clicar em **SAVE**.
 
@@ -80,4 +81,4 @@ Por fim, no lado direito clique no botão **EDIT SETTINGS**. No modal que abrir 
   $ yarn start
 ```
 
-Feito com ❤️ por Matheus Pires 👋🏻 [Get in touch!](https://github.com/MatheusPires99)
+Feito com ❤️ por [Matheus Pires](https://github.com/MatheusPires99) e [Paulo Henrique](https://github.com/paulohenriquepm) 👋🏻 
