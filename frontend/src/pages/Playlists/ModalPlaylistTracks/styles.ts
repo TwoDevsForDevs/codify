@@ -45,14 +45,21 @@ export const LeftContent = styled.aside`
   }
 
   @media (max-width: 1220px) {
-    position: initial;
-    margin-right: 0;
+    margin-right: 48px;
+  }
+
+  @media (max-width: 992px) {
     padding-bottom: 24px;
+    width: 100%;
 
     div {
       width: 100%;
       height: 100%;
     }
+  }
+
+  @media (max-width: 768px) {
+    position: initial;
   }
 `;
 
@@ -285,17 +292,16 @@ export const Track = styled(animated.div)<IIsPlaying>`
     }
   }
 
-  @media (max-width: 992px) {
-    width: 100%;
-    height: 100%;
-  }
-
-  @media (max-width: 768px) {
-    padding: 16px 24px;
-
+  @media (max-width: 1200px) {
     .track-image {
       display: none;
     }
+  }
+
+  @media (max-width: 992px) {
+    width: 100%;
+    height: 100%;
+    padding: 16px 24px;
 
     .track-info {
       margin-right: 16px;

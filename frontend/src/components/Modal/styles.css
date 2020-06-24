@@ -21,8 +21,13 @@
 @media (max-width: 1220px) {
   .ReactModal__Content {
     width: 93%;
-    height: 580px;
     padding: 24px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .ReactModal__Content {
+    height: 80vh;
   }
 }
 

@@ -364,7 +364,7 @@ const ModalArtist: React.FC<IModalProps> = ({
             </Scroll>
 
             <CloseModal type="button" onClick={setIsOpen}>
-              <FaTimes size={28} color="#f7415f" />
+              <FaTimes color="#f7415f" />
             </CloseModal>
           </>
         )}

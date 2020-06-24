@@ -95,6 +95,7 @@ export const LeftContent = styled.div`
 
     p {
       font-size: 14px;
+      text-align: center;
     }
   }
 `;
@@ -104,8 +105,13 @@ export const TopArtists = styled.div`
   grid-template-columns: auto auto auto auto auto auto;
   grid-gap: 24px;
 
-  @media (max-width: 768px) {
+  @media (max-width: 992px) {
     grid-template-columns: 1fr 1fr;
+  }
+
+  @media (max-width: 768px) {
+    width: 320px;
+    grid-template-columns: 1fr;
   }
 `;
 
@@ -225,6 +231,10 @@ export const Artist = styled(animated.div)`
     display: flex;
     align-items: center;
     justify-content: center;
+
+    svg {
+      padding-left: 2px;
+    }
   }
 
   .lineGraph {
@@ -241,50 +251,62 @@ export const Artist = styled(animated.div)`
     display: flex;
   }
 
-  @media (max-width: 1200px) {
-    &:nth-child(1) {
-      grid-column-start: 3;
-      grid-column-end: 3;
+  @media (max-width: 992px) {
+    grid-column: initial !important;
+    grid-row-start: initial !important;
+    width: 100%;
+    height: 100%;
+
+    div.playingAnimationContainer {
+      width: 40px;
+      height: 40px;
+
+      svg {
+        padding-left: 3px;
+        width: 20px;
+        height: 20px;
+      }
     }
 
-    &:nth-child(2) {
-      grid-column-start: 5;
-      grid-column-end: 5;
+    .lineGraph div {
+      width: 4px;
+      height: 18px;
     }
 
-    &:nth-child(3) {
-      grid-row-start: 2;
-      grid-column-start: 3;
-      grid-column-end: 3;
+    .name {
+      h3 {
+        font-size: 32px;
+      }
+
+      span {
+        font-size: 20px;
+      }
     }
 
-    &:nth-child(4) {
-      grid-row-start: 2;
-      grid-column-start: 5;
-      grid-column-end: 5;
+    &:hover .followers {
+      transform: translateY(0);
     }
 
-    &:nth-child(5) {
-      grid-row-start: 3;
-      grid-column-start: 3;
-      grid-column-end: 3;
+    &:hover .popularity {
+      transform: translateY(70px);
+    }
+
+    &:hover .top-track {
+      transform: translateY(140px);
     }
   }
 
   @media (max-width: 768px) {
-    & {
-      grid-column: initial !important;
-      grid-row-start: initial !important;
-      width: 100%;
-      height: 100%;
+    width: 320px;
+    height: 320px;
 
-      .name {
-        left: 12px;
-        bottom: 12px;
+    .name {
+      h3 {
+        font-size: 28px;
+      }
 
-        h3 {
-          font-size: 16px;
-        }
+      span {
+        font-size: 16px;
       }
     }
   }
@@ -329,5 +351,45 @@ export const ArtistInfo = styled.div`
 
   .top-track {
     transform: translateY(120px);
+  }
+
+  @media (max-width: 992px) {
+    width: 300px;
+
+    .info {
+      span {
+        font-size: 20px;
+      }
+
+      h4 {
+        font-size: 24px;
+        line-height: initial;
+      }
+    }
+
+    .followers {
+      transform: translateY(40px);
+    }
+
+    .popularity {
+      transform: translateY(110px);
+    }
+
+    .top-track {
+      transform: translateY(180px);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .info {
+      span {
+        font-size: 18px;
+      }
+
+      h4 {
+        font-size: 22px;
+        line-height: initial;
+      }
+    }
   }
 `;

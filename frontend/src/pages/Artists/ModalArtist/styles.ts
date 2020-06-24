@@ -41,6 +41,25 @@ export const LeftContent = styled.aside`
 
     justify-content: center;
   }
+
+  @media (max-width: 1220px) {
+    margin-right: 48px;
+    /* display: none; */
+  }
+
+  @media (max-width: 992px) {
+    padding-bottom: 24px;
+    width: 100%;
+
+    div {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  @media (max-width: 768px) {
+    position: initial;
+  }
 `;
 
 export const Content = styled.div`
@@ -58,6 +77,12 @@ export const Content = styled.div`
     opacity: 0;
     animation: ${fadeUp} 1.5s forwards cubic-bezier(0.19, 1, 0.22, 1);
     animation-delay: 0.7s;
+  }
+
+  @media (max-width: 992px) {
+    h1 {
+      font-size: 40px;
+    }
   }
 `;
 
@@ -83,6 +108,19 @@ export const Genres = styled.div`
       margin-left: 16px;
     }
   }
+
+  @media (max-width: 992px) {
+    margin: 16px 0;
+
+    span {
+      padding: 8px 12px;
+      font-size: 12px;
+
+      & + span {
+        margin-left: 12px;
+      }
+    }
+  }
 `;
 
 export const ArtistInfo = styled.section`
@@ -90,6 +128,10 @@ export const ArtistInfo = styled.section`
 
   display: flex;
   align-items: center;
+
+  .followers {
+    margin-left: 24px;
+  }
 
   > div {
     background: #2d2f30;
@@ -133,8 +175,33 @@ export const ArtistInfo = styled.section`
     }
   }
 
-  .followers {
-    margin-left: 24px;
+  @media (max-width: 1200px) {
+    flex-direction: column;
+
+    .followers {
+      margin-left: 0px;
+      margin-top: 12px;
+    }
+  }
+
+  @media (max-width: 992px) {
+    > div {
+      div[role='button'] {
+        width: 64px !important;
+        height: 64px !important;
+      }
+
+      .info {
+        span {
+          font-size: 12px;
+        }
+
+        strong {
+          font-size: 16px;
+          margin-top: 0px;
+        }
+      }
+    }
   }
 `;
 
@@ -182,6 +249,22 @@ export const ArtistTopTracks = styled.section`
           &:hover {
             color: #fff;
           }
+        }
+      }
+    }
+  }
+
+  @media (max-width: 992px) {
+    margin-top: 24px;
+
+    > div {
+      h3 {
+        font-size: 18px;
+      }
+
+      button {
+        & + button {
+          margin-left: 24px;
         }
       }
     }
@@ -383,6 +466,22 @@ export const RelatedArtists = styled.section`
       }
     }
   }
+
+  @media (max-width: 992px) {
+    margin-top: 24px;
+
+    > div {
+      h3 {
+        font-size: 18px;
+      }
+
+      button {
+        & + button {
+          margin-left: 24px;
+        }
+      }
+    }
+  }
 `;
 
 interface IRelatedArtistsList {
@@ -530,5 +629,21 @@ export const CloseModal = styled.button`
 
   &:hover {
     transform: scale(1.2);
+  }
+
+  svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  @media (max-width: 992px) {
+    margin-right: 0;
+    top: 8px;
+    right: 8px;
+
+    svg {
+      width: 22px;
+      height: 22px;
+    }
   }
 `;
