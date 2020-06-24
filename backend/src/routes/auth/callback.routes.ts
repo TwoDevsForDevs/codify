@@ -47,13 +47,13 @@ callbackRouter.get('/', (req, res) => {
         api.defaults.headers.Authorization = `Bearer ${access_token}`;
 
         res.redirect(
-          `http://localhost:3000/spotify-authentication?${querystring.stringify(
-            {
-              access_token,
-              refresh_token,
-              expires_in,
-            },
-          )}`,
+          `${
+            process.env.APP_URL
+          }/spotify-authentication?${querystring.stringify({
+            access_token,
+            refresh_token,
+            expires_in,
+          })}`,
         );
       }
     });
