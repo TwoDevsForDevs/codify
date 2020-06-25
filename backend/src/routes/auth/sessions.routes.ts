@@ -5,8 +5,8 @@ import generateRandomString from '../../utils/GenerateRandomString';
 
 const sessionsRouter = Router();
 
-const redirectURI = 'http://localhost:3333/callback';
-const stateKey = '@spotify-clone/auth_state';
+const redirectURI = process.env.REDIRECT_URI;
+const stateKey = '@codify/auth_state';
 
 sessionsRouter.get('/', (req, res) => {
   const state = generateRandomString(16);
@@ -22,7 +22,7 @@ sessionsRouter.get('/', (req, res) => {
       scope,
       redirect_uri: redirectURI,
       state,
-      // show_dialog: true,
+      show_dialog: true,
     })}`,
   );
 });
