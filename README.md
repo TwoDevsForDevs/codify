@@ -35,7 +35,7 @@ Nesse projeto tivemos como principal objetivo aprender a consumir uma API extern
 ## :books: Requisitos
 - Ter [**Git**](https://git-scm.com/) para clonar o projeto.
 - Ter [**Node.js**](https://nodejs.org/en/) instalado.
-= Ter [**Yarn**](https://classic.yarnpkg.com/pt-BR/docs/install/) instalado.
+- Ter [**Yarn**](https://classic.yarnpkg.com/pt-BR/docs/install/) instalado.
 - Ter credencias do Spotify.
 
 ## :lock: Credenciais do Spotify para rodar o projeto localmente
