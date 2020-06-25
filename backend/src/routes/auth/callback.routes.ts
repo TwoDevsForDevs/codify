@@ -8,7 +8,7 @@ const callbackRouter = Router();
 
 const clientId = process.env.CLIENT_ID;
 const clientSecret = process.env.CLIENT_SECRET;
-const redirectURI = 'http://localhost:3333/callback';
+const redirectURI = process.env.REDIRECT_URI;
 
 const stateKey = '@spotify-clone/auth_state';
 
@@ -19,7 +19,7 @@ callbackRouter.get('/', (req, res) => {
 
   if (state === null || state !== storedState) {
     res.redirect(
-      `http://localhost:3000/error/${querystring.stringify({
+      `${process.env.APP_URL}/error/${querystring.stringify({
         error: 'state_mismatch',
       })}`,
     );
