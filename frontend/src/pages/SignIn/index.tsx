@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 import edSheeran from '../../assets/ed-sheeran.svg';
 
@@ -34,8 +34,7 @@ const SignIn: React.FC = () => {
           Descubra suas músicas mais escutadas e artistas preferidos da sua
           conta do Spotify.
         </p>
-
-        <SpotifyButton href="http://localhost:3333/sessions">
+        <SpotifyButton href={`${process.env.REACT_APP_API_URL}/sessions`}>
           Continue com o Spotify
         </SpotifyButton>
       </SignInContainer>
