@@ -10,7 +10,7 @@
   "scripts": {
     "dev:server": "ts-node-dev --transpileOnly --ignore-watch node_modules src/server.ts",
     "build": "tsc",
-    "start": "ts-node src/config/server.ts"
+    "start": "ts-node src/server.ts"
   },
   "dependencies": {
     "axios": "^0.19.2",
