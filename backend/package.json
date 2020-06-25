@@ -9,8 +9,8 @@
   },
   "scripts": {
     "dev:server": "ts-node-dev --transpileOnly --ignore-watch node_modules src/server.ts",
-    "tsc": "tsc && node ./dist/server.js",
-    "start": "yarn tsc"
+    "build": "tsc",
+    "start": "ts-node src/config/server.ts",
   },
   "dependencies": {
     "axios": "^0.19.2",
