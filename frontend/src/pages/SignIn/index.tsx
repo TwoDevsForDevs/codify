@@ -1,6 +1,6 @@
 import React from 'react';
 
-import edSheeran from '../../assets/ed-sheeran.svg';
+import edSheeran from '../../assets/ed-sheeran.png';
 
 import SpotifyButton from '../../components/SpotifyButton';
 
