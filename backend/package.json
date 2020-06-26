@@ -3,10 +3,6 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
-  "engines": {
-    "node": "12.14.1",
-    "yarn": "1.22.0"
-  },
   "scripts": {
     "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files",
     "dev:server": "ts-node-dev --transpileOnly --ignore-watch node_modules src/server.ts",
