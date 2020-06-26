@@ -8,7 +8,7 @@
     "yarn": "1.22.0"
   },
   "scripts": {
-    "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files && ts-node dist/server.js",
+    "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files",
     "dev:server": "ts-node-dev --transpileOnly --ignore-watch node_modules src/server.ts",
     "start": "ts-node src/server.js"
   },
