@@ -1,7 +1,5 @@
 import { Router } from 'express';
 
-import authMiddleware from '../middlewares/auth';
-
 import api from '../services/api';
 
 const userRouter = Router();
@@ -42,7 +40,7 @@ interface ITopArtists {
   topTrackName: string;
 }
 
-userRouter.get('/top-artists', authMiddleware, async (req, res) => {
+userRouter.get('/top-artists', async (req, res) => {
   const response = await api.get('/me/top/artists', {
     params: {
       limit: 5,
@@ -74,7 +72,7 @@ interface IPlaylists {
   uri: string;
 }
 
-userRouter.get('/playlists', authMiddleware, async (req, res) => {
+userRouter.get('/playlists', async (req, res) => {
   const response = await api.get('/me/playlists');
 
   const playlists: IPlaylists[] = response.data.items;
@@ -113,7 +111,7 @@ interface IFavoriteTrack {
   artists: IFavoriteTrackArtists[];
 }
 
-userRouter.get('/favorite-tracks', authMiddleware, async (req, res) => {
+userRouter.get('/favorite-tracks', async (req, res) => {
   const response = await api.get('/me/top/tracks', {
     params: {
       limit: 10,
