@@ -63,11 +63,6 @@ export const SignInContainer = styled.div`
     position: relative;
     overflow-wrap: break-word;
 
-    @media (max-width: 768px) {
-      font-size: 52px;
-      height: 220px;
-    }
-
     div {
       line-height: 93.6px;
       position: absolute;
@@ -157,6 +152,9 @@ export const SignInContainer = styled.div`
 
   @media (max-width: 768px) {
     h1 {
+      font-size: 52px;
+      height: 220px;
+
       .word-container:nth-child(2),
       .word-container:nth-child(3) {
         top: 64px;
