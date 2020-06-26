@@ -48,7 +48,7 @@ const Dropdown: React.FC<IDropdownProps> = ({
         </li>
         <li>
           <a
-            href="https://github.com/KeepCodingLab/codify"
+            href="https://github.com/TwoDevsForDevs/codify"
             target="_blank"
             rel="noopener noreferrer"
           >

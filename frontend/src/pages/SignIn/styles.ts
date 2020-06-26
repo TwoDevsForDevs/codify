@@ -56,10 +56,6 @@ export const SignInContainer = styled.div`
   flex-direction: column;
   align-items: flex-start;
 
-  @media (max-width: 1160px) {
-    margin-right: 0px;
-  }
-
   h1 {
     font-size: 72px;
     color: #fff;
@@ -143,11 +139,6 @@ export const SignInContainer = styled.div`
     opacity: 0;
     animation: ${fadeUp} 1.5s forwards cubic-bezier(0.19, 1, 0.22, 1);
     animation-delay: 0.8s;
-
-    @media (max-width: 768px) {
-      margin-bottom: 32px;
-      font-size: 16px;
-    }
   }
 
   a {
@@ -157,6 +148,28 @@ export const SignInContainer = styled.div`
 
     @media (max-width: 1160px) {
       width: 100%;
+    }
+  }
+
+  @media (max-width: 1160px) {
+    margin-right: 0px;
+  }
+
+  @media (max-width: 768px) {
+    h1 {
+      .word-container:nth-child(2),
+      .word-container:nth-child(3) {
+        top: 64px;
+      }
+
+      .word-container:nth-child(4) {
+        top: 128px;
+      }
+    }
+
+    p {
+      margin-bottom: 32px;
+      font-size: 16px;
     }
   }
 `;
