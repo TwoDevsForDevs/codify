@@ -34,7 +34,7 @@ const SignIn: React.FC = () => {
           Descubra suas músicas mais escutadas e artistas preferidos da sua
           conta do Spotify.
         </p>
-        <SpotifyButton href={`${process.env.REACT_APP_API_URL}/sessions`}>
+        <SpotifyButton href={`${process.env.REACT_APP_API_URL}sessions`}>
           Continue com o Spotify
         </SpotifyButton>
       </SignInContainer>
