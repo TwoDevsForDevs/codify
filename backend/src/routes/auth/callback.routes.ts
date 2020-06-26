@@ -10,7 +10,7 @@ const clientId = process.env.CLIENT_ID;
 const clientSecret = process.env.CLIENT_SECRET;
 const redirectURI = process.env.REDIRECT_URI;
 
-const stateKey = '@spotify-clone/auth_state';
+const stateKey = '@codify/auth_state';
 
 callbackRouter.get('/', (req, res) => {
   const code = req.query.code || null;
