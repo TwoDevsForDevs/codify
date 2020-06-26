@@ -153,7 +153,7 @@ export const SignInContainer = styled.div`
   @media (max-width: 768px) {
     h1 {
       font-size: 52px;
-      height: 220px;
+      height: 200px;
 
       .word-container:nth-child(2),
       .word-container:nth-child(3) {
@@ -166,7 +166,6 @@ export const SignInContainer = styled.div`
     }
 
     p {
-      margin-bottom: 32px;
       font-size: 16px;
     }
   }
