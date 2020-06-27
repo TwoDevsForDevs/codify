@@ -2,8 +2,6 @@ import request from 'request';
 import { Router } from 'express';
 import querystring from 'querystring';
 
-import api from '../../services/api';
-
 const callbackRouter = Router();
 
 const clientId = process.env.CLIENT_ID;
@@ -43,8 +41,6 @@ callbackRouter.get('/', (req, res) => {
     request.post(authOptions, (error, response, body) => {
       if (!error && response.statusCode === 200) {
         const { access_token, refresh_token, expires_in } = body;
-
-        api.defaults.headers.Authorization = `Bearer ${access_token}`;
 
         res.redirect(
           `${

@@ -6,10 +6,14 @@ import userRouter from './user.routes';
 import playlistRouter from './playlist.routes';
 import artistRouter from './artist.routes';
 
+import authMiddleware from '../middlewares/auth';
+
 const routes = Router();
 
 routes.use('/sessions', sessionsRouter);
 routes.use('/callback', callbackRouter);
+
+routes.use(authMiddleware);
 
 routes.use('/me', userRouter);
 routes.use('/playlist', playlistRouter);
