@@ -9,8 +9,6 @@ export default function auth(
 ): void | Response<object> {
   const authHeader = request.headers.authorization;
 
-  console.log(authHeader);
-
   if (!authHeader) {
     return response.status(401).json({ error: 'Token not provided' });
   }
