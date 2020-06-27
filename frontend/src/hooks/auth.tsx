@@ -33,6 +33,8 @@ export const AuthProvider: React.FC = ({ children }) => {
     const exp = localStorage.getItem('@Spotify:exp');
 
     if (access_token && user && exp) {
+      api.defaults.headers.authorization = `Bearer ${access_token}`;
+
       return { access_token, user: JSON.parse(user), exp: JSON.parse(exp) };
     }
 
@@ -50,9 +52,11 @@ export const AuthProvider: React.FC = ({ children }) => {
       hashParams[key] = value;
     });
 
-    const response = await api.get('/me');
-
     const { access_token } = hashParams;
+
+    api.defaults.headers.authorization = `Bearer ${access_token}`;
+
+    const response = await api.get('/me');
 
     localStorage.setItem('@Spotify:access_token', access_token);
     localStorage.setItem('@Spotify:user', JSON.stringify(response.data));

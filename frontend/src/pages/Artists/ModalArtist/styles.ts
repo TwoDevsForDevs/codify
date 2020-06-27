@@ -44,7 +44,6 @@ export const LeftContent = styled.aside`
 
   @media (max-width: 1220px) {
     margin-right: 48px;
-    /* display: none; */
   }
 
   @media (max-width: 992px) {
@@ -111,13 +110,14 @@ export const Genres = styled.div`
 
   @media (max-width: 992px) {
     margin: 16px 0;
+    flex-wrap: wrap;
 
     span {
       padding: 8px 12px;
       font-size: 12px;
 
       & + span {
-        margin-left: 12px;
+        margin-left: 0px;
       }
     }
   }
