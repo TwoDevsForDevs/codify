@@ -262,8 +262,10 @@ export const ArtistTopTracks = styled.section`
         font-size: 18px;
       }
 
-      nav {
-        display: none;
+      button {
+        & + button {
+          margin-left: 24px;
+        }
       }
     }
   }
@@ -284,10 +286,6 @@ export const TopTracksList = styled.ul<ITopTracksList>`
       ? 'translate3d(calc(-100% - 15px), 0px, 0px)'
       : 'translate3d(calc(0% - 0px), 0px, 0px)'};
   transition: transform 1s cubic-bezier(0.19, 1, 0.22, 1);
-
-  @media (max-width: 768px) {
-    overflow-x: scroll;
-  }
 `;
 
 interface IIsPlaying {
@@ -477,8 +475,10 @@ export const RelatedArtists = styled.section`
         font-size: 18px;
       }
 
-      nav {
-        display: none;
+      button {
+        & + button {
+          margin-left: 24px;
+        }
       }
     }
   }
@@ -499,10 +499,6 @@ export const RelatedArtistsList = styled.ul<IRelatedArtistsList>`
       ? 'translate3d(calc(-100% - 15px), 0px, 0px)'
       : 'translate3d(calc(0% - 0px), 0px, 0px)'};
   transition: transform 1s cubic-bezier(0.19, 1, 0.22, 1);
-
-  @media (max-width: 768px) {
-    overflow-x: scroll;
-  }
 `;
 
 export const RelatedArtist = styled(animated.li)`
