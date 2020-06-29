@@ -6,8 +6,6 @@ import {
   FaTimes,
   FaRecordVinyl,
   FaUsers,
-  FaChevronLeft,
-  FaChevronRight,
 } from 'react-icons/fa';
 import { useTransition } from 'react-spring';
 import { toast } from 'react-toastify';

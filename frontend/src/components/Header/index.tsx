@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import { NavLink } from 'react-router-dom';
+import { FaUserCircle } from 'react-icons/fa';
 import { MdLink, MdMenu, MdClose } from 'react-icons/md';
 import { FiMoreVertical } from 'react-icons/fi';
 
@@ -88,7 +89,12 @@ const Header: React.FC = () => {
         </Nav>
 
         <ProfileData showDropdown={showDropdown}>
-          <img src={user.avatar} alt={user.display_name} />
+          {user.avatar ? (
+            <img src={user.avatar} alt={user.display_name} />
+          ) : (
+            <FaUserCircle size={32} color="#fff" />
+          )}
+
           <span>{user.display_name}</span>
 
           <button type="button" onClick={handleDropdown}>
