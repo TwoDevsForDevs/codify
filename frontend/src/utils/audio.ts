@@ -5,7 +5,7 @@ const playAudioWithFade = (
   audio: HTMLAudioElement,
   fadeTiming = 1000,
 ): void => {
-  let volCounter = 0;
+  const volCounter = 10;
   audio.volume = 0;
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -13,8 +13,7 @@ const playAudioWithFade = (
     audio.play();
 
     const volumeFade = setInterval(() => {
-      volCounter++;
-      audio.volume = volCounter / 20;
+      audio.volume = volCounter / 10;
     }, 100);
 
     setTimeout(() => {
