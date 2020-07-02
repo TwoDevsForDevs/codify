@@ -8,10 +8,9 @@ export const Container = styled.div`
   align-items: center;
 
   @media (max-width: 1220px) {
-    /* flex-direction: column;
+    flex-direction: column;
     justify-content: center;
-    align-items: center; */
-    display: block;
+    align-items: center;
   }
 `;
 
@@ -112,7 +111,6 @@ export const TopArtists = styled.div`
 
   @media (max-width: 768px) {
     width: 320px;
-    margin: 0 auto;
     grid-template-columns: 1fr;
   }
 `;
