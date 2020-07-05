@@ -14,7 +14,7 @@ userRouter.get('/', async (req, res) => {
     type,
     display_name,
     email,
-    avatar: images[0].url,
+    avatar: images.length ? images[0].url : '',
   };
 
   return res.json(user);
